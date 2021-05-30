@@ -1,0 +1,2 @@
+class Taylor < ApplicationRecord
+end
