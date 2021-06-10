@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "customer" : {
+      "type" : "object",
+      "required" : [
+        "id",
+        "idx",
+        "nickname",
+        "created_at",
+        "updated_at"
+      ],
+      "properties" : {
+        "id" : { "type" : "integer" },
+        "idx" : { "type" : "integer" },
+        "name" : { "type" : "string" },
+        "created_at" : { "type" : "string", "format": "date-time" },
+        "updated_at" : { "type" : "string", "format": "date-time" }
+      }
+    }
+  }
+} 

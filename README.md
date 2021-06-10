@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# CRM
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Ендпоинты следущие:
+  get /api/v1/customers - просмотр всех клиентов
+  get /api/v1/customers/{id} - просмотр одного клиента
+  post /api/v1/customers - создать клиента
+  put /api/v1/customers/{id} - изменить поля клиента
+  delete /api/v1/customers/{id} - удалить клиента
