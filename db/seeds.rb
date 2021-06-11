@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # frozen_string_literal: true
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
@@ -44,3 +45,30 @@ Product.create(idx:'2',name:'Litle black dress')
 
 Taylor.create(name:'Gor',meta:'some meta')
 Taylor.create(name:'Krush',meta:'some meta')
+=======
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+# #
+# # Examples:
+# #
+# #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+# #   Character.create(name: 'Luke', movie: movies.first)
+ require 'factory_bot_rails'
+ #
+
+5.times do
+  FactoryBot.create(:customer)
+  FactoryBot.create(:country)
+  FactoryBot.create(:city)
+  FactoryBot.create(:address)
+  FactoryBot.create(:contact_type)
+  FactoryBot.create(:contact)
+  FactoryBot.create(:measure)
+  FactoryBot.create(:customer_measure)
+  FactoryBot.create(:fabric)
+  FactoryBot.create(:product)
+  FactoryBot.create(:product_price)
+  FactoryBot.create(:order)
+  FactoryBot.create(:tailor)
+end
+>>>>>>> add factories
