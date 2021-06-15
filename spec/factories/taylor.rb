@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :tailor do
+  factory :taylor do
     name{Faker::Name.name}
-    meta{Faker::Lorem.world}
+    meta{Faker::Lorem.word}
   end
 end

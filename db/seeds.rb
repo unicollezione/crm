@@ -56,8 +56,9 @@ Taylor.create(name:'Krush',meta:'some meta')
  require 'factory_bot_rails'
  #
 
-5.times do
   FactoryBot.create(:customer)
+  FactoryBot.create(:customer_with_products)
+  #FactoryBot.create(:customer_with_orders)
   FactoryBot.create(:country)
   FactoryBot.create(:city)
   FactoryBot.create(:address)
@@ -68,7 +69,12 @@ Taylor.create(name:'Krush',meta:'some meta')
   FactoryBot.create(:fabric)
   FactoryBot.create(:product)
   FactoryBot.create(:product_price)
+<<<<<<< HEAD
   FactoryBot.create(:order)
   FactoryBot.create(:tailor)
 end
 >>>>>>> add factories
+=======
+  #FactoryBot.build(:order)
+  FactoryBot.create(:taylor)
+>>>>>>> do customer with products

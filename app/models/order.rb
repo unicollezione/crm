@@ -5,7 +5,7 @@ class Order < ApplicationRecord
 
   aasm do
   end
-  belongs_to :client
+  belongs_to :customer
   belongs_to :product
   belongs_to :fabric
 end

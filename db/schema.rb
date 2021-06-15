@@ -12,7 +12,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20_210_530_154_018) do
+=======
+ActiveRecord::Schema.define(version: 2021_06_13_052019) do
+
+>>>>>>> do customer with products
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -112,11 +117,20 @@ ActiveRecord::Schema.define(version: 20_210_530_154_018) do
     t.index ['product_id'], name: 'index_product_prices_on_product_id'
   end
 
+<<<<<<< HEAD
   create_table 'products', force: :cascade do |t|
     t.integer 'idx'
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+=======
+  create_table "products", force: :cascade do |t|
+    t.integer "idx"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "customer_id"
+>>>>>>> do customer with products
   end
 
   create_table 'taylors', force: :cascade do |t|
