@@ -1,6 +1,6 @@
-class NotionQuery
+class FindNotionQuery
 
 	def find_notion_query
-		query = NotionQuery.find_order(args)
+		query = NotionQuery.find(query{order(id: args)})
 	end
 end
