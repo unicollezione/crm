@@ -17,19 +17,15 @@ gem 'ruby-trello', '~> 1.5', '>= 1.5.1'
 gem 'factory_bot'
 
 group :development, :test do
-<<<<<<< HEAD
+
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'json_matchers'
   gem 'json-schema'
   gem 'rspec-rails'
-=======
-  gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 3.0', require: false
-  gem 'database_cleaner'
->>>>>>> add factories
+
 end
 
 group :development do
