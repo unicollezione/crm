@@ -15,6 +15,7 @@ gem 'rack-cors'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'ruby-trello', '~> 1.5', '>= 1.5.1'
 gem 'factory_bot'
+gem 'prawn'
 
 group :development, :test do
 
