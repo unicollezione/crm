@@ -36,4 +36,7 @@
        class ApplicationController < ActionController::API
          include ActionController::MimeResponds
        end
-
+       
+  5.  Путь для render pdf
+      http://127.0.0.1:3000/api/v1/customers/1.pdf
+      где 1.pdf номер id 
