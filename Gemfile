@@ -22,9 +22,13 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'json_matchers'
   gem 'json-schema'
-  gem 'rspec-rails'
+  
+
+  
   gem 'faker'
+  gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 3.0', require: false
+  
 
 end
 

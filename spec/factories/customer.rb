@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :customer do
+  factory :customers do
     nickname {Faker::Name.first_name}
     idx {Faker::IDNumber.valid}
 
