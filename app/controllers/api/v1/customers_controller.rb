@@ -11,7 +11,14 @@ module Api
       end
 
       def show
-        render_json @customer
+        @customer
+        respond_to do |format|
+          format.pdf do 
+        pdf = Prawn::Document.new
+        pdf.text "Hello World"
+        send_data pdf.render
+        end
+        end
       end
 
       def create
