@@ -18,8 +18,7 @@ module Api
         @customer
         respond_to do |format|
           format.pdf do 
-        pdf = Prawn::Document.new
-        pdf.text "Hello World"
+        pdf = CustomerPdf.new(@customer)
         send_data pdf.render
         end
         end
