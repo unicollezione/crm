@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 require 'notion_api'
 
-class NotionQuery < AbstractQuery 
+class NotionQuery < AbstractQuery
+  def find_notion_query
+    @client = NotionAPI::Client.new("ENV['NOTION_API_TOKEN']")
 
-	def find_notion_query
-
-	 @client = NotionAPI::Client.new("ENV['NOTION_API_TOKEN']")
-
-	
-		query = NotionQuery.find(query{order(id: args)})
-	end
+    query = NotionQuery.find(query { order(id: args) })
+  end
 end
