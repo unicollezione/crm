@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+class ApplicationController < ActionController::API
+  include ActionController::MimeResponds
+end
+
 module Api
   module V1
     class CustomersController < ApplicationController
@@ -11,7 +15,13 @@ module Api
       end
 
       def show
-        render_json @customer
+        @customer
+        respond_to do |format|
+          format.pdf do 
+        pdf = CustomerPdf.new(@customer)
+        send_data pdf.render
+        end
+        end
       end
 
       def create
