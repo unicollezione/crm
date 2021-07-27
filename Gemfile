@@ -27,9 +27,12 @@ group :development, :test do
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'database_cleaner'
+  # add dependency for faraday
+  gem 'net-http'
 end
 
 group :development do
+  gem 'pry-rails'
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
