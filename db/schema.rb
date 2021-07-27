@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_24_072245) do
+ActiveRecord::Schema.define(version: 2021_07_26_101216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,13 @@ ActiveRecord::Schema.define(version: 2021_07_24_072245) do
   end
 
   create_table "fabrics", force: :cascade do |t|
+    t.integer "notion_id"
     t.string "title"
+    t.string "tag"
+    t.text "description"
+    t.text "link"
+    t.string "editor"
+    t.oid "photo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
