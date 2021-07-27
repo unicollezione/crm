@@ -145,6 +145,9 @@ GEM
     net-ftp (0.1.2)
       net-protocol
       time
+    net-http (0.1.1)
+      net-protocol
+      uri
     net-protocol (0.1.0)
     netrc (0.11.0)
     nio4r (2.5.7)
@@ -227,24 +230,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rest-client (2.1.0-x64-mingw32)
-      ffi (~> 1.9)
-      http-accept (>= 1.7.0, < 2.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
-    rest-client (2.1.0-x86-mingw32)
-      ffi (~> 1.9)
-      http-accept (>= 1.7.0, < 2.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
-    rest-client (2.1.0-x86-mswin32)
-      ffi (~> 1.9)
-      http-accept (>= 1.7.0, < 2.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -291,14 +276,13 @@ GEM
     ttfunk (1.7.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2021.1)
-      tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.7.7)
     unf_ext (0.0.7.7-x64-mingw32)
     unf_ext (0.0.7.7-x86-mingw32)
+    uri (0.10.1)
     websocket-driver (0.7.4)
       websocket-extensions (>= 0.1.0)
     websocket-driver (0.7.4-java)
@@ -327,6 +311,7 @@ DEPENDENCIES
   json_matchers
   jsonapi-serializer
   listen (~> 3.2)
+  net-http
   notion (~> 1.1, >= 1.1.4)
   pg (>= 0.18, < 2.0)
   prawn
