@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :contact do
-    customer_id{Customer.ids.sample}
-    contact_type_id{ContactType.ids.sample}
-    value{[true,false].sample}
+    customer
+    contact_type
+    value{Faker::Lorem.word}
   end
 end
