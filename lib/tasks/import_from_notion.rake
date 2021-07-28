@@ -12,6 +12,7 @@ desc "Imports a CSV file into an ActiveRecord table"
 task :csv_model_import, [:filename, :model] => [:environment] do |task,args|
   CSV.foreach(args[:filename], headers: true) do |row|
     attributes = row.to_hash
+    # binding.pry
     Module.const_get(args[:model]).create(attributes)
   end
 end
