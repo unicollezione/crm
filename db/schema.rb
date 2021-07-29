@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_24_072245) do
+ActiveRecord::Schema.define(version: 2021_07_29_194307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,10 +73,15 @@ ActiveRecord::Schema.define(version: 2021_07_24_072245) do
     t.string "nickname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
   create_table "fabrics", force: :cascade do |t|
     t.string "title"
+    t.string "tag"
+    t.text "description"
+    t.text "link"
+    t.string "editor"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -97,7 +102,6 @@ ActiveRecord::Schema.define(version: 2021_07_24_072245) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "aasm_state"
-    t.bigint "workroom_id", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
@@ -128,6 +132,13 @@ ActiveRecord::Schema.define(version: 2021_07_24_072245) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "workrooms", force: :cascade do |t|
     t.string "name"
     t.string "chat"
@@ -145,6 +156,7 @@ ActiveRecord::Schema.define(version: 2021_07_24_072245) do
   add_foreign_key "contacts", "customers"
   add_foreign_key "customer_measures", "customers"
   add_foreign_key "customer_measures", "measures"
+  add_foreign_key "customers", "users"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "fabrics"
   add_foreign_key "orders", "products"
