@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 2021_07_29_194307) do
     t.string "nickname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
@@ -103,7 +102,6 @@ ActiveRecord::Schema.define(version: 2021_07_29_194307) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "aasm_state"
-    t.bigint "workroom_id", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
