@@ -3,8 +3,6 @@
  #
 
   FactoryBot.create(:customer)
-  #FactoryBot.create(:customer_with_products)
-  #FactoryBot.create(:customer_with_orders)
   FactoryBot.create(:country)
   FactoryBot.create(:city)
   FactoryBot.create(:address)
