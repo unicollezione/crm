@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
-  include AASM
+  #include AASM
 
-  aasm do
-  end
+  #aasm do
+  #end
   belongs_to :customer
   belongs_to :product
   belongs_to :fabric
