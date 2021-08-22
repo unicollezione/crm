@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class CustomersController < Api::BaseController
+    class CustomersController < Api::V1::BaseController
       before_action :set_customer, only: %i[show update destroy]
 
       def index
