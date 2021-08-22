@@ -32,11 +32,13 @@ group :development, :test do
   gem 'json-schema'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner'
   # add dependency for faraday
   gem 'net-http'
 end
 
 group :development do
+  gem 'pry-rails'
   gem 'listen', '~> 3.2'
   gem 'pry-rails'
   gem 'spring'
