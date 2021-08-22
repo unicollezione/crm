@@ -1,6 +1,6 @@
-Trestle.resource(:tailors) do
+Trestle.resource(:taylors) do
   menu do
-    item :tailors, icon: "fa fa-star"
+    item :taylors, icon: "fa fa-star"
   end
 
   # Customize the table columns shown on the index view.
@@ -13,7 +13,7 @@ Trestle.resource(:tailors) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |tailor|
+  # form do |taylor|
   #   text_field :name
   #
   #   row do
@@ -30,6 +30,6 @@ Trestle.resource(:tailors) do
   #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
   #
   # params do |params|
-  #   params.require(:tailor).permit(:name, ...)
+  #   params.require(:taylor).permit(:name, ...)
   # end
 end
