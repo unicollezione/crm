@@ -1,8 +1,12 @@
 Trestle.resource(:orders) do
   menu do
     group :orders, priority: :first do
-      item :orders, icon: "fa fa-shopping-cart"
+      item :orders, icon: 'fa fa-shopping-cart'
     end
+  end
+
+  collection do
+    Order.order(created_at: :desc)
   end
 
   # Customize the table columns shown on the index view.
@@ -14,7 +18,7 @@ Trestle.resource(:orders) do
     column :продукт, ->(order) { order.product.name }
     column :ткань, ->(order) { order.fabric.title }
     column :наличие, ->(order) { order.aasm_state }
-    column :коммент , ->(order) { order.comment }
+    column :коммент, ->(order) { order.comment }
     column :производство, ->(order) { order.workroom.name }
     column :created_at, align: :center
     actions
@@ -22,15 +26,15 @@ Trestle.resource(:orders) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |order|
+  form do |_order|
     text_field :idx
-    select :customer_id, Customer.all, {label: 'покупатель'}
+    select :customer_id, Customer.all, { label: 'покупатель' }
     date_field :purchased_at
     select :product_id, Product.all, { label: 'продукт' }
     select :fabric_id, Fabric.all, { label: 'Ткань' }
     text_field :aasm_state, { label: 'наличие' }
     text_field :comment
-    select :workroom_id, Workroom.all, { label: 'производство'}
+    select :workroom_id, Workroom.all, { label: 'производство' }
 
     row do
       col { datetime_field :updated_at }
