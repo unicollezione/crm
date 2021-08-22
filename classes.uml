@@ -1,0 +1,39 @@
+
+           ,---------------.
+,-------.  |Address        |   ,-----.   ,-----.
+|Contact|  |---------------|   |Order|   |Price|
+|-------|  |customer_id = 1|   |-----|   |-----|
+|-------|  |---------------|   |-----|   |-----|
+`-------'  `---------------'   `-----'   `-----'
+                    |
+                    |
+               ,--------.          ,-------.
+               |Customer|          |Product|
+               |--------|          |-------|
+               |--------|          |-------|
+               `--------'          `-------'
+                                       |
+                                ,------------.
+                                |BuildProcess|
+                                |------------|
+                                |------------|
+                                `------------'
+
+@startuml
+ object Customer
+ object Contact
+ object Address
+ object Order
+ object Price
+ object Product
+ object BuildProcess
+
+ Address : customer_id = 1
+
+ Address "many" <|-- "1" Customer
+ Order "many" --|> "1" Customer
+ Contact "many" --|> "1" Customer
+ Order --|> Product
+ Price --|> Product
+ Product --|> BuildProcess
+@enduml

@@ -1,0 +1,76 @@
+
+          ┌─┐
+          ║"│
+          └┬┘
+          ┌┼┐
+           │                  ┌───┐                                       ┌────────────┐          ┌──────┐                    ┌──┐          ┌─────────────┐
+          ┌┴┐                 │CRM│                                       │PDFGenerator│          │Notion│                    │DB│          │UserOrderData│
+      PdfRequest              └─┬─┘                                       └─────┬──────┘          └──┬───┘                    └┬─┘          └──────┬──────┘
+         ┌┴┐  request from bot  │                                               │                    │                         │                   │
+         │ │ ──────────────────>│                                               │                    │                         │                   │
+         │ │                    │                                               │                    │                         │                   │
+         │ │                    │                    API call(s)                │                    │                         │                   │
+         │ │                    │                     from CRM to Notion API    │                    │                         │                   │
+         │ │                    │                    to collect all required data                    │                         │                   │
+         │ │                    │────────────────────────────────────────────────────────────────────>                         │                   │
+         │ │                    │                                               │                    │                         │                   │
+         │ │                    │                                               │                    │                         │                   │
+         │ │                    │                                               │       ╔══════╤═════╪═════════════════════════╪═══════════════════╪════════════════╗
+         │ │                    │                                               │       ║ ALT  │  Notion                       │                   │                ║
+         │ │                    │                                               │       ╟──────┘     │                         │                   │                ║
+         │ │                    │                                               │       ║            │ Notion Fetches user data│                   │                ║
+         │ │                    │                                               │       ║            │ ────────────────────────>                   │                ║
+         │ │                    │                                               │       ║            │                         │                   │                ║
+         │ │                    │                                               │       ║            │                         │                   │                ║
+         │ │                    │                                               │       ║            │                         │ ─────────────────>│                ║
+         │ │                    │                                               │       ║            │                         │                   │                ║
+         │ │                    │                                               │       ║            │                         │                   │                ║
+         │ │                    │                                               │       ║            │ <───────────────────────────────────────────│                ║
+         │ │                    │                                               │       ╚════════════╪═════════════════════════╪═══════════════════╪════════════════╝
+         │ │                    │                                               │                    │                         │                   │
+         │ │                    │                          Serialized data      │                    │                         │                   │
+         │ │                    │<────────────────────────────────────────────────────────────────────                         │                   │
+         │ │                    │                                               │                    │                         │                   │
+         │ │                    │                                               │                    │                         │                   │
+         │ │        ╔══════╤════╪═══════════════════════════════════════════════╪════════════════╗   │                         │                   │
+         │ │        ║ ALT  │  PDFGenerator                                      │                ║   │                         │                   │
+         │ │        ╟──────┘    │                                               │                ║   │                         │                   │
+         │ │        ║           │Serialized dataset:                            │                ║   │                         │                   │
+         │ │        ║           │ Customer, BuildProcess, Measurements, Image(s)│                ║   │                         │                   │
+         │ │        ║           │───────────────────────────────────────────────>                ║   │                         │                   │
+         │ │        ║           │                                               │                ║   │                         │                   │
+         │ │        ║           │            render PDF file or URL             │                ║   │                         │                   │
+         │ │        ║           │<───────────────────────────────────────────────                ║   │                         │                   │
+         │ │        ╚═══════════╪═══════════════════════════════════════════════╪════════════════╝   │                         │                   │
+         │ │                    │                                               │                    │                         │                   │
+         │ │ Printable PDF file │                                               │                    │                         │                   │
+         │ │ <──────────────────│                                               │                    │                         │                   │
+      Pdf│ │uest              ┌─┴─┐                                       ┌─────┴──────┐          ┌──┴───┐                    ┌┴─┐          ┌──────┴──────┐
+         │ │┐                 │CRM│                                       │PDFGenerator│          │Notion│                    │DB│          │UserOrderData│
+         │ ││                 └───┘                                       └────────────┘          └──────┘                    └──┘          └─────────────┘
+         │ │┘
+         │ │┐
+         │ │
+         │ │┐
+         └┬┘
+
+@startuml
+actor PdfRequest
+database CRM
+entity PDFGenerator
+
+    activate PdfRequest
+    PdfRequest -> CRM : request from bot
+    CRM -> Notion : API call(s)\n from CRM to Notion API\nto collect all required data
+    alt Notion
+      Notion -> DB : Notion Fetches user data
+      DB -> UserOrderData
+      UserOrderData -> Notion
+    end
+    Notion -> CRM : Serialized data
+    alt PDFGenerator
+      CRM -> PDFGenerator : Serialized dataset: \n Customer, BuildProcess, Measurements, Image(s)
+      PDFGenerator -> CRM : render PDF file or URL
+    end
+    CRM -> PdfRequest : Printable PDF file
+@enduml

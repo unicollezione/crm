@@ -6,4 +6,6 @@ Rails.application.routes.draw do
       resources :customers
     end
   end
+
+  resources :customers
 end

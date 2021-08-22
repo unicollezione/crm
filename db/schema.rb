@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_13_052019) do
+ActiveRecord::Schema.define(version: 2021_07_24_072245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,9 +97,11 @@ ActiveRecord::Schema.define(version: 2021_06_13_052019) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "aasm_state"
+    t.bigint "workroom_id", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["workroom_id"], name: "index_orders_on_workroom_id"
   end
 
   create_table "product_prices", force: :cascade do |t|
@@ -126,6 +128,15 @@ ActiveRecord::Schema.define(version: 2021_06_13_052019) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "workrooms", force: :cascade do |t|
+    t.string "name"
+    t.string "chat"
+    t.string "status"
+    t.string "link"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "addresses", "cities"
   add_foreign_key "addresses", "countries"
   add_foreign_key "addresses", "customers"
@@ -137,5 +148,6 @@ ActiveRecord::Schema.define(version: 2021_06_13_052019) do
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "fabrics"
   add_foreign_key "orders", "products"
+  add_foreign_key "orders", "workrooms"
   add_foreign_key "product_prices", "products"
 end
