@@ -1,6 +1,8 @@
 Trestle.resource(:contacts) do
   menu do
-    item :contacts, icon: "fa fa-star"
+    group :клиенты do
+      item :contacts, icon: "fa fa-address-book"
+    end
   end
 
   # Customize the table columns shown on the index view.

@@ -1,6 +1,8 @@
 Trestle.resource(:workrooms) do
   menu do
-    item :workrooms, icon: "fa fa-star"
+    group :производство do
+      item :workrooms, icon: "fa fa-star"
+    end
   end
 
   # Customize the table columns shown on the index view.

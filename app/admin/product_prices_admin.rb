@@ -1,6 +1,8 @@
 Trestle.resource(:product_prices) do
   menu do
-    item :product_prices, icon: "fa fa-star"
+    group :продукты do
+      item :product_prices, icon: "fa fa-dollar-sign"
+    end
   end
 
   # Customize the table columns shown on the index view.

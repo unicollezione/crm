@@ -1,6 +1,8 @@
 Trestle.resource(:countries) do
   menu do
-    item :countries, icon: "fa fa-star"
+    group :cities do
+      item :countries, icon: "fa fa-globe"
+    end
   end
 
   # Customize the table columns shown on the index view.

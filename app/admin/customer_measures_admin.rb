@@ -1,6 +1,8 @@
 Trestle.resource(:customer_measures) do
   menu do
-    item :customer_measures, icon: "fa fa-star"
+    group :клиенты do
+      item :customer_measures, icon: "fa fa-ruler"
+    end
   end
 
   # Customize the table columns shown on the index view.

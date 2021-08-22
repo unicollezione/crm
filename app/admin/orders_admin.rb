@@ -1,6 +1,8 @@
 Trestle.resource(:orders) do
   menu do
-    item :orders, icon: "fa fa-star"
+    group :orders, priority: :first do
+      item :orders, icon: "fa fa-shopping-cart"
+    end
   end
 
   # Customize the table columns shown on the index view.
@@ -26,7 +28,7 @@ Trestle.resource(:orders) do
     date_field :purchased_at
     select :product_id, Product.all, { label: 'продукт' }
     select :fabric_id, Fabric.all, { label: 'Ткань' }
-    text_field :aasm_state
+    text_field :aasm_state, { label: 'наличие' }
     text_field :comment
     select :workroom_id, Workroom.all, { label: 'производство'}
 

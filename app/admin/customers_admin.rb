@@ -1,6 +1,8 @@
 Trestle.resource(:customers) do
   menu do
-    item :customers, icon: "fa fa-star"
+    group :клиенты do
+      item :customers, icon: "fa fa-user"
+    end
   end
 
   # Customize the table columns shown on the index view.

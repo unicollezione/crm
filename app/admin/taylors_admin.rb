@@ -1,6 +1,8 @@
 Trestle.resource(:taylors) do
   menu do
-    item :taylors, icon: "fa fa-star"
+    group :производство do
+      item :taylors, icon: "fa fa-industry"
+    end
   end
 
   # Customize the table columns shown on the index view.

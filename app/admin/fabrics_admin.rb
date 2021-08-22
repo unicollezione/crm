@@ -1,6 +1,8 @@
 Trestle.resource(:fabrics) do
   menu do
-    item :fabrics, icon: "fa fa-star"
+    group :orders do
+      item :fabrics, icon: "fa fa-scroll"
+    end
   end
 
   # Customize the table columns shown on the index view.

@@ -1,6 +1,8 @@
 Trestle.resource(:contact_types) do
   menu do
-    item :contact_types, icon: "fa fa-star"
+    group :configuration do
+      item :contact_types, icon: "fa fa-star"
+    end
   end
 
   # Customize the table columns shown on the index view.
