@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
-class ApplicationController < ActionController::API
-  include ActionController::MimeResponds
-end
-
 module Api
   module V1
-    class CustomersController < ApplicationController
+    class CustomersController < Api::BaseController
       before_action :set_customer, only: %i[show update destroy]
 
       def index
@@ -17,7 +13,7 @@ module Api
       def show
         @customer
         respond_to do |format|
-          format.pdf do 
+          format.pdf do
         pdf = CustomerPdf.new(@customer)
         send_data pdf.render
         end
