@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_22_115535) do
+ActiveRecord::Schema.define(version: 2021_08_23_055226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_115535) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "aasm_state"
     t.bigint "workroom_id", null: false
+    t.string "trello_url"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"

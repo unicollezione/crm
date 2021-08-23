@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:orders) do
   menu do
     group :orders, priority: :first do
@@ -21,20 +23,25 @@ Trestle.resource(:orders) do
     column :коммент, ->(order) { order.comment }
     column :производство, ->(order) { order.workroom.name }
     column :created_at, align: :center
+    column :trello_url, link: true
     actions
   end
 
   # Customize the form fields shown on the new/edit views.
   #
   form do |_order|
+    static_field :trello do
+      link_to 'trello', _order.trello_url, target: "_blank", class: "external-link"
+    end
     text_field :idx
     select :customer_id, Customer.all, { label: 'покупатель' }
     date_field :purchased_at
     select :product_id, Product.all, { label: 'продукт' }
     select :fabric_id, Fabric.all, { label: 'Ткань' }
-    text_field :aasm_state, { label: 'наличие' }
+    select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' }
     text_field :comment
     select :workroom_id, Workroom.all, { label: 'производство' }
+    text_field :trello_url
 
     row do
       col { datetime_field :updated_at }
