@@ -1,7 +1,7 @@
 Trestle.resource(:customers) do
   menu do
     group :клиенты do
-      item :customers, icon: "fa fa-user"
+      item :customers, icon: 'fa fa-user'
     end
   end
 
@@ -9,19 +9,21 @@ Trestle.resource(:customers) do
   #
   table do
     column :nickname
-  #   column :created_at, align: :center
+    column :idx
+    #   column :created_at, align: :center
     actions
   end
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |customer|
-    text_field :nickname, {default: true}
-  #
-  #   row do
-  #     col { datetime_field :updated_at }
-  #     col { datetime_field :created_at }
-  #   end
+  form do |_customer|
+    text_field :nickname, { default: true }
+    text_field :idx
+    #
+    #   row do
+    #     col { datetime_field :updated_at }
+    #     col { datetime_field :created_at }
+    #   end
   end
 
   # By default, all parameters passed to the update and create actions will be

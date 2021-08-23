@@ -30,17 +30,24 @@ Trestle.resource(:orders) do
   # Customize the form fields shown on the new/edit views.
   #
   form do |_order|
-    static_field :trello do
-      link_to 'trello', _order.trello_url, target: "_blank", class: "external-link"
+    row do
+      col(xs: 4) { text_field :idx }
+      col(xs: 4) { date_field :purchased_at }
+      col(xs: 2) do
+        static_field :trello do
+          link_to 'trello', _order.trello_url, target: '_blank', class: 'external-link'
+        end
+      end
     end
-    text_field :idx
     select :customer_id, Customer.all, { label: 'покупатель' }
-    date_field :purchased_at
     select :product_id, Product.all, { label: 'продукт' }
     select :fabric_id, Fabric.all, { label: 'Ткань' }
-    select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' }
+    row do
+      col(xs: 6) { select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' } }
+      col(xs: 6) { select :workroom_id, Workroom.all, { label: 'производство' } }
+    end
+
     text_field :comment
-    select :workroom_id, Workroom.all, { label: 'производство' }
     text_field :trello_url
 
     row do
