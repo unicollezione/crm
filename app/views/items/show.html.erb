@@ -1,0 +1,11 @@
+<div class='section'>
+  <h2>
+    <%= @item.name%>
+  </h2>
+  <% @item.product_measurements.each do |measure| %>
+    <p>
+      <%= measure.measure.tag%>: <%= measure.range%>
+    </p>
+  <% end %>
+</div>
+<%= react_component('Items', { items: @item } ) %>

@@ -10,29 +10,36 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'styles/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </head>
 
   <body>
-    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
-      <%# <%= link_to "Rails Flix", "/", class: "navbar-brand" %1> %>
-      <%# <%= button_tag class: "navbar-toggler", data: { toggle: "collapse", target: "#primary-nav" }, aria: { controls: "primary-nav", expanded: false, label: "Toggle navigation" } do %1> %>
-        <%# <span class="navbar-toggler-icon"></span> %>
-      <%# <% end %1> %>
-
-      <div class="collapse navbar-collapse" id="primary-nav">
-        <%# <ul class="navbar-nav"> %>
-          <%# <li class="nav-item"><%= link_to "Movies", movies_path, class: "nav-link" %1></li> %>
-          <%# <li class="nav-item"><%= link_to "TV Shows", tv_shows_path, class: "nav-link" %1></li> %>
-        <%# </ul> %>
-
-        <%= link_to "/admin", class: "btn btn-primary rounded-pill ml-auto" do %>
-          <i class="fas fa-lock"></i>
-          Admin Login
-        <% end %>
-        <%= link_to image_tag("trestle.svg", alt: "Trestle"), "https://trestle.io", target: "_blank", class: "trestle-logo" %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Unicollezione</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+        <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><%= link_to "Items", items_path, class: "nav-link" %></li>
+          <li class="nav-item">
+            <%= link_to "/admin", class: "nav-link" do %>
+              <i class="fas fa-lock"></i>
+              Admin
+            <% end %>
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -41,8 +48,6 @@
     </div>
 
     <div class="page-footer bg-dark">
-      <p>Copyright &copy; <%= Date.today.year %> Sam Pohlenz — All rights reserved.</p>
-      <p class="text-muted">This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
     </div>
   </body>
 </html>

@@ -29,13 +29,14 @@ Trestle.resource(:orders) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |_order|
+  form do |order|
     row do
       col(xs: 4) { text_field :idx }
       col(xs: 4) { date_field :purchased_at }
       col(xs: 2) do
         static_field :trello do
-          link_to 'trello', _order.trello_url, target: '_blank', class: 'external-link'
+          link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
+          link_to order.fabric.material, fabrics_admin_path
         end
       end
     end

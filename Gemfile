@@ -24,6 +24,9 @@ gem 'trestle', '~> 0.9.5'
 gem 'trestle-auth', '~> 0.4.3'
 gem 'webpacker', '~> 5.4', '>= 5.4.2'
 
+gem 'bootstrap', '~> 5.1.0'
+gem 'react-rails', '~> 2.6', '>= 2.6.1'
+
 group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'

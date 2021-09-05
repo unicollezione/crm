@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_055226) do
+ActiveRecord::Schema.define(version: 2021_09_05_224532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.bigint "customer_id", null: false
@@ -75,16 +96,24 @@ ActiveRecord::Schema.define(version: 2021_08_23_055226) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "fabric_contents", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "fabrics", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "material"
   end
 
   create_table "measures", force: :cascade do |t|
     t.string "tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "range"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -103,6 +132,25 @@ ActiveRecord::Schema.define(version: 2021_08_23_055226) do
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["workroom_id"], name: "index_orders_on_workroom_id"
+  end
+
+  create_table "product_fabric_contents", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "fabric_content_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["fabric_content_id"], name: "index_product_fabric_contents_on_fabric_content_id"
+    t.index ["product_id"], name: "index_product_fabric_contents_on_product_id"
+  end
+
+  create_table "product_measurements", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "measure_id", null: false
+    t.string "range"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["measure_id"], name: "index_product_measurements_on_measure_id"
+    t.index ["product_id"], name: "index_product_measurements_on_product_id"
   end
 
   create_table "product_prices", force: :cascade do |t|
@@ -148,6 +196,7 @@ ActiveRecord::Schema.define(version: 2021_08_23_055226) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "cities"
   add_foreign_key "addresses", "countries"
   add_foreign_key "addresses", "customers"
@@ -160,5 +209,9 @@ ActiveRecord::Schema.define(version: 2021_08_23_055226) do
   add_foreign_key "orders", "fabrics"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "workrooms"
+  add_foreign_key "product_fabric_contents", "fabric_contents"
+  add_foreign_key "product_fabric_contents", "products"
+  add_foreign_key "product_measurements", "measures"
+  add_foreign_key "product_measurements", "products"
   add_foreign_key "product_prices", "products"
 end
