@@ -36,7 +36,7 @@ Trestle.resource(:orders) do
       col(xs: 2) do
         static_field :trello do
           link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
-          link_to order&.fabric&.material, fabrics_admin_path
+          # link_to order&.fabric&.material, fabrics_admin_path
         end
       end
     end
