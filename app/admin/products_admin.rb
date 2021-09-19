@@ -5,6 +5,10 @@ Trestle.resource(:products) do
     end
   end
 
+  active_storage_fields do
+    [:illustration]
+  end
+
   # Customize the table columns shown on the index view.
   #
   # table do
@@ -15,14 +19,16 @@ Trestle.resource(:products) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |product|
-  #   text_field :name
+  form do |product|
+    text_field :idx
+    text_field :name
+    active_storage_field :illustration
   #
   #   row do
   #     col { datetime_field :updated_at }
   #     col { datetime_field :created_at }
   #   end
-  # end
+  end
 
   # By default, all parameters passed to the update and create actions will be
   # permitted. If you do not have full trust in your users, you should explicitly

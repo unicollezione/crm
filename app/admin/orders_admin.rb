@@ -7,8 +7,12 @@ Trestle.resource(:orders) do
     end
   end
 
+  active_storage_fields do
+    [:illustration]
+  end
+
   collection do
-    Order.order(created_at: :desc)
+    Order.order(created_at: :desc).with_attached_illustration
   end
 
   # Customize the table columns shown on the index view.
@@ -48,9 +52,11 @@ Trestle.resource(:orders) do
       col(xs: 6) { select :workroom_id, Workroom.all, { label: 'производство' } }
     end
 
+    active_storage_field :illustration
     text_field :comment
     text_field :trello_url
 
+    render 'image', order: order
     row do
       col { datetime_field :updated_at }
       col { datetime_field :created_at }

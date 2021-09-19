@@ -20,9 +20,14 @@ gem 'rack-cors'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'ruby-trello', '~> 1.5', '>= 1.5.1'
 gem 'sass-rails', '~> 6.0'
+gem 'sprockets'
 gem 'trestle', '~> 0.9.5'
+gem 'trestle-active_storage', '~> 3.0', '>= 3.0.1'
 gem 'trestle-auth', '~> 0.4.3'
 gem 'webpacker', '~> 5.4', '>= 5.4.2'
+
+gem 'aws-sdk-s3', require: false
+gem 'image_processing', '>= 1.2'
 
 gem 'bootstrap', '~> 5.1.0'
 gem 'react-rails', '~> 2.6', '>= 2.6.1'

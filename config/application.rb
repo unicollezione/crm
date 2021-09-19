@@ -36,5 +36,6 @@ module Crm
     # Skip views, helpers and assets when generating a new resource.
     # config.api_only = true
     config.react.server_renderer_extensions = ["jsx", "js", "tsx", "ts"]
+    config.action_mailer.default_url_options = { host: 'unicrm.herokuapp.com' }
   end
 end

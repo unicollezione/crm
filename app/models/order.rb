@@ -8,6 +8,8 @@ class Order < ApplicationRecord
 
   include AASM
 
+  has_one_attached :illustration
+
   aasm do
     state :купить, initial: true
     state :на_производстве
