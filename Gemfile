@@ -24,6 +24,7 @@ gem 'sprockets'
 gem 'trestle', '~> 0.9.5'
 gem 'trestle-active_storage', '~> 3.0', '>= 3.0.1'
 gem 'trestle-auth', '~> 0.4.3'
+gem 'trestle-search'
 gem 'webpacker', '~> 5.4', '>= 5.4.2'
 
 gem 'aws-sdk-s3', require: false

@@ -7,6 +7,14 @@ Trestle.resource(:orders) do
     end
   end
 
+  search do |query|
+    if query
+      Order.joins(:customer).where('customers.nickname ILIKE ?', "%#{query}%")
+           .or(Order.joins(:customer).where('orders.idx = ?', query.to_i))
+    else
+      Order.all
+    end
+  end
   active_storage_fields do
     [:illustration]
   end
@@ -36,7 +44,7 @@ Trestle.resource(:orders) do
   form do |order|
     row do
       col(xs: 4) { text_field :idx }
-      col(xs: 4) { date_field :purchased_at }
+      col(xs: 4) { date_field :purchased_at, label: 'дата' }
       col(xs: 2) do
         static_field :trello do
           link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
@@ -44,9 +52,16 @@ Trestle.resource(:orders) do
         end
       end
     end
-    select :customer_id, Customer.all, { label: 'покупатель' }
-    select :product_id, Product.all, { label: 'продукт' }
-    select :fabric_id, Fabric.all, { label: 'Ткань' }
+    row do
+      col(sm: 6) { select :customer_id, Customer.all, { label: 'покупатель' } }
+      col(sm: 6) { select :product_id, Product.all, { label: 'продукт' } }
+    end
+
+    row do
+      col(xs: 6) { render 'fabric', order: order }
+      col(xs: 6) { select :fabric_id, Fabric.all, { label: 'Ткань' } }
+    end
+
     row do
       col(xs: 6) { select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' } }
       col(xs: 6) { select :workroom_id, Workroom.all, { label: 'производство' } }
