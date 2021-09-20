@@ -9,6 +9,14 @@ Trestle.resource(:fabrics) do
     [:illustration]
   end
 
+  search do |query|
+    if query
+      Fabric.where('title ILIKE ?', "%#{query}%")
+    else
+      Fabric.all.order(created_at: :desc)
+    end
+  end
+
   # Customize the table columns shown on the index view.
   #
   # table do
