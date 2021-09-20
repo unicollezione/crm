@@ -2,8 +2,8 @@
 
 Trestle.resource(:orders) do
   menu do
-    group :orders, priority: :first do
-      item :orders, icon: 'fa fa-shopping-cart'
+    group :orders do
+      item :orders, icon: 'fa fa-shopping-cart', priority: :first
     end
   end
 
@@ -11,8 +11,9 @@ Trestle.resource(:orders) do
     if query
       Order.joins(:customer).where('customers.nickname ILIKE ?', "%#{query}%")
            .or(Order.joins(:customer).where('orders.idx = ?', query.to_i))
+           .order(created_at: :desc)
     else
-      Order.all
+      Order.all.order(created_at: :desc)
     end
   end
   active_storage_fields do
