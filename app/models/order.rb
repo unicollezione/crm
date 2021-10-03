@@ -5,6 +5,8 @@ class Order < ApplicationRecord
   belongs_to :product
   belongs_to :fabric
   belongs_to :workroom
+  has_many :order_measures
+  has_many :measures, through: :order_measures
 
   include AASM
 

@@ -20,12 +20,17 @@ gem 'rack-cors'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'ruby-trello', '~> 1.5', '>= 1.5.1'
 gem 'sass-rails', '~> 6.0'
-gem 'sprockets'
+gem 'sprockets-rails'
 gem 'trestle', '~> 0.9.5'
 gem 'trestle-active_storage', '~> 3.0', '>= 3.0.1'
 gem 'trestle-auth', '~> 0.4.3'
 gem 'trestle-search'
 gem 'webpacker', '~> 5.4', '>= 5.4.2'
+gem 'wicked_pdf', '~> 2.1'
+gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
+gem 'rqrcode', '~> 2.1'
+gem 'chunky_png'
+
 
 gem 'aws-sdk-s3', require: false
 gem 'image_processing', '>= 1.2'

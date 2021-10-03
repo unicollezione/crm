@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :items
   end
-  root  to: 'items#index'
+  root to: 'items#index'
 
   namespace :api do
     namespace :v1 do
@@ -14,4 +14,5 @@ Rails.application.routes.draw do
 
   resources :customers
   resources :items
+  resources :cards, only: %i[index show]
 end

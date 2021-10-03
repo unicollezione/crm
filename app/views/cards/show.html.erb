@@ -1,0 +1,31 @@
+<%="##{@card.idx}"%>
+<%= @card.purchased_at.strftime('%d.%m') %>
+<%= @card.product.name %>
+<div style='max-height: 320px'>
+  <%= image_tag @card.product.illustration.presence, size: '240x320' %>
+</div>
+<div class='row'>
+  <div class='col-6'>
+    <% @card.order_measures.map do |order_measure| %>
+      <div>
+        <%= order_measure.measure.tag %>
+        <%= order_measure.value%>
+      </div>
+    <% end %>
+  </div>
+  <div class='row-6'>
+    <div>
+      <%= @card.fabric.title%>
+      <%= @card.fabric.material %>
+      <div>
+        <%= @card.fabric.description %>
+      </div>
+      <div>
+        <%= image_tag @card.fabric.illustration.presence, size: '120x160' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <%= @card.customer.nickname %>
+</div>
