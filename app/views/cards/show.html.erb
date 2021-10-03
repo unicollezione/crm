@@ -2,7 +2,7 @@
 <%= @card.purchased_at.strftime('%d.%m') %>
 <%= @card.product.name %>
 <div style='max-height: 320px'>
-  <%= image_tag @card.product.illustration.presence, size: '240x320' %>
+  <%= image_tag(@card.product.illustration, size: '240x320')  if @card.product.illustration.present? %>
 </div>
 <div class='row'>
   <div class='col-6'>
@@ -21,7 +21,7 @@
         <%= @card.fabric.description %>
       </div>
       <div>
-        <%= image_tag @card.fabric.illustration.presence, size: '120x160' %>
+        <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
       </div>
     </div>
   </div>

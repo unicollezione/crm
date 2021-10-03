@@ -7,6 +7,7 @@ ruby '2.7.3'
 
 gem 'aasm', '~> 5.2'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'chunky_png'
 gem 'devise', '~> 4.2'
 gem 'factory_bot'
 gem 'faraday'
@@ -18,6 +19,7 @@ gem 'prawn'
 gem 'puma', '~> 4.1'
 gem 'rack-cors'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'rqrcode', '~> 2.1'
 gem 'ruby-trello', '~> 1.5', '>= 1.5.1'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails'
@@ -28,9 +30,6 @@ gem 'trestle-search'
 gem 'webpacker', '~> 5.4', '>= 5.4.2'
 gem 'wicked_pdf', '~> 2.1'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
-gem 'rqrcode', '~> 2.1'
-gem 'chunky_png'
-
 
 gem 'aws-sdk-s3', require: false
 gem 'image_processing', '>= 1.2'
