@@ -11,6 +11,7 @@ class Order < ApplicationRecord
   include AASM
 
   has_one_attached :illustration
+  accepts_nested_attributes_for :order_measures
 
   aasm do
     state :купить, initial: true

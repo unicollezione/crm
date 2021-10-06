@@ -1,5 +1,5 @@
 <%="##{@card.idx}"%>
-<%= @card.purchased_at.strftime('%d.%m') %>
+<%= @card.purchased_at&.strftime('%d.%m') %>
 <%= @card.product.name %>
 <div style='max-height: 320px'>
   <%= image_tag(@card.product.illustration, size: '240x320')  if @card.product.illustration.present? %>
