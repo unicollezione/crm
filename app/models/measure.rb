@@ -3,4 +3,8 @@
 class Measure < ApplicationRecord
   has_many :product_measurements
   has_many :products
+
+  def name
+    tag
+  end
 end

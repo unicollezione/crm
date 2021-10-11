@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_19_140042) do
+ActiveRecord::Schema.define(version: 2021_10_10_223852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,16 @@ ActiveRecord::Schema.define(version: 2021_09_19_140042) do
     t.string "range"
   end
 
+  create_table "order_measures", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "measure_id", null: false
+    t.integer "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["measure_id"], name: "index_order_measures_on_measure_id"
+    t.index ["order_id"], name: "index_order_measures_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "idx"
     t.bigint "customer_id", null: false
@@ -129,6 +139,7 @@ ActiveRecord::Schema.define(version: 2021_09_19_140042) do
     t.string "aasm_state"
     t.bigint "workroom_id", null: false
     t.string "trello_url"
+    t.datetime "prepared_at"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
@@ -206,6 +217,8 @@ ActiveRecord::Schema.define(version: 2021_09_19_140042) do
   add_foreign_key "contacts", "customers"
   add_foreign_key "customer_measures", "customers"
   add_foreign_key "customer_measures", "measures"
+  add_foreign_key "order_measures", "measures"
+  add_foreign_key "order_measures", "orders"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "fabrics"
   add_foreign_key "orders", "products"

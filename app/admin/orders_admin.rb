@@ -49,14 +49,48 @@ Trestle.resource(:orders) do
       col(xs: 2) do
         static_field :trello do
           link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
-          # link_to order&.fabric&.material, fabrics_admin_path
         end
       end
     end
+
     row do
-      col(sm: 6) { select :customer_id, Customer.all, { label: 'покупатель' } }
-      col(sm: 6) { select :product_id, Product.all, { label: 'продукт' } }
+      col(xs: 6) { select :customer_id, Customer.all, { label: 'покупатель' } }
+      col(xs: 6) { select :product_id, Product.all, { label: 'продукт' } }
     end
+    row do
+      col(sm: 6) do
+        table order.order_measures, admin: :order_measures do
+          column :measure
+          column :value
+        end
+        concat admin_link_to 'add measure',
+                             admin: :order_measures,
+                             action: :new,
+                             params: { order_id: order.id },
+                             class: 'btn btn-success'
+      end
+      col(sm: 6) do
+        table order.product.product_measurements, admin: :product_measurements do
+          column :measure
+          column :range
+        end unless order.new_record?
+      end
+    end
+
+    # fields_for :order_measures, order.order_measures do |measure|
+    # render 'order_measure', order_measure: measure if measure.present?
+    # text_field 'value'
+    # actions
+    # end if order.order_measures.present?
+
+    # row do
+    #   col(sm: 6) do
+    #     select :measures, Measure.all, { label: :measures }
+    #     order.order_measures.each do |_measure|
+    #       text_field :id
+    #     end
+    #   end
+    # end
 
     row do
       col(xs: 6) { render 'fabric', order: order }
@@ -76,6 +110,7 @@ Trestle.resource(:orders) do
     row do
       col { datetime_field :updated_at }
       col { datetime_field :created_at }
+      col { datetime_field :prepared_at}
     end
   end
 

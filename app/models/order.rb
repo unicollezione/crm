@@ -26,4 +26,8 @@ class Order < ApplicationRecord
       transitions to: :in_deveopment, from: :in_office
     end
   end
+
+  def name
+    idx
+  end
 end

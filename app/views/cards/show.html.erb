@@ -1,31 +1,46 @@
-<%="##{@card.idx}"%>
-<%= @card.purchased_at&.strftime('%d.%m') %>
-<%= @card.product.name %>
-<div style='max-height: 320px'>
-  <%= image_tag(@card.product.illustration, size: '240x320')  if @card.product.illustration.present? %>
-</div>
-<div class='row'>
-  <div class='col-6'>
-    <% @card.order_measures.map do |order_measure| %>
-      <div>
-        <%= order_measure.measure.tag %>
-        <%= order_measure.value%>
-      </div>
-    <% end %>
-  </div>
-  <div class='row-6'>
-    <div>
-      <%= @card.fabric.title%>
-      <%= @card.fabric.material %>
-      <div>
-        <%= @card.fabric.description %>
-      </div>
-      <div>
-        <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
+<div class='container'>
+  <div class='row d-table-row align-items-start'>
+    <div class='col w-25 d-table-cell'>
+      <h2> <%="##{@card.idx}"%> </h2>
+    </div>
+    <div class='col w-25 d-table-cell'>
+      <div class='strong'>
+        <%= @card.customer.nickname %>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <%= @card.customer.nickname %>
+  <div class='row d-table-row d-flex'>
+    <div class='col w-75 d-table-cell'>
+      <%= image_tag(@card.product.illustration, size: '240x320', class: 'img img-fluid')  if @card.product.illustration.present? %>
+    </div>
+    <div class='col w-25 d-table-cell d-flex'>
+      <div>
+        <p>референтные значения</p>
+        <% @card.product.product_measurements.map do |product_measurements| %>
+          <div>
+            <%= product_measurements.measure.tag %>
+            <%= product_measurements.range%>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <strong>мерки клиента</strong>
+        <% @card.order_measures.map do |order_measure| %>
+          <div>
+            <%= order_measure.measure.tag %>
+            <%= order_measure.value%>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <strong>ткань</strong>
+        <div>
+          <%= @card.fabric.title%>
+          <%= @card.fabric.material %>
+          <%= @card.fabric.description %>
+          <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

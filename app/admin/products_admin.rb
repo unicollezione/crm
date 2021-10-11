@@ -1,12 +1,6 @@
 Trestle.resource(:products) do
   menu do
-    group :продукты do
-      item :products, icon: "fa fa-tshirt"
-    end
-  end
-
-  active_storage_fields do
-    [:illustration]
+    item :products, icon: "fa fa-star"
   end
 
   # Customize the table columns shown on the index view.
@@ -20,9 +14,12 @@ Trestle.resource(:products) do
   # Customize the form fields shown on the new/edit views.
   #
   form do |product|
-    text_field :idx
     text_field :name
-    active_storage_field :illustration
+    table product.product_measurements, admin: 'product_measurements' do
+      column :range
+      column :measure
+    end
+    concat admin_link_to("Add", admin: :product_measurements, action: :new, params: { product_id: product.id }, class: "btn btn-success")
   #
   #   row do
   #     col { datetime_field :updated_at }

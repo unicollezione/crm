@@ -32,4 +32,9 @@ Trestle.resource(:order_measures) do
   # params do |params|
   #   params.require(:order_measure).permit(:name, ...)
   # end
+  build_instance do |attr, params|
+    OrderMeasure.new(attr).tap do |order_measure|
+      order_measure.order_id = params[:order_id] if params[:order_id].present?
+    end
+  end
 end
