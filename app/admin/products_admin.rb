@@ -15,6 +15,7 @@ Trestle.resource(:products) do
   #
   form do |product|
     text_field :name
+    file_field :illustration
     table product.product_measurements, admin: 'product_measurements' do
       column :range
       column :measure

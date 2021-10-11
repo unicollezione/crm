@@ -1,11 +1,22 @@
 <div class='container'>
   <div class='row d-table-row align-items-start'>
     <div class='col w-25 d-table-cell'>
-      <h2> <%="##{@card.idx}"%> </h2>
+      <div>
+        <h2>
+          <%="##{@card.idx}"%>
+          <span class='badge'>
+            <label>
+              <%= @card.product.name %>
+            </label>
+          </span>
+        </h2>
+      </div>
     </div>
     <div class='col w-25 d-table-cell'>
-      <div class='strong'>
-        <%= @card.customer.nickname %>
+      <div class='badge'>
+        <h4>
+          <%= @card.customer.nickname %>
+        </h4>
       </div>
     </div>
   </div>
@@ -13,16 +24,7 @@
     <div class='col w-75 d-table-cell'>
       <%= image_tag(@card.product.illustration, size: '240x320', class: 'img img-fluid')  if @card.product.illustration.present? %>
     </div>
-    <div class='col w-25 d-table-cell d-flex'>
-      <div>
-        <p>референтные значения</p>
-        <% @card.product.product_measurements.map do |product_measurements| %>
-          <div>
-            <%= product_measurements.measure.tag %>
-            <%= product_measurements.range%>
-          </div>
-        <% end %>
-      </div>
+    <div class='col w-25 d-table-cell d-flex align-top'>
       <div>
         <strong>мерки клиента</strong>
         <% @card.order_measures.map do |order_measure| %>
