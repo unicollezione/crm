@@ -1,1 +1,2 @@
 export NOTION_API_TOKEN='secret_************'
+export TRELLO_TOKEN=f84381c572fa423f5cfc5b0a053d12d8
