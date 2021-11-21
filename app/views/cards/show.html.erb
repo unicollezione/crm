@@ -42,6 +42,9 @@
           <%= @card.fabric.description %>
           <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
         </div>
+        <div>
+          <%= image_tag(@card.qr_code_url, size: '240x240')%>
+        </div>
       </div>
     </div>
   </div>

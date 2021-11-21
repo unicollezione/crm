@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  include Qrcodable
+
   belongs_to :customer
   belongs_to :product
   belongs_to :fabric
@@ -11,6 +13,7 @@ class Order < ApplicationRecord
   include AASM
 
   has_one_attached :illustration
+  has_one_attached :qr_code
   accepts_nested_attributes_for :order_measures
 
   aasm do
@@ -30,4 +33,5 @@ class Order < ApplicationRecord
   def name
     idx
   end
+
 end
