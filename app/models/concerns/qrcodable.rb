@@ -38,7 +38,10 @@ module Qrcodable
     end
 
     def path
-      "./tmp/qr/#{self.class.to_s.downcase}/"
+      path = "./tmp/#{self.class.to_s.downcase}/"
+      Dir.mkdir(path) unless Dir.exist?(path)
+
+      path
     end
   end
 end
