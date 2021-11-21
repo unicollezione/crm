@@ -1,6 +1,6 @@
 <div class='container'>
   <% @cards.each do |card| %>
-    <div>
+    <div class='mt-2'>
       заказ
       <%= link_to card.idx, OrdersAdmin.path(:show, id: card.id) %>
       <%= link_to 'pdf', card_path(card.idx), target: '_blank' %>

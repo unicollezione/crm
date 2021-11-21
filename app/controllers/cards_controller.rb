@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CardsController < ApplicationController
   def index
-    @cards = Order.where(prepared_at: nil)
+    @cards = Order.where(prepared_at: nil).last(12)
   end
 
   def show
