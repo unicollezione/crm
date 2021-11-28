@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Order
+# Order represent customers order
 class Order < ApplicationRecord
   include Qrcodable
 
@@ -15,6 +17,7 @@ class Order < ApplicationRecord
   has_one_attached :illustration
   has_one_attached :qr_code
   accepts_nested_attributes_for :order_measures
+  after_create :attach_qr_code
 
   aasm do
     state :купить, initial: true
@@ -33,5 +36,4 @@ class Order < ApplicationRecord
   def name
     idx
   end
-
 end
