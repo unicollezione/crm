@@ -42,15 +42,22 @@ Trestle.resource(:orders) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |order|
+  form do |order| # rubocop:disable Metrics/BlockLength
     row do
-      col(xs: 4) { text_field :idx }
-      col(xs: 4) { date_field :purchased_at, label: 'дата' }
+      col(xs: 3) { text_field :idx }
+      col(xs: 3) { date_field :purchased_at, label: 'дата' }
+      col(xs: 3) { date_field :ready_at, label: 'сдача' }
       col(xs: 2) do
         static_field :trello do
           link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
         end
       end
+    end
+
+    row do
+      col(xs: 3) { text_field :prepayment, label: 'предоплата' }
+      col(xs: 3) { text_field :payment, label: 'оплата' }
+      col(xs: 3) { check_box :payed, label: 'оплачено' }
     end
 
     row do
