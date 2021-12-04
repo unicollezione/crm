@@ -24,6 +24,10 @@ Trestle.resource(:orders) do
     Order.order(created_at: :desc).with_attached_illustration
   end
 
+  scopes do
+    scope :all, default: true
+    scope :warning, -> { Order.where(ready_at: 7.days.ago..7.days.from_now) }
+  end
   # Customize the table columns shown on the index view.
   #
   table do
