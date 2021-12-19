@@ -1,51 +1,123 @@
-<div class='container'>
-  <div class='row d-table-row align-items-start'>
-    <div class='col w-25 d-table-cell'>
-      <div>
-        <h2>
-          <%="##{@card.idx}"%>
-          <span class='badge'>
-            <label>
-              <%= @card.product.name %>
-            </label>
-          </span>
-        </h2>
-      </div>
-    </div>
-    <div class='col w-25 d-table-cell'>
-      <div class='badge'>
-        <h4>
-          <%= @card.customer.nickname %>
-        </h4>
-      </div>
-    </div>
-  </div>
-  <div class='row d-table-row d-flex'>
-    <div class='col w-75 d-table-cell'>
-      <%= image_tag(@card.product.illustration, size: '240x320', class: 'img img-fluid')  if @card.product.illustration.present? %>
-    </div>
-    <div class='col w-25 d-table-cell d-flex align-top'>
-      <div>
-        <strong>мерки клиента</strong>
-        <% @card.order_measures.map do |order_measure| %>
+<style>
+table, th, td {
+  border-collapse: collapse;
+  vertical-align: baseline;
+  text-align: left;
+  vertical-align: top;
+  text-align-last: justify;
+}
+th, td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  vertical-align: baseline;
+  text-align: left;
+  vertical-align: top;
+}
+</style>
+<div>
+  <table style='width: 1024px; width: 100%;'>
+    <tr style='height: 24px; width: 100%;'>
+      <th style='width: 320px;'>
+        <div>
+          <div style='flex-direction: row' >
+            <h2><%= "##{@card.idx}" %></h2>
+            <%= "#{@card.ready_at&.strftime('%F')}" %>
+          </div>
+        </div>
+      </th>
+      <th style='width: 100px;'>
+        <strong>
+          <%= "#{@card.product.name}" %>
+        </strong>
+      </th>
+      <th style='width: 320px;'>
+        <div>
+          <h2>
+            <%= "#{@card.customer.nickname}" %>
+          </h2>
+        </div>
+      </th>
+      <th style='padding: 0px'>
+      </th>
+    </tr>
+    <tr style='width: 100%; height: 640px;'>
+      <td>
+        <div>
           <div>
-            <%= order_measure.measure.tag %>
-            <%= order_measure.value%>
+            <h2>
+              <%= "#{@card.comment}"%>
+            </h2>
+          </div>
+          <%= image_tag(@card.product.illustration, size: '240x320', class: 'img img-fluid')  if @card.product.illustration.present? %>
+          <div>
+            <strong>мерки клиента</strong>
+            <% @card.order_measures.each do |order_measure| %>
+              <div>
+                <%= "#{[order_measure.measure.tag, ":", order_measure.value].join}" %>
+              </div>
+            <% end%>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
+          <div>
+            <%= "Ткань: #{@card.fabric.title}" %>
+            <p>
+              <%= @card.fabric.title%>
+            </p>
+            <p>
+              <%= @card.fabric.material %>
+            </p>
+            <p>
+              <%= @card.fabric.description %>
+            </p>
+          </div>
+        </div>
+
+      </td>
+      <td>
+        <% @card.product.instructions.each do |instruction| %>
+          <%= "#{instruction.title}" %>
+          <div>
+            <%= "#{instruction.body}"%>
           </div>
         <% end %>
-      </div>
-      <div>
-        <strong>ткань</strong>
         <div>
-          <%= @card.fabric.title%>
-          <%= @card.fabric.material %>
-          <%= @card.fabric.description %>
-          <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
+          <p>куплен
+            <%= "#{@card.purchased_at&.strftime('%F')}" %>
+          </p>
+          <p>готов к
+            <%= "#{@card.ready_at&.strftime('%F')}" %>
+          </p>
+          <p>отправлен
+            <%= "#{@card.prepared_at&.strftime('%F')}" %>
+          </p>
         </div>
-        <div>
-          <%= image_tag(@card.qr_code_url, size: '240x240')%>
+        <div style='text-align: bottom;'>
+          <div>
+            <p>Укомплектовал</p>
+          </div>
+          <div>
+            <p>Крой      ______________________</p>
+          </div>
+          <div>
+            <p>Пошив    ______________________</p>
+          </div>
+          <div>
+            <p>Проверил ______________________</p>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </td>
+      <td style='text-align: center;'>
+        <p>trello</p>
+          <%= image_tag @card.trello_qr_code_url %>
+        <p>card</p>
+        <%= image_tag @card.qr_code_url %>
+      </td>
+    </tr>
+  </table>
 </div>

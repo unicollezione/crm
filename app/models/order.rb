@@ -1,5 +1,27 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: orders
+#
+#  id           :bigint           not null, primary key
+#  idx          :integer
+#  customer_id  :bigint           not null
+#  purchased_at :datetime
+#  product_id   :bigint           not null
+#  fabric_id    :bigint           not null
+#  comment      :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  aasm_state   :string
+#  workroom_id  :bigint           not null
+#  trello_url   :string
+#  prepared_at  :datetime
+#  prepayment   :integer          default(0)
+#  payment      :integer          default(0)
+#  ready_at     :date
+#  payed        :boolean
+#
 # Order
 # Order represent customers order
 class Order < ApplicationRecord
@@ -16,6 +38,9 @@ class Order < ApplicationRecord
 
   has_one_attached :illustration
   has_one_attached :qr_code
+  has_one_attached :trello_qr_code
+  has_one_attached :chat_qr_code
+
   accepts_nested_attributes_for :order_measures
   after_create :attach_qr_code
 
