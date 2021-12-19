@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_11_162607) do
+ActiveRecord::Schema.define(version: 2021_12_04_093600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,15 @@ ActiveRecord::Schema.define(version: 2021_10_11_162607) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
+  create_table "instructions", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_instructions_on_product_id"
+  end
+
   create_table "measures", force: :cascade do |t|
     t.string "tag"
     t.datetime "created_at", precision: 6, null: false
@@ -172,6 +181,9 @@ ActiveRecord::Schema.define(version: 2021_10_11_162607) do
     t.bigint "workroom_id", null: false
     t.string "trello_url"
     t.datetime "prepared_at"
+    t.integer "prepayment", default: 0
+    t.integer "payment", default: 0
+    t.date "ready_at"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
@@ -1402,6 +1414,7 @@ ActiveRecord::Schema.define(version: 2021_10_11_162607) do
   add_foreign_key "contacts", "customers"
   add_foreign_key "customer_measures", "customers"
   add_foreign_key "customer_measures", "measures"
+  add_foreign_key "instructions", "products"
   add_foreign_key "order_measures", "measures"
   add_foreign_key "order_measures", "orders"
   add_foreign_key "orders", "customers"

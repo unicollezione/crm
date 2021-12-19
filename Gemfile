@@ -47,11 +47,11 @@ group :development, :test do
   gem 'net-http'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.0', require: false
-  gem 'solargraph', '~> 0.43.0'
-  gem 'solargraph-rails', '~> 0.2.1.1'
 end
 
 group :development do
+  gem 'solargraph-rails', '~> 0.2.1.1'
+  gem 'solargraph', '~> 0.43.0'
   gem 'listen', '~> 3.2'
   gem 'pry-rails'
   gem 'spring'

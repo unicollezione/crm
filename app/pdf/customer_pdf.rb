@@ -2,8 +2,8 @@ class CustomerPdf < Prawn::Document
   def initialize(customer)
   	super()
   	@customer = customer
+
   	customer_text
-  	
   	end
 
 
