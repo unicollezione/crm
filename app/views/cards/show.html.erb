@@ -16,10 +16,11 @@ th, td {
   vertical-align: top;
 }
 </style>
+
 <div>
   <table style='width: 1024px; width: 100%;'>
     <tr style='height: 24px; width: 100%;'>
-      <th style='width: 320px;'>
+      <th style='width: 340px;'>
         <div>
           <div style='flex-direction: row' >
             <h2><%= "##{@card.idx}" %></h2>
@@ -27,7 +28,7 @@ th, td {
           </div>
         </div>
       </th>
-      <th style='width: 100px;'>
+      <th style='width: 140px;'>
         <strong>
           <%= "#{@card.product.name}" %>
         </strong>
@@ -42,7 +43,8 @@ th, td {
       <th style='padding: 0px'>
       </th>
     </tr>
-    <tr style='width: 100%; height: 640px;'>
+
+    <tr style='width: 100%; max-height: 640px;'>
       <td>
         <div>
           <div>
@@ -51,19 +53,6 @@ th, td {
             </h2>
           </div>
           <%= image_tag(@card.product.illustration, size: '240x320', class: 'img img-fluid')  if @card.product.illustration.present? %>
-          <div>
-            <strong>мерки клиента</strong>
-            <% @card.order_measures.each do |order_measure| %>
-              <div>
-                <%= "#{[order_measure.measure.tag, ":", order_measure.value].join}" %>
-              </div>
-            <% end%>
-          </div>
-        </div>
-      </td>
-      <td>
-        <div>
-          <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
           <div>
             <%= "Ткань: #{@card.fabric.title}" %>
             <p>
@@ -77,8 +66,22 @@ th, td {
             </p>
           </div>
         </div>
-
       </td>
+
+      <td>
+        <div>
+          <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
+          <div>
+            <strong>мерки клиента</strong>
+            <% @card.order_measures.each do |order_measure| %>
+              <div>
+                <%= "#{[order_measure.measure.tag, ":", order_measure.value].join}" %>
+              </div>
+            <% end%>
+          </div>
+        </div>
+      </td>
+
       <td>
         <% @card.product.instructions.each do |instruction| %>
           <%= "#{instruction.title}" %>
@@ -112,6 +115,7 @@ th, td {
           </div>
         </div>
       </td>
+
       <td style='text-align: center;'>
         <p>trello</p>
           <%= image_tag @card.trello_qr_code_url %>
