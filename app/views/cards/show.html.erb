@@ -83,12 +83,17 @@ th, td {
       </td>
 
       <td>
-        <% @card.product.instructions.each do |instruction| %>
-          <%= "#{instruction.title}" %>
-          <div>
-            <%= "#{instruction.body}"%>
-          </div>
-        <% end %>
+        <div>
+          <p>полностью оплачен:
+            <%= "#{@card.payed ? 'да' : 'нет'} "%>
+          </p>
+          <p>предоплата:
+            <%= "#{@card.prepayment} "%>
+          </p>
+          <p>оплата:
+            <%= "#{@card.payment} "%>
+          </p>
+        </div>
         <div>
           <p>куплен
             <%= "#{@card.purchased_at&.strftime('%F')}" %>
@@ -113,6 +118,15 @@ th, td {
           <div>
             <p>Проверил ______________________</p>
           </div>
+
+          <% @card.product.instructions.each do |instruction| %>
+            <strong>
+              <%= "#{instruction.title}" %>
+            </strong>
+            <div>
+              <%= "#{instruction.body}"%>
+            </div>
+          <% end %>
         </div>
       </td>
 
