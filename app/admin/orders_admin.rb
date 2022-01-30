@@ -16,7 +16,7 @@ Trestle.resource(:orders) do
     else
       Order
         .all
-        .includes(:fabric, :measures, :product, :product_measures, order_measures: :value)
+        .includes(:fabric, :measures, :product)
         .order(created_at: :desc)
     end
   end
