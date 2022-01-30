@@ -9,11 +9,15 @@ Trestle.resource(:orders) do
 
   search do |query|
     if query
-      Order.joins(:customer).where('customers.nickname ILIKE ?', "%#{query}%")
-           .or(Order.joins(:customer).where('orders.idx = ?', query.to_i))
-           .order(created_at: :desc)
+      Order
+        .joins(:customer).where('customers.nickname ILIKE ?', "%#{query}%")
+        .or(Order.joins(:customer).where('orders.idx = ?', query.to_i))
+        .order(created_at: :desc)
     else
-      Order.all.order(created_at: :desc)
+      Order
+        .all
+        .includes(:fabricm, :measures, :product, :product_measurements, order_measures: :value)
+        .order(created_at: :desc)
     end
   end
   active_storage_fields do
@@ -81,10 +85,12 @@ Trestle.resource(:orders) do
                              class: 'btn btn-success'
       end
       col(sm: 6) do
-        table order.product.product_measurements, admin: :product_measurements do
-          column :measure
-          column :range
-        end unless order.new_record?
+        unless order.new_record?
+          table(order.product.product_measurements, admin: :product_measurements) do
+            column :measure
+            column :range
+          end
+        end
       end
     end
 
@@ -121,7 +127,7 @@ Trestle.resource(:orders) do
     row do
       col { datetime_field :updated_at }
       col { datetime_field :created_at }
-      col { datetime_field :prepared_at}
+      col { datetime_field :prepared_at }
     end
   end
 

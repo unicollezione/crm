@@ -29,6 +29,7 @@ class Order < ApplicationRecord
 
   belongs_to :customer
   belongs_to :product
+  has_many :product_measures, through: :product
   belongs_to :fabric
   belongs_to :workroom
   has_many :order_measures
@@ -42,8 +43,9 @@ class Order < ApplicationRecord
   has_one_attached :chat_qr_code
 
   accepts_nested_attributes_for :order_measures
-  after_create :attach_qr_code
+  after_create :setup_order
 
+  validates_presence_of :customer, :idx, :product
   aasm do
     state :купить, initial: true
     state :на_производстве
@@ -60,5 +62,25 @@ class Order < ApplicationRecord
 
   def name
     idx
+  end
+
+  private
+
+  def setup_order
+    ActiveRecord::Base.connection.transaction do
+      attach_qr_code
+      attach_product_measures
+      save
+    end
+  end
+
+  def attach_product_measures
+    product &&
+      product.product_measurements.pluck(:measure_id).each do |measure_id|
+        order_measures.build(
+          value: 0,
+          measure_id: measure_id
+        )
+      end
   end
 end

@@ -12,4 +12,6 @@
 class OrderMeasure < ApplicationRecord
   belongs_to :order
   belongs_to :measure
+  validates_presence_of :order
+  validates_presence_of :measure
 end
