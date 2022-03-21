@@ -31,6 +31,13 @@ Trestle.resource(:orders) do
   scopes do
     scope :all, default: true
     scope :warning, -> { Order.where(ready_at: 7.days.ago..7.days.from_now) }
+    Workroom.all.map do |workroom|
+      scope workroom.name.to_sym, -> { Order.where(workroom_id: workroom.id) }
+    end
+
+    Order.pluck(:aasm_state).map do |state|
+      scope state.to_sym, -> { Order.where(aasm_state: state) }
+    end
   end
   # Customize the table columns shown on the index view.
   #
