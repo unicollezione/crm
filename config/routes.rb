@@ -14,5 +14,9 @@ Rails.application.routes.draw do
 
   resources :customers
   resources :items
-  resources :cards, only: %i[index show]
+  resources :cards, only: %i[index show] do
+    member do
+      get 'trello', to: 'cards#trello'
+    end
+  end
 end

@@ -1,0 +1,82 @@
+<style>
+table, th, td {
+  border-collapse: collapse;
+  vertical-align: baseline;
+  text-align: left;
+  vertical-align: top;
+  text-align-last: justify;
+}
+th, td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  vertical-align: baseline;
+  text-align: left;
+  vertical-align: top;
+}
+</style>
+
+<div>
+  <table style='width: 980px; height: 1080px; width: 100%;'>
+    <tr style='height: 24px; width: 100%;'>
+      <th>
+        <div>
+          <div style='flex-direction: row' >
+            <h2>
+              <%= "##{@card.idx}" %>
+              <%= "#{@card.customer.nickname}" %>
+            </h2>
+          </div>
+        </div>
+      </th>
+      <th>
+        <h1>
+          <%= "#{@card.product.name}" %>
+        </h1>
+      </th>
+    </tr>
+
+    <tr style='width: 100%; max-height: 640px;'>
+      <td>
+        <div>
+          <div>
+            <h2>
+              <%= "#{@card.comment}"%>
+            </h2>
+          </div>
+          <%= image_tag(@card.product.illustration, size: '640x480', class: 'img img-fluid')  if @card.product.illustration.present? %>
+          <div>
+            <h1>
+              <%= "ткань: #{@card.fabric.title}" %>
+            </h1>
+            <h2>
+              <%= @card.fabric.material %>
+            </h2>
+            <h2>
+              <%= @card.fabric.description %>
+            </h2>
+          </div>
+        </div>
+      </td>
+
+      <td>
+        <div>
+          <%= image_tag(@card.fabric.illustration, size: '480x640', class: 'img img-fluid') if @card.fabric.illustration.present? %>
+          <div>
+            <h2>
+              <strong>мерки</strong>
+            </h2>
+            <% @card.order_measures.each do |order_measure| %>
+              <div>
+                <h2>
+                  <%= "#{[order_measure.measure.tag, ":", order_measure.value].join}" %>
+                </h2>
+              </div>
+            <% end%>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

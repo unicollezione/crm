@@ -19,4 +19,16 @@ class CardsController < ApplicationController
             page_size: 'A4',
             layout: 'pdf'
   end
+
+  def trello
+    @card = Order
+            .includes(product: %i[product_measurements measures])
+            .find_by(idx: params[:id])
+
+    render  pdf: @card.idx.to_s,
+            margin: { top: 1, bottom: 1, left: 1, right: 1 },
+            encoding: 'utf8',
+            page_size: 'A4',
+            layout: 'pdf'
+  end
 end
