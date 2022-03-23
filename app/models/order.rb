@@ -44,6 +44,7 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :order_measures
   after_create :setup_order
+  before_update :update_measures
 
   validates_presence_of :customer, :idx, :product
   aasm do
@@ -70,6 +71,8 @@ class Order < ApplicationRecord
     ActiveRecord::Base.connection.transaction do
       attach_qr_code
       attach_product_measures
+      update_measures
+
       save
     end
   end
@@ -82,5 +85,21 @@ class Order < ApplicationRecord
           measure_id: measure_id
         )
       end
+  end
+
+  def update_measures
+    measures = Measure.all
+
+    notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
+      note = arg.split(/:|-/)
+      measure = measures.detect { |m| m.tag.eql? note[0] }
+      measure &&
+        order_measures.build(
+          value: note[1].to_s,
+          measure_id: measure.id
+        )
+    end
+
+    self.notes = ''
   end
 end

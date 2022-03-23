@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_093600) do
+ActiveRecord::Schema.define(version: 2022_03_22_073754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_093600) do
     t.string "nickname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["nickname"], name: "index_customers_on_nickname"
   end
 
   create_table "fabric_contents", force: :cascade do |t|
@@ -184,6 +185,8 @@ ActiveRecord::Schema.define(version: 2021_12_04_093600) do
     t.integer "prepayment", default: 0
     t.integer "payment", default: 0
     t.date "ready_at"
+    t.boolean "payed"
+    t.text "notes"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"

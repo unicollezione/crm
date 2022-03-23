@@ -79,6 +79,11 @@ Trestle.resource(:orders) do
       col(xs: 6) { select :customer_id, Customer.all, { label: 'покупатель' } }
       col(xs: 6) { select :product_id, Product.all, { label: 'продукт' } }
     end
+
+    row do
+      text_area :notes, label: 'мерки'
+    end
+
     row do
       col(sm: 6) do
         table order.order_measures, admin: :order_measures do
