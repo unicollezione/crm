@@ -49,7 +49,7 @@ class Order < ApplicationRecord
   validates_presence_of :customer, :idx, :product
 
   scope :unpaid, -> { Order.where(payed: false) }
-  scope :без_мерок, -> { includes(:measures).where(measures: { id: nil }) }
+  scope :waiting_for_measures, -> { includes(:measures).where(measures: { id: nil }) }
 
   aasm do
     state :купить, initial: true
