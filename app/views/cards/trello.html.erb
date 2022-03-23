@@ -37,8 +37,8 @@ th, td {
       </th>
     </tr>
 
-    <tr style='width: 100%; max-height: 640px;'>
-      <td>
+    <tr>
+      <td style='width: 640px;'>
         <div>
           <div>
             <h2>
@@ -60,7 +60,7 @@ th, td {
         </div>
       </td>
 
-      <td>
+      <td style='width: 320px;'>
         <div>
           <%= image_tag(@card.fabric.illustration, size: '480x640', class: 'img img-fluid') if @card.fabric.illustration.present? %>
           <div>
