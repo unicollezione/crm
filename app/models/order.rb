@@ -47,6 +47,9 @@ class Order < ApplicationRecord
   before_update :update_measures
 
   validates_presence_of :customer, :idx, :product
+
+  scope :unpaid, -> { Order.where(payed: false) }
+
   aasm do
     state :купить, initial: true
     state :на_производстве
