@@ -32,6 +32,8 @@ Trestle.resource(:orders) do
     scope :all, default: true
     scope :warning, -> { Order.where(ready_at: 7.days.ago..7.days.from_now) }
     scope :unpaid, -> { Order.unpaid }
+    scope :waiting_for_measures, -> { Order.waiting_for_measures }
+
     Workroom.all.map do |workroom|
       scope workroom.name.to_sym, -> { Order.where(workroom_id: workroom.id) }
     end
