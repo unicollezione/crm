@@ -45,6 +45,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_measures
   after_create :setup_order
   before_update :update_measures
+  after_create :send_order_to_trello
 
   validates_presence_of :customer, :idx, :product
 
@@ -104,5 +105,10 @@ class Order < ApplicationRecord
     end
     
     self.notes = ''
+  end
+
+  #поменять list_id для рабочей доски
+  def send_order_to_trello
+    Trello::Card.create( name: "Заказ № #{self.id}", list_id: "6260e2d833a6050c5317d3f6", cover_image: self.illustration)
   end
 end
