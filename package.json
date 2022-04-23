@@ -16,8 +16,8 @@
     "defaults"
   ],
   "devDependencies": {
-    "@webpack-cli/serve": "^1.6.0",
+    "@webpack-cli/serve": "^1.6.1",
     "mini-css-extract-plugin": "^2.4.5",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-dev-server": "^4.8.1"
   }
 }
