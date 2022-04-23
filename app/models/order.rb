@@ -34,6 +34,7 @@ class Order < ApplicationRecord
   belongs_to :workroom
   has_many :order_measures
   has_many :measures, through: :order_measures
+  has_many :trello_lists
 
   include AASM
 
@@ -45,7 +46,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_measures
   after_create :setup_order
   before_update :update_measures
-  after_create :send_order_to_trello
+  after_create :create_order_with_trello_list
 
   validates_presence_of :customer, :idx, :product
 
@@ -107,8 +108,8 @@ class Order < ApplicationRecord
     self.notes = ''
   end
 
-  #поменять list_id для рабочей доски
-  def send_order_to_trello
-    Trello::Card.create( name: "Заказ № #{self.id}", list_id: "6260e2d833a6050c5317d3f6", cover_image: self.illustration)
+  def create_order_with_trello_list
+    TrelloService.new(self, self.workroom).create_trello_list
+    TrelloService.new(self, self.workroom).send_order_to_trello
   end
 end
