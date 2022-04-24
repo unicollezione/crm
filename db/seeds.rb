@@ -15,3 +15,4 @@ FactoryBot.create(:product_price)
 FactoryBot.create(:order)
 FactoryBot.create(:taylor)
 
+
