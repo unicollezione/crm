@@ -20,6 +20,10 @@ In `terminal` or `cmd`
 
 - `$ rails db:migrate`
 
+- `rails webpacker:install` for webpacker
+
+- Overwrite `/crm/package.json`? - No
+
 - `$ rails s` for server starting
 
 Then open `http://localhost:3000` at your web-browser
