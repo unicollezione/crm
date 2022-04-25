@@ -34,7 +34,7 @@ class Order < ApplicationRecord
   belongs_to :workroom
   has_many :order_measures
   has_many :measures, through: :order_measures
-  has_many :trello_lists
+  has_one :trello_list
 
   include AASM
 
@@ -110,6 +110,5 @@ class Order < ApplicationRecord
 
   def create_order_with_trello_list
     TrelloService.new(self, self.workroom).create_trello_list
-    TrelloService.new(self, self.workroom).send_order_to_trello
   end
 end
