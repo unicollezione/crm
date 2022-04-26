@@ -1,12 +1,14 @@
 FactoryBot.define do
   factory :order do
     idx {Faker::IDNumber.valid}
-    index_orders_on_customer_id {Customer.ids.sample}
+    customer_id {Customer.ids.sample}
     purchased_at{Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)}
-    index_orders_on_product_id {Product.ids.sample}
-    index_orders_on_fabric_id {Fabric.ids.sample}
+    product_id {Product.ids.sample}
+    fabric_id {Fabric.ids.sample}
+    workroom_id {Workroom.ids.sample}
     comment{Faker::Lorem.sentence(word_count: 3)}
-    aasm_state{[true,false].sample}
+    aasm_state{ :купить }
     association :customer
+    trello_url { nil }
   end
 end

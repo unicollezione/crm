@@ -92,15 +92,16 @@ class Order < ApplicationRecord
 
   def update_measures
     measures = Measure.all
-
-    notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
-      note = arg.split(/:|-/)
-      measure = measures.detect { |m| m.tag.eql? note[0] }
-      measure &&
-        order_measures.build(
-          value: note[1].to_s,
-          measure_id: measure.id
-        )
+    unless notes.nil?
+      notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
+        note = arg.split(/:|-/)
+        measure = measures.detect { |m| m.tag.eql? note[0] }
+        measure &&
+          order_measures.build(
+            value: note[1].to_s,
+            measure_id: measure.id
+          )
+      end
     end
 
     self.notes = ''
