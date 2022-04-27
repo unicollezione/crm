@@ -1,4 +1,4 @@
-require 'factory_bot_rails'
+require_relative 'base_seeds'
 #
 
  FactoryBot.create(:customer)

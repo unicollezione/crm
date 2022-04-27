@@ -14,9 +14,9 @@
 #
 FactoryBot.define do
   factory :workroom do
-    name { 'MyString' }
-    chat { 'MyString' }
-    status { 'MyString' }
-    link { 'MyString' }
+    name { 'MyWorkroom' }
+    chat { 'MyChat' }
+    status { 'MyStatus' }
+    link { 'MyLink' }
   end
 end
