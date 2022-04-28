@@ -7,7 +7,7 @@ class TrelloService
   end
 
   def find_user_trello
-    Trello::Member.find( order.customer.nickname )
+    Trello::Member.find(order.customer.nickname)
   end
 
   def create_trello_list
