@@ -6,7 +6,7 @@ Trestle.resource(:trello_list) do
   # Customize the table columns shown on the index view.
   #
   table do
-    column :order
+    column :workroom
     column :created_at, align: :center
     actions
   end
@@ -16,7 +16,6 @@ Trestle.resource(:trello_list) do
   form do |trello|
 
     row do
-      col(xs: 6) { select :order_id, Order.all, { label: 'заказ' } }
       col(xs: 6) { select :workroom_id, Workroom.all, { label: 'производство' } }
     end
 
@@ -25,6 +24,8 @@ Trestle.resource(:trello_list) do
       col { datetime_field :created_at }
     end
   end
+
+
 
   # By default, all parameters passed to the update and create actions will be
   # permitted. If you do not have full trust in your users, you should explicitly
