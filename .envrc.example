@@ -1,2 +1,7 @@
 export NOTION_API_TOKEN='secret_************'
 export TRELLO_TOKEN=f84381c572fa423f5cfc5b0a053d12d8
+export BUCKET_ACCESS_KEY_ID=
+export BUCKET_SECRET_ACCESS_KEY=
+export BUCKET_NAME=
+export BUCKET_REGION=
+export AWS_REGION=
