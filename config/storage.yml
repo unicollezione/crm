@@ -9,9 +9,9 @@ local:
 digitalocean:
   service: S3
   endpoint: https://fra1.digitaloceanspaces.com
-  access_key_id: ENV['BUCKET_ACCESS_KEY_ID'].presence
-  secret_access_key: ENV['BUCKET_SECRET_ACCESS_KEY'].presence
-  bucket: ENV['BUCKET_NAME'].presence
+  access_key_id: ENV['BUCKET_ACCESS_KEY_ID']
+  secret_access_key: ENV['BUCKET_SECRET_ACCESS_KEY']
+  bucket: ENV['BUCKET_NAME']
   region: <%= ENV['BUCKET_REGION'].presence || ENV['AWS_REGION'].presence || 'unused'  %>
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
