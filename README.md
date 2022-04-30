@@ -28,6 +28,14 @@ In `terminal` or `cmd`
 
 Then open `http://localhost:3000` at your web-browser
 
+## Setup for staging / production
+
+Connecting staging
+
+```console
+heroku run rails console --app <app name>
+```
+
 # CRM
 
 Ендпоинты следущие:
