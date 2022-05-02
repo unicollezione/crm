@@ -2,7 +2,7 @@
 # CardsController
 # Render cards
 class CardsController < ApplicationController
-  before_action :find_card , only: %i[show trello image file_path trello_card_attributes]
+  before_action :find_card , only: %i[show trello image file_path]
 
   def index
     @cards = Order.where(prepared_at: nil).last(12)
@@ -25,6 +25,7 @@ class CardsController < ApplicationController
             layout: 'pdf'
   end
 
+<<<<<<< HEAD
   def image
     pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], "#{@card.idx}"].join)
     pdf.format "jpg"
@@ -54,7 +55,8 @@ class CardsController < ApplicationController
     {
       io: File.open(file_path), 
       filename: "#{@card.idx}.jpg", 
-      content_type: 'image/jpg'
+      contnt_type: 'image/jpg'
     }
+  end
 
 end
