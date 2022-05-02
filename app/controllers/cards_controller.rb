@@ -31,4 +31,13 @@ class CardsController < ApplicationController
             page_size: 'A4',
             layout: 'pdf'
   end
+
+  def create_image
+    @card = Order
+            .includes(product: %i[product_measurements measures])
+            .find_by(idx: params[:id])
+    image = MiniMagick::Image.open("/home/kurt/Downloads/#{@card.idx}") # тут изменить путь до файла pdf
+    image.format"jpg"
+    image.write "card_#{@card.idx}.jpg"
+  end
 end
