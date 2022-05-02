@@ -56,5 +56,5 @@ class CardsController < ApplicationController
       filename: "#{@card.idx}.jpg", 
       content_type: 'image/jpg'
     }
-  end
+
 end
