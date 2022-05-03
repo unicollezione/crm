@@ -16,7 +16,12 @@ In `terminal` or `cmd`
 
 - `$ bundle install`
 
+The project uses postgresql to work with databases.
+If postgresql docker is used, you must take the file config/database.docker.yml.example. 
+
 - `docker-compose up` for run database
+
+If postgresql is installed in the operating system then use config/database.yml.example
 
 - `$ rails db:migrate`
 
