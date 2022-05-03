@@ -29,6 +29,7 @@ class CardsController < ApplicationController
     pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], "#{@card.idx}"].join)
     pdf.format "jpg"
     pdf.write([path, "#{@card.idx}.jpg"].join)
+    @card.illustration.attach(io: File.open(file_path), filename: "#{@card.idx}.jpg", content_type: 'image/ipg')
   end
 
   private
@@ -43,5 +44,9 @@ class CardsController < ApplicationController
     path = "./tmp/#{self.class.to_s.downcase}/"
     Dir.mkdir(path) unless Dir.exist?(path)
     path
+  end
+
+  def file_path
+    [path, "#{@card.idx}.jpg"].join
   end
 end
