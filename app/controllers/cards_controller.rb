@@ -1,10 +1,9 @@
 # frozen_string_literal: true
-
 # CardsController
 # Render cards
 class CardsController < ApplicationController
-  before_action :find_card , only: %i[show trello create_image]
-  
+  before_action :find_card , only: %i[show trello image]
+
   def index
     @cards = Order.where(prepared_at: nil).last(12)
   end
@@ -26,10 +25,10 @@ class CardsController < ApplicationController
             layout: 'pdf'
   end
 
-  def create_image
-    image = MiniMagick::Image.open("/home/kurt/Downloads/#{@card.idx}") # тут изменить путь до файла pdf
-    image.format"jpg"
-    image.write "card_#{@card.idx}.jpg"
+  def image
+    pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], "#{@card.idx}"].join)
+    pdf.format "jpg"
+    pdf.write([path, "#{@card.idx}.jpg"].join)
   end
 
   private
@@ -37,6 +36,12 @@ class CardsController < ApplicationController
   def find_card
     @card = Order
             .includes(product: %i[product_measurements measures])
-            .find_by(idx: params[:id])
+            .find_by(id: params[:id])
+  end
+
+  def path
+    path = "./tmp/#{self.class.to_s.downcase}/"
+    Dir.mkdir(path) unless Dir.exist?(path)
+    path
   end
 end
