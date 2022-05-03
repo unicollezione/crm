@@ -37,7 +37,7 @@ class CardsController < ApplicationController
   def find_card
     @card = Order
             .includes(product: %i[product_measurements measures])
-            .find_by(id: params[:id])
+            .find_by(idx: params[:id])
   end
 
   def path
