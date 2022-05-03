@@ -2,11 +2,7 @@
 # CardsController
 # Render cards
 class CardsController < ApplicationController
-<<<<<<< HEAD
   before_action :find_card , only: %i[show trello image file_path]
-=======
-  before_action :find_card , only: %i[show trello image]
->>>>>>> create path to save img
 
   def index
     @cards = Order.where(prepared_at: nil).last(12)
@@ -28,19 +24,12 @@ class CardsController < ApplicationController
             page_size: 'A4',
             layout: 'pdf'
   end
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> create path to save img
+  
   def image
     pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], "#{@card.idx}"].join)
     pdf.format "jpg"
     pdf.write([path, "#{@card.idx}.jpg"].join)
-<<<<<<< HEAD
     @card.illustration.attach(**trello_card_attributes)
-=======
->>>>>>> create path to save img
   end
 
   private
@@ -48,13 +37,7 @@ class CardsController < ApplicationController
   def find_card
     @card = Order
             .includes(product: %i[product_measurements measures])
-            .find_by(id: params[:id])
-  end
-
-  def path
-    path = "./tmp/#{self.class.to_s.downcase}/"
-    Dir.mkdir(path) unless Dir.exist?(path)
-    path
+            .find_by(idx: params[:id])
   end
 
   def path
@@ -71,8 +54,7 @@ class CardsController < ApplicationController
     {
       io: File.open(file_path), 
       filename: "#{@card.idx}.jpg", 
-      contnt_type: 'image/jpg'
+      content_type: 'image/jpg'
     }
   end
-
 end
