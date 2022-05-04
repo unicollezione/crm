@@ -1,5 +1,33 @@
 # README
 
+### Requirements
+
+`ruby >= 2.7.3`
+
+`rails ~> 6.0.4`
+
+### Installation & using
+
+In `terminal` or `cmd`
+
+- `$ git clone git@github.com:unicollezione/crm.git`
+
+- `$ gem install bundler` - if needed
+
+- `$ bundle install`
+
+- `docker-compose up` for run database
+
+- `$ rails db:migrate`
+
+- `rails webpacker:install` for webpacker
+
+- Overwrite `/crm/package.json`? - No
+
+- `$ rails s` for server starting
+
+Then open `http://localhost:3000` at your web-browser
+
 # CRM
 
 Ендпоинты следущие:
