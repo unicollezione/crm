@@ -2,7 +2,7 @@
 # CardsController
 # Render cards
 class CardsController < ApplicationController
-  before_action :find_card , only: %i[show trello image]
+  before_action :find_card , only: %i[show trello image trello_card_attributes]
 
   def index
     @cards = Order.where(prepared_at: nil).last(12)
