@@ -29,7 +29,7 @@ class CardsController < ApplicationController
     pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], "#{@card.idx}"].join)
     pdf.format "jpg"
     pdf.write([path, "#{@card.idx}.jpg"].join)
-    @card.illustration.attach(io: File.open(file_path), filename: "#{@card.idx}.jpg", content_type: 'image/ipg')
+    @card.illustration.attach(**trello_card_attributes)
   end
 
   private
@@ -48,5 +48,13 @@ class CardsController < ApplicationController
 
   def file_path
     [path, "#{@card.idx}.jpg"].join
+  end
+
+  def trello_card_attributes
+    {
+      io: File.open(file_path), 
+      filename: "#{@card.idx}.jpg", 
+      content_type: 'image/jpg'
+    }
   end
 end
