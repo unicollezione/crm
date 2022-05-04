@@ -45,6 +45,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_measures
   after_create :setup_order
   before_update :update_measures
+  after_create :create_order_with_trello_list
 
   validates_presence_of :customer, :idx, :product
 
@@ -104,5 +105,9 @@ class Order < ApplicationRecord
     end
 
     self.notes = ''
+  end
+
+  def create_order_with_trello_list
+    TrelloService.new( self, self.workroom ).create_trello_list
   end
 end

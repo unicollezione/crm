@@ -24,7 +24,7 @@ class CardsController < ApplicationController
     @card = Order
             .includes(product: %i[product_measurements measures])
             .find_by(idx: params[:id])
-
+    
     render  pdf: @card.idx.to_s,
             margin: { top: 1, bottom: 1, left: 1, right: 1 },
             encoding: 'utf8',
