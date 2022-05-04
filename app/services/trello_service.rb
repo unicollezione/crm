@@ -1,4 +1,6 @@
 class TrelloService
+  include Rails.application.routes.url_helpers
+
   attr_reader :order, :workroom
 
   def initialize( order, workroom )
@@ -7,7 +9,7 @@ class TrelloService
   end
 
   def find_user_trello
-    Trello::Member.find(order.customer.nickname)
+    Trello::Member.find('karimaluance')
   end
 
   def create_trello_list
@@ -23,7 +25,12 @@ class TrelloService
 
   def send_order_to_trello
     Trello::Card.create( name: "##{order.idx}",
-                         list_id: order.workroom.trello_list.public_id
+                         list_id: order.workroom.trello_list.public_id                         
     )
+    send_attachmen_file
+  end
+
+  def send_attachmen_file
+    find_user_trello.boards.first.lists.first.cards.last.add_attachment(rails_blob_path(order.illustration, path_only: true))
   end
 end
