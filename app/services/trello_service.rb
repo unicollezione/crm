@@ -3,21 +3,21 @@ class TrelloService
 
   attr_reader :order, :workroom
 
-  def initialize( order, workroom )
+  def initialize( order )
     @order = order
-    @workroom = workroom
+    @workroom = order.workroom
   end
 
-  def find_user_trello
-    Trello::Member.find('karimaluance')
+  def find_trello_list
+    Trello::List.find("6260e2d833a6050c5317d3f6")
   end
 
   def create_trello_list
     trello_list = TrelloList.create( workroom: workroom,
-                                     public_id: find_user_trello.boards.first.lists.first.id
+                                     public_id: find_trello_list.id
     )
     raise  trello_list.errors.full_messages.join(' ') unless trello_list.save
-    trello_list
+    
     send_order_to_trello
   end
 
@@ -31,6 +31,11 @@ class TrelloService
   end
 
   def send_attachmen_file
-    find_user_trello.boards.first.lists.first.cards.last.add_attachment(rails_blob_path(order.illustration, path_only: true))
+    find_trello_list.cards.last.add_attachment(File.open(file_path))
+  end
+
+  def file_path
+    [ENV['TEMPORARY_ASSETS_PATH'], "#{order.idx}.jpg"].join # так работает 
+    #rails_blob_path(order.illustration, disposition: "attachment", path_only: true)  а так нет((
   end
 end

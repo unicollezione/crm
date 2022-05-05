@@ -108,6 +108,6 @@ class Order < ApplicationRecord
   end
 
   def create_order_with_trello_list
-    TrelloService.new( self, self.workroom ).create_trello_list
+    TrelloService.new( self ).create_trello_list
   end
 end
