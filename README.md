@@ -31,6 +31,20 @@ If postgresql is installed in the operating system then use config/database.yml.
 
 - `$ rails s` for server starting
 
+If ubuntu is used, the package direnv must be installed for the .envrc file
+
+```console
+$ sudo apt install direnv
+```
+
+Next, [connect](https://github.com/direnv/direnv/blob/master/docs/hook.md) depending on the shell used.
+
+Then allow variables in the project:
+
+```console
+$ direnv allow .
+```
+
 Then open `http://localhost:3000` at your web-browser
 
 ## Setup for staging / production
