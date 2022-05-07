@@ -27,15 +27,15 @@ class TrelloService
     Trello::Card.create( name: "##{order.idx}",
                          list_id: order.workroom.trello_list.public_id                         
     )
-    send_attachmen_file
+    send_attachmen_file 
   end
 
   def send_attachmen_file
-    find_trello_list.cards.last.add_attachment(File.open(file_path))
+    find_trello_list.cards.last.add_attachment(File.open(file_path)) if order.illustration.attached?
   end
 
   def file_path
-    [ENV['TEMPORARY_ASSETS_PATH'], "#{order.idx}.jpg"].join # так работает 
-    #rails_blob_path(order.illustration, disposition: "attachment", path_only: true)  а так нет((
+    url_for([ENV['TEMPORARY_ASSETS_PATH'], "#{order.idx}.jpg"].join)
+    #rails_blob_path(order.illustration, only_path: true)
   end
 end
