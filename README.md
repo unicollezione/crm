@@ -45,6 +45,15 @@ Then allow variables in the project:
 $ direnv allow .
 ```
 
+To start the project, fill in the *ACTIVE_STORAGE_SERVICE* variable in the .envrc file.
+
+Example:
+
+```bash
+# .envrc.example
+export ACTIVE_STORAGE_SERVICE=local
+```
+
 Then open `http://localhost:3000` at your web-browser
 
 ## Setup for staging / production
