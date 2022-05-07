@@ -27,8 +27,8 @@ class CardsController < ApplicationController
   end
 
   def image
-    pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], "#{@card.idx}"].join)
-    pdf.format("jpg")
+    pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], @card.idx].join)
+    pdf.format('jpg')
     pdf.write([path, "#{@card.idx}.jpg"].join)
     @card.illustration.attach(**trello_card_attributes)
   end
