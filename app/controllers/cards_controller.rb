@@ -2,7 +2,7 @@
 # CardsController
 # Render cards
 class CardsController < ApplicationController
-
+  
   before_action :find_card , only: %i[show trello image file_path]
 
   def index
