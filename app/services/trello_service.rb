@@ -35,7 +35,7 @@ class TrelloService
   end
 
   def file_path
-    url_for([ENV['TEMPORARY_ASSETS_PATH'], "#{order.idx}.jpg"].join)
-    # rails_blob_path(order.illustration, path_only: true)
+    #url_for([ENV['TEMPORARY_ASSETS_PATH'], "#{order.idx}.jpg"].join)
+    rails_blob_path(order.illustration, path_only: true)
   end
 end
