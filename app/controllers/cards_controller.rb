@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # CardsController
 # Render cards
 class CardsController < ApplicationController

@@ -13,10 +13,10 @@ class TrelloService
   end
 
   def create_trello_list
-    trello_list = TrelloList.create( workroom: workroom,
-                                     public_id: find_trello_list.id
+    trello_list = TrelloList.new( workroom: workroom,
+                                  public_id: find_trello_list.id
     )
-    raise  trello_list.errors.full_messages.join(' ') unless trello_list.save
+    trello_list.save!
     
     send_order_to_trello
   end
@@ -27,10 +27,10 @@ class TrelloService
     Trello::Card.create( name: "##{order.idx}",
                          list_id: order.workroom.trello_list.public_id                         
     )
-    send_attachmen_file 
+    send_attachmen
   end
 
-  def send_attachmen_file
+  def send_attachmen
     find_trello_list.cards.last.add_attachment(File.open(file_path)) if order.illustration.attached?
   end
 

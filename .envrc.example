@@ -1,3 +1,4 @@
 export NOTION_API_TOKEN='secret_************'
-export TRELLO_TOKEN=f84381c572fa423f5cfc5b0a053d12d8
-export TEMPORARY_ASSETS_PATH="/tmp/pdf/***/"
+export TRELLO_DEVELOPER_PUBLIC_KEY=**********
+export TRELLO_MEMBER_TOKEN=f84381c572fa423f5cfc5b0a053d12d8
+export TEMPORARY_ASSETS_PATH="/tmp/pdf/"
