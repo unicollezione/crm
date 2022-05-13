@@ -31,7 +31,7 @@ class TrelloService
   end
 
   def send_attachmen
-    find_trello_list.cards.last.add_attachment(File.open(file_path)) if order.illustration.attached?
+    find_trello_list.cards.last.add_attachment(file_path) if order.illustration.attached?
   end
 
   def file_path
