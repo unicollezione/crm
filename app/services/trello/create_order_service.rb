@@ -39,7 +39,7 @@
 #    "cover_image_id"=>nil,
 #    "source_card_properties"=>nil}
 module Trello
-  #  class Trello::CreateOderService
+  #  class Trello::CreateOrderService
   #  @param [Order] order
   class CreateOrderService
     def initialize(order)
