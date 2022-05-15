@@ -25,12 +25,13 @@ class TrelloService
 
   def send_order_to_trello
     Trello::Card.create( name: "##{order.idx}",
-                         list_id: order.workroom.trello_list.public_id                         
-    )
-    send_attachmen
+                         list_id: order.workroom.trello_list.public_id,
+                         desc: "Order #{order.idx}"                         
+    ).add_comment("Fabric #{order.fabric.title}")
+    send_attachment
   end
 
-  def send_attachmen
+  def send_attachment
     find_trello_list.cards.last.add_attachment(file_path) if order.illustration.attached?
   end
 
