@@ -1,3 +1,3 @@
 class TrelloList < ApplicationRecord
-  belongs_to :workroom  
+  belongs_to :workroom
 end

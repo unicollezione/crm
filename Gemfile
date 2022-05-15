@@ -46,7 +46,10 @@ group :development, :test do
   gem 'json_matchers'
   gem 'json-schema'
   gem 'net-http'
+  gem "pry"
+  gem "pry-stack_explorer"
   gem 'rspec-rails'
+  gem "shoulda", "~> 3.6"
   gem 'shoulda-matchers', '~> 3.0', require: false
 end
 

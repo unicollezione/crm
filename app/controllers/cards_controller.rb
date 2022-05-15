@@ -3,8 +3,9 @@
 # CardsController
 # Render cards
 class CardsController < ApplicationController
-  
-  before_action :find_card , only: %i[show trello image file_path]
+  layout false, only: [:image]
+
+  before_action :card, only: %i[show trello image file_path]
 
   def index
     @cards = Order.where(prepared_at: nil).last(12)
@@ -24,39 +25,19 @@ class CardsController < ApplicationController
             margin: { top: 1, bottom: 1, left: 1, right: 1 },
             encoding: 'utf8',
             page_size: 'A4',
-            layout: 'pdf'
+            layout: 'pdf',
+            template: 'cards/trello'
   end
 
   def image
-    pdf = MiniMagick::Image.open([ENV['TEMPORARY_ASSETS_PATH'], @card.idx].join)
-    pdf.format('jpg')
-    pdf.write([path, "#{@card.idx}.jpg"].join)
-    @card.illustration.attach(**trello_card_attributes)
+    return if @card.illustration.attached?
   end
 
   private
 
-  def find_card
-    @card = Order
-            .includes(product: %i[product_measurements measures])
-            .find_by(idx: params[:id])
-  end
-
-  def path
-    path = "./tmp/#{self.class.to_s.downcase}/"
-    Dir.mkdir(path) unless Dir.exist?(path)
-    path
-  end
-
-  def file_path
-    [path, "#{@card.idx}.jpg"].join
-  end
-
-  def trello_card_attributes
-    {
-      io: File.open(file_path), 
-      filename: "#{@card.idx}.jpg", 
-      content_type: 'image/jpg'
-    }
+  def card
+    @card ||= Order
+              .includes(product: %i[product_measurements measures])
+              .find_by(idx: params[:id])
   end
 end

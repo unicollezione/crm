@@ -204,7 +204,8 @@ ActiveRecord::Schema.define(version: 2022_04_23_042118) do
   end
 
   create_table "trello_lists", force: :cascade do |t|
-    t.string "public_id"
+    t.string "list"
+    t.string "board"
     t.bigint "workroom_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
