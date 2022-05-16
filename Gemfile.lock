@@ -513,9 +513,9 @@ DEPENDENCIES
   notion (~> 1.1, >= 1.1.4)
   pg (>= 0.18, < 2.0)
   prawn
-  pry (~> 0.14.1)
+  pry
   pry-rails
-  pry-stack_explorer (~> 0.6.1)
+  pry-stack_explorer
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)
