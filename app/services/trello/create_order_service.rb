@@ -70,13 +70,13 @@ module Trello
       "#{order.idx}.jpg"
     end
 
-    def jpg_path
-      Rails.root.join('tmp', jpg_name)
+    def path_for(name)
+      Rails.root.join(path, name)
     end
 
     def trello_card_attributes
       {
-        io: File.open(jpg_path),
+        io: File.open(path_for(jpg_name)),
         filename: "#{order.idx}.jpg",
         content_type: 'image/jpg'
       }
@@ -112,9 +112,10 @@ module Trello
     def render_pdf
       return if order.trello_pdf.attached?
 
-      File.open(path, 'wb') { |file| file << wicked_pdf }
+      File.open(path_for(pdf_name), 'wb') { |file| file << wicked_pdf }
 
-      order.trello_pdf.attach(io: File.open(path), filename: pdf_name)
+      order.trello_pdf.attach(io: File.open(path_for(pdf_name), 'r'),
+                              filename: pdf_name)
     end
 
     def generate_jpg
@@ -124,14 +125,19 @@ module Trello
 
       pdf = MiniMagick::Image.open(order.trello_card_pdf)
       pdf.format('jpg')
-      pdf.write(jpg_path)
+      pdf.write(path_for(jpg_name))
+
       order.illustration.attach(**trello_card_attributes)
     end
 
     def send_attachment
-      attachment = Trello::Card.find(card.id).add_attachment(File.open(jpg_path, 'r'), jpg_name)
+      attachment = Trello::Card
+                   .find(card.id)
+                   .add_attachment(File.open(path_for(jpg_name), 'r'),
+                                   jpg_name)
 
       attachment_id = JSON.parse(attachment.body)['id']
+
       card.update_fields(cover_image_id: attachment_id)
     end
   end
