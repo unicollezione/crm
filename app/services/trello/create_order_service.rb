@@ -106,7 +106,7 @@ module Trello
     end
 
     def wicked_pdf
-      WickedPdf.new.pdf_from_string("IDX #{order.idx} ")
+      WickedPdf.new.pdf_from_string("IDX #{order.idx}")
     end
 
     def render_pdf
