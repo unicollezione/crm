@@ -106,7 +106,7 @@ module Trello
     end
 
     def wicked_pdf
-      WickedPdf.new.pdf_from_string(pdf_html)
+      WickedPdf.new.pdf_from_string("IDX #{order.idx} ")
     end
 
     def render_pdf
@@ -123,7 +123,7 @@ module Trello
 
       render_pdf
 
-      pdf = MiniMagick::Image.open(order.trello_card_pdf)
+      pdf = MiniMagick::Image.open(path_for(pdf_name))
       pdf.format('jpg')
       pdf.write(path_for(jpg_name))
 
