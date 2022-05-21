@@ -100,13 +100,12 @@ module Trello
                                      orientation: 'Portrait',
                                      page_size: 'A4'
                                    },
-                                   layout: 'pdf',
                                    encoding: 'utf8',
                                    locals: { :@card => order })
     end
 
     def wicked_pdf
-      WickedPdf.new.pdf_from_string("IDX #{order.idx}")
+      WickedPdf.new.pdf_from_string(pdf_html)
     end
 
     def render_pdf
