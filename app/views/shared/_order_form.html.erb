@@ -1,0 +1,19 @@
+<%= form_with model: @order do |form| %>
+  <p>
+    <%= form.label :производство %><br>
+    <%= form.collection_select :fabric_id, Fabric.all, :id, :title, prompt: true%>
+  </p>
+  <p>
+    <%= form.label :продукт %>
+    <%= form.text_field :product%>
+  </p>
+  <p>
+    <%= form.label :кабинет %><br>
+    <%= form.collection_select :workroom_id, Workroom.all, :id, :name, prompt: true%>
+  </p>
+  <p>
+    <%= form.label :клиент %>
+    <%= form.text_field :клиент%>
+  </p>
+  <p><%= form.submit "Отправить", class: 'btn btn-primary btn-sm' %></p>
+<% end %>
