@@ -83,7 +83,7 @@ module Trello
     end
 
     def path
-      path = "./tmp/#{self.class.to_s.downcase}/"
+      path = "./tmp/cards/"
       Dir.mkdir(path) unless Dir.exist?(path)
       path
     end
@@ -123,7 +123,7 @@ module Trello
 
       render_pdf
 
-      pdf = MiniMagick::Image.open(order.trello_card_pdf)
+      pdf = MiniMagick::Image.open(path_for(pdf_name))
       pdf.format('jpg')
       pdf.write(path_for(jpg_name))
 
