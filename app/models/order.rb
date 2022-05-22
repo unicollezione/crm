@@ -77,7 +77,7 @@ class Order < ApplicationRecord
   end
 
   def trello_card_pdf
-    trello_pdf.blob.service_url if trello_pdf.attached?
+    Rails.application.routes.url_helpers.url_for(trello_pdf) if trello_pdf.attached?
   end
 
   private
