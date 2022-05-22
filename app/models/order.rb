@@ -120,6 +120,7 @@ class Order < ApplicationRecord
   end
 
   def create_order_with_trello_list
-    Trello::CreateOrderService.new(self).call
+    workroom.trello_list &&
+      Trello::CreateOrderService.new(self).call
   end
 end
