@@ -110,7 +110,7 @@ module Trello
     end
 
     def render_pdf
-      return if order.trello_pdf.attached?
+      # return if order.trello_pdf.attached?
 
       File.open(path_for(pdf_name), 'wb') { |file| file << wicked_pdf }
 
@@ -119,7 +119,7 @@ module Trello
     end
 
     def generate_jpg
-      return if order.illustration.attached?
+      # return if order.illustration.attached?
 
       render_pdf
 
