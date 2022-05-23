@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :cards, only: %i[index show] do
     member do
       get 'trello', to: 'cards#trello'
+      get 'image', to: 'cards#image'
     end
   end
 end

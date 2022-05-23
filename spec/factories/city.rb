@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :city do
-    country_id {Country.ids.sample}
+    association :country
     name {Faker::Address.city}
   end
 end

@@ -32,19 +32,22 @@ class Order < ApplicationRecord
   has_many :product_measures, through: :product
   belongs_to :fabric
   belongs_to :workroom
+  has_one :trello_list, through: :workroom
   has_many :order_measures
   has_many :measures, through: :order_measures
-
+  has_one :trello_card
   include AASM
 
   has_one_attached :illustration
   has_one_attached :qr_code
+  has_one_attached :trello_pdf
   has_one_attached :trello_qr_code
   has_one_attached :chat_qr_code
 
   accepts_nested_attributes_for :order_measures
   after_create :setup_order
   before_update :update_measures
+  after_create :create_order_with_trello_list
 
   validates_presence_of :customer, :idx, :product
 
@@ -67,6 +70,15 @@ class Order < ApplicationRecord
 
   def name
     idx
+  end
+
+  def illustration_url
+    product.illustration.attached? &&
+      Rails.application.routes.url_helpers.rails_blob_url(product.illustration)
+  end
+
+  def trello_card_pdf
+    trello_pdf.blob.service_url if trello_pdf.attached?
   end
 
   private
@@ -94,16 +106,21 @@ class Order < ApplicationRecord
   def update_measures
     measures = Measure.all
 
-    notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
-      note = arg.split(/:|-/)
-      measure = measures.detect { |m| m.tag.eql? note[0] }
-      measure &&
-        order_measures.build(
-          value: note[1].to_s,
-          measure_id: measure.id
-        )
-    end
+    notes &&
+      notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
+        note = arg.split(/:|-/)
+        measure = measures.detect { |m| m.tag.eql? note[0] }
+        measure &&
+          order_measures.build(
+            value: note[1].to_s,
+            measure_id: measure.id
+          )
+      end
 
     self.notes = ''
+  end
+
+  def create_order_with_trello_list
+    Trello::CreateOrderService.new(self).call
   end
 end
