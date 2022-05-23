@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '3.0.1'
 
 gem 'aasm', '~> 5.2'
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -19,13 +19,14 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'prawn'
 gem 'puma', '~> 4.1'
 gem 'rack-cors'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem "rails", "~> 7.0.2"
 gem 'rqrcode', '~> 2.1'
 gem 'ruby-trello', '~> 3.0'
 gem 'sass-rails', '~> 6.0'
 gem 'sprockets-rails'
 gem 'trestle', '~> 0.9.5'
-gem 'trestle-active_storage', '~> 3.0', '>= 3.0.1'
+# gem 'trestle-active_storage', '~> 3.0', '>= 3.0.1'
+gem 'trestle-active_storage', git: 'https://github.com/rzilient-club/trestle-active_storage.git', ref: '3d066c7d2c401d04d12ea346f93e1201c45454b7'
 gem 'trestle-auth', '~> 0.4.3'
 gem 'trestle-search'
 gem 'webpacker', '~> 6.0.0.rc.5'
