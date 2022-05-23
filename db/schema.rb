@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_23_042118) do
+ActiveRecord::Schema.define(version: 2022_05_23_131212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,14 @@ ActiveRecord::Schema.define(version: 2022_04_23_042118) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "trello_cards", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.string "trello_card"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_trello_cards_on_order_id"
+  end
+
   create_table "trello_lists", force: :cascade do |t|
     t.string "list"
     t.string "board"
@@ -253,5 +261,6 @@ ActiveRecord::Schema.define(version: 2022_04_23_042118) do
   add_foreign_key "product_measurements", "measures"
   add_foreign_key "product_measurements", "products"
   add_foreign_key "product_prices", "products"
+  add_foreign_key "trello_cards", "orders"
   add_foreign_key "trello_lists", "workrooms"
 end

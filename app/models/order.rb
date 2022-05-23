@@ -35,7 +35,7 @@ class Order < ApplicationRecord
   has_one :trello_list, through: :workroom
   has_many :order_measures
   has_many :measures, through: :order_measures
-
+  has_one :trello_card
   include AASM
 
   has_one_attached :illustration
