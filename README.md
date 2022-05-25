@@ -16,7 +16,12 @@ In `terminal` or `cmd`
 
 - `$ bundle install`
 
+The project uses postgresql to work with databases.
+If postgresql docker is used, you must take the file config/database.docker.yml.example. 
+
 - `docker-compose up` for run database
+
+If postgresql is installed in the operating system then use config/database.yml.example
 
 - `$ rails db:migrate`
 
@@ -26,7 +31,38 @@ In `terminal` or `cmd`
 
 - `$ rails s` for server starting
 
+If ubuntu is used, the package direnv must be installed for the .envrc file
+
+```console
+$ sudo apt install direnv
+```
+
+Next, [connect](https://github.com/direnv/direnv/blob/master/docs/hook.md) depending on the shell used.
+
+Then allow variables in the project:
+
+```console
+$ direnv allow .
+```
+
+To start the project, fill in the *ACTIVE_STORAGE_SERVICE* variable in the .envrc file.
+
+Example:
+
+```bash
+# .envrc.example
+export ACTIVE_STORAGE_SERVICE=local
+```
+
 Then open `http://localhost:3000` at your web-browser
+
+## Setup for staging / production
+
+Connecting staging
+
+```console
+heroku run rails console --app <app name>
+```
 
 # CRM
 

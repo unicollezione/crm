@@ -32,7 +32,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   # config.active_storage.service = :local
-  config.active_storage.service = :digitalocean
+  config.active_storage.service = ENV['ACTIVE_STORAGE_SERVICE'].to_sym
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -56,7 +56,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "crm_production"
 
-  config.action_mailer.perform_caching = false
+  # config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
