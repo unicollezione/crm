@@ -29,8 +29,17 @@ class CardsController < ApplicationController
             template: 'cards/trello'
   end
 
+  def wicked_pdf
+    render  pdf: @card.idx.to_s,
+            margin: { top: 1, bottom: 1, left: 1, right: 1 },
+            encoding: 'utf8',
+            page_size: 'A4',
+            layout: 'pdf',
+            template: 'cards/wicked_pdf'
+  end
+
   def image
-    return if @card.illustration.attached?
+    Trello::CreateOrderService.new(@card).generate_jpg unless @card.illustration.attached?
   end
 
   private

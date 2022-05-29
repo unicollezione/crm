@@ -80,6 +80,12 @@ class Order < ApplicationRecord
     Rails.application.routes.url_helpers.url_for(trello_pdf) if trello_pdf.attached?
   end
 
+  def trello_card
+    @trello_card ||= trello_card_id && Trello::Card.find(trello_card_id)
+  rescue Trello::Error
+    nil
+  end
+
   private
 
   def setup_order
@@ -115,8 +121,6 @@ class Order < ApplicationRecord
             measure_id: measure.id
           )
       end
-
-    self.notes = ''
   end
 
   def create_order_with_trello_list

@@ -53,6 +53,12 @@ module Trello
       send_order_to_trello
     end
 
+    def generate_jpg
+      render_pdf
+      pdf_to_jpg
+      order.illustration.attach(**trello_card_attributes)
+    end
+
     private
 
     attr_reader :order
@@ -60,6 +66,7 @@ module Trello
     def send_order_to_trello
       generate_jpg
       send_attachment
+      add_trello_card_id_to_order
     end
 
     def card
@@ -93,7 +100,7 @@ module Trello
     end
 
     def pdf_html
-      ApplicationController.render(template: 'cards/trello',
+      ApplicationController.render(template: 'cards/wicked_pdf',
                                    assigns: {
                                      pdf: pdf_name,
                                      print_media_type: true,
@@ -110,24 +117,16 @@ module Trello
     end
 
     def render_pdf
-      # return if order.trello_pdf.attached?
-
       File.open(path_for(pdf_name), 'wb') { |file| file << wicked_pdf }
 
       order.trello_pdf.attach(io: File.open(path_for(pdf_name), 'r'),
                               filename: pdf_name)
     end
 
-    def generate_jpg
-      # return if order.illustration.attached?
-
-      render_pdf
-
+    def pdf_to_jpg
       pdf = MiniMagick::Image.open(path_for(pdf_name))
       pdf.format('jpg')
       pdf.write(path_for(jpg_name))
-
-      order.illustration.attach(**trello_card_attributes)
     end
 
     def send_attachment
@@ -139,6 +138,11 @@ module Trello
       attachment_id = JSON.parse(attachment.body)['id']
 
       card.update_fields(cover_image_id: attachment_id)
+    end
+
+    # TODO: should we save here or just to assign attribute
+    def add_trello_card_id_to_order
+      order.upate!(trello_card_id: card.id)
     end
   end
 end

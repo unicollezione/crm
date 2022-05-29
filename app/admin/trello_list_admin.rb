@@ -47,7 +47,8 @@ def user_boards
 end
 
 def board_lists(order)
-  Trello::Board.find(order.board)
-               .lists
-               .map { |list| [list.name, list.id] }
+  order.attributes['board'] &&
+    Trello::Board.find(order.board)
+                 .lists
+                 .map { |list| [list.name, list.id] }
 end

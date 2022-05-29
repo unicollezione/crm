@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2022_04_23_042118) do
+ActiveRecord::Schema.define(version: 2022_05_29_180027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +156,7 @@ ActiveRecord::Schema.define(version: 2022_04_23_042118) do
     t.date "ready_at"
     t.boolean "payed"
     t.text "notes"
+    t.string "trello_card_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
