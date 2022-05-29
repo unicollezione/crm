@@ -46,7 +46,6 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :order_measures
   after_create :setup_order
-  before_update :update_measures
   after_create :create_order_with_trello_list
 
   validates_presence_of :customer, :idx, :product
@@ -91,10 +90,6 @@ class Order < ApplicationRecord
   def setup_order
     ActiveRecord::Base.connection.transaction do
       attach_qr_code
-      attach_product_measures
-      update_measures
-
-      save
     end
   end
 
@@ -116,7 +111,7 @@ class Order < ApplicationRecord
         note = arg.split(/:|-/)
         measure = measures.detect { |m| m.tag.eql? note[0] }
         measure &&
-          order_measures.build(
+          order_measures.find_or_initialize(
             value: note[1].to_s,
             measure_id: measure.id
           )

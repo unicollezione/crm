@@ -142,7 +142,8 @@ module Trello
 
     # TODO: should we save here or just to assign attribute
     def add_trello_card_id_to_order
-      order.update!(trello_card_id: card.id)
+      order.update!(trello_card_id: card.id,
+                    trello_url: card.short_url)
     end
   end
 end
