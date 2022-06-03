@@ -16,7 +16,8 @@ class CardsController < ApplicationController
             margin: { top: 1, bottom: 1, left: 1, right: 1 },
             viewport_size: '1920x1080',
             encoding: 'utf8',
-            page_size: 'A4',
+            page_size: 'A5',
+            orientation: 'landscape',
             layout: 'pdf'
   end
 

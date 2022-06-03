@@ -73,6 +73,9 @@ th, td {
           <%= image_tag(@card.fabric.illustration, size: '120x160') if @card.fabric.illustration.present? %>
           <div>
             <strong>мерки клиента</strong>
+            <strong>
+              <%= notes_for(@card) %>
+            </strong>
             <% @card.order_measures.each do |order_measure| %>
               <div>
                 <%= "#{[order_measure.measure.tag, ":", order_measure.value].join}" %>
@@ -138,7 +141,4 @@ th, td {
       </td>
     </tr>
   </table>
-</div>
-<div>
-  <%= button_to 'Создать изображение', image_card_path(@card), class: "btn btn-primary btn-sm" %>
 </div>
