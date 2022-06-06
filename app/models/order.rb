@@ -33,7 +33,7 @@ class Order < ApplicationRecord
   belongs_to :fabric
   belongs_to :workroom
   has_one :trello_list, through: :workroom
-  has_many :order_measures
+  has_many :order_measures, dependent: :destroy
   has_many :measures, through: :order_measures
 
   include AASM
