@@ -32,19 +32,21 @@ class Order < ApplicationRecord
   has_many :product_measures, through: :product
   belongs_to :fabric
   belongs_to :workroom
-  has_many :order_measures
+  has_one :trello_list, through: :workroom
+  has_many :order_measures, dependent: :destroy
   has_many :measures, through: :order_measures
 
   include AASM
 
   has_one_attached :illustration
   has_one_attached :qr_code
+  has_one_attached :trello_pdf
   has_one_attached :trello_qr_code
   has_one_attached :chat_qr_code
 
   accepts_nested_attributes_for :order_measures
   after_create :setup_order
-  before_update :update_measures
+  after_create :create_order_with_trello_list
 
   validates_presence_of :customer, :idx, :product
 
@@ -69,15 +71,26 @@ class Order < ApplicationRecord
     idx
   end
 
+  def illustration_url
+    product.illustration.attached? &&
+      Rails.application.routes.url_helpers.rails_blob_url(product.illustration)
+  end
+
+  def trello_card_pdf
+    Rails.application.routes.url_helpers.url_for(trello_pdf) if trello_pdf.attached?
+  end
+
+  def trello_card
+    @trello_card ||= trello_card_id && Trello::Card.find(trello_card_id)
+  rescue Trello::Error
+    nil
+  end
+
   private
 
   def setup_order
     ActiveRecord::Base.connection.transaction do
       attach_qr_code
-      attach_product_measures
-      update_measures
-
-      save
     end
   end
 
@@ -94,16 +107,20 @@ class Order < ApplicationRecord
   def update_measures
     measures = Measure.all
 
-    notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
-      note = arg.split(/:|-/)
-      measure = measures.detect { |m| m.tag.eql? note[0] }
-      measure &&
-        order_measures.build(
-          value: note[1].to_s,
-          measure_id: measure.id
-        )
-    end
+    notes &&
+      notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
+        note = arg.split(/:|-/)
+        measure = measures.detect { |m| m.tag.eql? note[0] }
+        measure &&
+          order_measures.find_or_initialize(
+            value: note[1].to_s,
+            measure_id: measure.id
+          )
+      end
+  end
 
-    self.notes = ''
+  def create_order_with_trello_list
+    workroom.trello_list &&
+      Trello::CreateOrderService.new(self).call
   end
 end

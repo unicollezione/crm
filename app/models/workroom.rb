@@ -14,4 +14,5 @@
 #
 class Workroom < ApplicationRecord
   has_many :order
+  has_one :trello_list
 end

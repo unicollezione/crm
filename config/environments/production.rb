@@ -33,6 +33,7 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   # config.active_storage.service = :local
   config.active_storage.service = :digitalocean
+  # config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -107,4 +108,5 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.action_mailer.default_url_options = { host: 'unicrm.herokuapp.com' }
   config.action_controller.asset_host = 'unicrm.herokuapp.com'
+  Rails.application.routes.default_url_options[:host] = ENV['HTTP_HOST']
 end

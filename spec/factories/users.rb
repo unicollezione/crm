@@ -14,11 +14,13 @@
 #
 FactoryBot.define do
   factory :user do
-    email { "MyString" }
-    password_digest { "MyString" }
-    first_name { "MyString" }
-    last_name { "MyString" }
-    remember_token { "MyString" }
+    sequence :email do |n|
+      "user#{n}@example.com"
+    end
+    password_digest { "12345678" }
+    first_name { "FirstName" }
+    last_name { "LastName" }
+    remember_token { "Token" }
     remember_token_expires_at { "2021-08-22 13:59:27" }
   end
 end

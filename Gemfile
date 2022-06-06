@@ -34,6 +34,7 @@ gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 gem 'aws-sdk-s3', require: false
 gem 'image_processing', '>= 1.2'
+gem "mini_magick"
 
 gem 'bootstrap', '~> 5.1.0'
 gem 'react-rails', '~> 2.6', '>= 2.6.1'
@@ -45,7 +46,10 @@ group :development, :test do
   gem 'json_matchers'
   gem 'json-schema'
   gem 'net-http'
+  gem "pry"
+  gem "pry-stack_explorer"
   gem 'rspec-rails'
+  gem "shoulda", "~> 3.6"
   gem 'shoulda-matchers', '~> 3.0', require: false
 end
 
