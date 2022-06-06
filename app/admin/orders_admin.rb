@@ -217,23 +217,25 @@ Trestle.resource(:orders) do
       col(xs: 6) do
         select :trello_card_id,
                lists_for(order),
-               selected: order.trello_card&.list,
+               selected: order.trello_card&.list&.name,
                label: 'list'
       end
     end
 
     tab :cards do
       col(xs: 6) do
-        link_to('trello',
-                Rails.application.routes.url_helpers.card_path(order.idx),
-                target: '_blank',
-                class: 'btn btn-primary m-2')
+        order.idx &&
+          link_to('trello',
+                  Rails.application.routes.url_helpers.card_path(order.idx),
+                  target: '_blank',
+                  class: 'btn btn-primary m-2')
       end
       col(xs: 6) do
-        link_to('card',
-                Rails.application.routes.url_helpers.image_card_path(order.idx),
-                target: '_blank',
-                class: 'btn btn-primary m-2')
+        order.idx &&
+          link_to('card',
+                  Rails.application.routes.url_helpers.image_card_path(order.idx),
+                  target: '_blank',
+                  class: 'btn btn-primary m-2')
       end
     end
   end
