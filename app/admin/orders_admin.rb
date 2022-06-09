@@ -195,9 +195,9 @@ Trestle.resource(:orders) do
 
       render 'image', order: order
       row do
-        col { datetime_field :updated_at }
-        col { datetime_field :created_at }
-        col { datetime_field :prepared_at }
+        col(sm: 4) { datetime_field :updated_at }
+        col(sm: 4) { datetime_field :created_at }
+        col(sm: 4) { datetime_field :prepared_at }
       end
     end
 
@@ -211,7 +211,7 @@ Trestle.resource(:orders) do
       col(sm: 2) do
         link_to order.trello_url, order.trello_url, target: '_blank', class: 'external-link'
       end
-      end
+    end
 
     tab :cards do
       col(sm: 6) do
