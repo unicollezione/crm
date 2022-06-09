@@ -128,29 +128,31 @@ Trestle.resource(:orders) do
   form do |order| # rubocop:disable Metrics/BlockLength
     tab :order do
       row do
-        col(xs: 3) { text_field :idx }
-        col(xs: 3) { date_field :purchased_at, label: 'дата' }
-        col(xs: 3) { date_field :ready_at, label: 'сдача' }
-        col(xs: 2) do
-          static_field :trello do
-            link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
-          end
+        col(sm: 3) { text_field :idx }
+        col(sm: 3) { text_field :prepayment, label: 'предоплата' }
+        col(sm: 3) { text_field :payment, label: 'оплата' }
+        col(sm: 2) { check_box :payed, label: 'оплачено' }
+      end
+
+      row do
+        col(sm: 6) { select :customer_id, Customer.all, { label: 'покупатель' } }
+        col(sm: 6) { select :product_id, Product.all, { label: 'продукт' } }
+      end
+
+      row do
+        col(sm: 6) do
+          text_area :notes, label: 'мерки'
+        end
+        col(sm: 6) do
+          select :fabric_id, Fabric.all, { label: 'Ткань' }
+          select :workroom_id, Workroom.all, { label: 'производство' }
         end
       end
 
       row do
-        col(xs: 3) { text_field :prepayment, label: 'предоплата' }
-        col(xs: 3) { text_field :payment, label: 'оплата' }
-        col(xs: 3) { check_box :payed, label: 'оплачено' }
-      end
-
-      row do
-        col(xs: 6) { select :customer_id, Customer.all, { label: 'покупатель' } }
-        col(xs: 6) { select :product_id, Product.all, { label: 'продукт' } }
-      end
-
-      row do
-        text_area :notes, label: 'мерки'
+        col do
+          text_field :comment
+        end
       end
 
       row do
@@ -176,34 +178,20 @@ Trestle.resource(:orders) do
         end
       end
 
-      # fields_for :order_measures, order.order_measures do |measure|
-      # render 'order_measure', order_measure: measure if measure.present?
-      # text_field 'value'
-      # actions
-      # end if order.order_measures.present?
-
-      # row do
-      #   col(sm: 6) do
-      #     select :measures, Measure.all, { label: :measures }
-      #     order.order_measures.each do |_measure|
-      #       text_field :id
-      #     end
-      #   end
-      # end
-
       row do
-        col(xs: 6) { render 'fabric', order: order }
-        col(xs: 6) { select :fabric_id, Fabric.all, { label: 'Ткань' } }
-      end
+        col(sm: 6) do
+          render 'fabric', order: order
+        end
 
-      row do
-        col(xs: 6) { select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' } }
-        col(xs: 6) { select :workroom_id, Workroom.all, { label: 'производство' } }
+        col(sm: 6) { select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' } }
       end
 
       active_storage_field :illustration
-      text_field :comment
-      text_field :trello_url
+
+      row do
+        col(sm: 3) { date_field :purchased_at, label: 'продали изделие' }
+        col(sm: 3) { date_field :ready_at, label: 'готовность к' }
+      end
 
       render 'image', order: order
       row do
@@ -214,23 +202,26 @@ Trestle.resource(:orders) do
     end
 
     tab :trello do
-      col(xs: 6) do
+      col(sm: 6) do
         select :trello_card_id,
                lists_for(order),
                selected: order.trello_card&.list&.name,
                label: 'list'
       end
-    end
+      col(sm: 2) do
+        link_to order.trello_url, order.trello_url, target: '_blank', class: 'external-link'
+      end
+      end
 
     tab :cards do
-      col(xs: 6) do
+      col(sm: 6) do
         order.idx &&
           link_to('trello',
                   Rails.application.routes.url_helpers.card_path(order.idx),
                   target: '_blank',
                   class: 'btn btn-primary m-2')
       end
-      col(xs: 6) do
+      col(sm: 6) do
         order.idx &&
           link_to('card',
                   Rails.application.routes.url_helpers.image_card_path(order.idx),
