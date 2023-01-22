@@ -1,0 +1,7 @@
+<div>
+  <h2>Orders#new</h2>
+</div>
+
+<%= turbo_frame_tag "new form" do %>
+  <%= render partial: "form", locals: { order: @order } %>
+<% end %>

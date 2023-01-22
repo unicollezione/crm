@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'order/new'
+    get 'order/create'
+    get 'order/update'
+  end
+
   namespace :api do
     resources :items
   end

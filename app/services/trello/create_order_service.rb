@@ -66,11 +66,12 @@ module Trello
     def send_order_to_trello
       generate_jpg
       send_attachment
-      add_trello_card_id_to_order
+      add_trello_card_id_to_order!
     end
 
     def card
-      @card ||= Trello::Card.create(name: "##{order.idx}", list_id: order.workroom.trello_list.list)
+      @card ||= Trello::Card.create(name: "##{order.idx}",
+                                    list_id: order.workroom.trello_list.list)
     end
 
     def jpg_name
@@ -90,7 +91,7 @@ module Trello
     end
 
     def path
-      path = "./tmp/cards/"
+      path = './tmp/cards/'
       Dir.mkdir(path) unless Dir.exist?(path)
       path
     end
@@ -141,7 +142,7 @@ module Trello
     end
 
     # TODO: should we save here or just to assign attribute
-    def add_trello_card_id_to_order
+    def add_trello_card_id_to_order!
       order.update!(trello_card_id: card.id,
                     trello_url: card.short_url)
     end
