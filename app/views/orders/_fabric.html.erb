@@ -1,0 +1,15 @@
+<%= turbo_frame_tag 'fabric1' do %>
+  <div class="form">
+    <p>Fabrics</p>
+    <div class='d-flex form-group flex-row'>
+      <div class='form-control'>
+        <%= select_tag :fabric_id,
+          options_from_collection_for_select(
+            @fabrics, :id, :title, { prompt: 'Select a fabric' }
+          ), class: 'single-select-fabrics border-dark flex-grow w-90' %>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'New', new_fabric_path, data: { turbo_frame: 'fabric1'} %>
+<% end %>
+

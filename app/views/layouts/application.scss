@@ -1,1 +1,18 @@
+$white: #ffffff;
+
+$theme-colors: (
+    "light":      #f7d1e0,
+    "dark":       #a273c4,
+    "primary":    #6ddef7,
+    "secondary":  #0aaaed,
+    "info":       #eb098c,
+    "accent1":    #ac1b85,
+    "accent2":    #d85ea3,
+    "accent3":    #d1b4d2,
+    "success":    #03bf5e,
+    "warning":    #f1cf03,
+    "danger":     #ff0d2b,
+);
+
 @import "bootstrap";
+

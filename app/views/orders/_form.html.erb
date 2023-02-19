@@ -1,0 +1,15 @@
+<div class='form-group'>
+  <div class='form-row'>
+    <%# product fabric taylor %>
+    <%= form_with(model: order, class: "mb-7", action: :create) do |form| %>
+      <div class="mb-5 d-flex flex-row">
+        <%= form.text_field :description,
+            placeholder: "Add new task",
+            class: "inline-block w-96 px-3 py-2 mt-2 shadow rounded-md border border-gray-200 outline-none form-control" %>
+          <%= form.submit "Save",
+            class: "btn btn-success text-white py-2 ml-2 bg-blue-600 form-control" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

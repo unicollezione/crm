@@ -1,16 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'order/new'
-    get 'order/create'
-    get 'order/update'
-  end
-
   namespace :api do
     resources :items
   end
-  root to: 'items#index'
 
   namespace :api do
     namespace :v1 do
@@ -20,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :customers
   resources :items
+  resources :orders, only: %w(index new create)
+  resources :fabrics, only: %w(index new create)
+
   resources :cards, only: %i[index show] do
     member do
       get 'trello', to: 'cards#trello'
@@ -27,4 +23,6 @@ Rails.application.routes.draw do
       get 'image', to: 'cards#image'
     end
   end
+
+  root to: 'items#index'
 end

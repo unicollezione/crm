@@ -44,7 +44,7 @@ class Order < ApplicationRecord
   has_one_attached :trello_qr_code
   has_one_attached :chat_qr_code
 
-  accepts_nested_attributes_for :order_measures
+  accepts_nested_attributes_for :order_measures, :customer, :fabric
   after_create :setup_order
   after_create :create_order_with_trello_list
 
@@ -98,7 +98,7 @@ class Order < ApplicationRecord
       product.product_measurements.pluck(:measure_id).each do |measure_id|
         order_measures.build(
           value: 0,
-          measure_id: measure_id
+          measure_id:
         )
       end
   end

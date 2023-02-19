@@ -1,7 +1,21 @@
-<div>
-  <h2>Orders#new</h2>
-</div>
+<%= javascript_import_module_tag("utils") %>
 
-<%= turbo_frame_tag "new form" do %>
-  <%= render partial: "form", locals: { order: @order } %>
-<% end %>
+<div class='orders pt-3'>
+  <div class='card mb-3 '>
+    <div class='card-header bg-white'>
+      <h2 class='text-dark'>Новый заказ</h2>
+    </div>
+    <div class='card-body'>
+      <%= turbo_frame_tag :product do %>
+        <%= render partial: 'product' %>
+      <% end %>
+
+      <%= turbo_frame_tag 'fabric1' do %>
+        <%= render 'fabric' %>
+      <% end %>
+      <button data-action="click->orders#refresh">Do</button>
+
+      </button>
+    </div>
+  </div>
+</div>
