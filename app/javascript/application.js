@@ -1,11 +1,9 @@
 import "@hotwired/turbo-rails"
-import jquery from 'jquery'
 import './controllers'
 import "@hotwired/turbo-rails"
-import "controllers"
+import { application } from './controllers'
+import { initChoices } from './utils'
 
-window.jQuery = jquery
-window.$ = jquery
+initChoices()
 
-require('select2')()
-console.log("Hello, app/js/appplication.js Stimulus!!!")
+export { application }

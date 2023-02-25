@@ -5,7 +5,7 @@
         <label> Add new fabrics </label>
         <%= link_to 'X',
           new_order_path,
-          data: { turbo_frame: 'fabric1' },
+          data: { action: 'click->orders:attachSelect2' },
           class: 'btn btn-outline-dark pull-right' %>
       </div>
     </div>

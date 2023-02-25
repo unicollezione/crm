@@ -1,14 +1,28 @@
-import "select2";
+import Choices from 'choices.js/src/scripts/choices.ts'
 
-$(document).ready(function () {
-  $(".single-select-fabrics").select2({
-    theme: "bootstrap-5"
-  });
-  $(".single-select-products").select2({
-    theme: "bootstrap-5"
-  });
-  document.documentElement.addEventListener("turbo:frame-load", event => {
-    console.debug("turbo:frame-load event:", event)
+const choicesConfig = {
+  searchEnabled: true,
+  allowHTML: false
+}
+const elements = ['product_id', 'fabric_id', 'workroom_id', 'customer_id']
+
+const events = ['DOMContentLoaded', 'turbo:frame-load']
+
+const initChoices = () => {
+  events.forEach((domEvent) => {
+    document.addEventListener(domEvent, () => {
+
+      elements.forEach((element) => {
+        let select = document.getElementById(element)
+
+        if (select) {
+          new Choices(select, choicesConfig).setValue([])
+        } else {
+          console.log(`Element ${element} not found`)
+        }
+      })
+    })
   })
-});
+}
 
+export { initChoices }

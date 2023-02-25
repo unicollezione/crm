@@ -1,0 +1,17 @@
+<%= turbo_frame_tag 'customers' do %>
+  <%= form_for @customer, data: { turbo_frame: 'customers' } do |f| %>
+    <div class='form form-group'>
+      <div class='form-row'>
+        <div class='col'>
+          <%= f.label :name %>
+          <%= f.text_field :nickname, class: 'form-control' %>
+        </div>
+      </div>
+      <div class='form-row'>
+        <div class='col'>
+          <%= f.submit class: 'btn btn-primary form-control'%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

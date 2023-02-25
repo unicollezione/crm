@@ -11,10 +11,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :customers
   resources :items
-  resources :orders, only: %w(index new create)
-  resources :fabrics, only: %w(index new create)
+  resources :customers, only: %w[index new create]
+  resources :orders, only: %w[index new create]
+  resources :fabrics, only: %w[index new create]
 
   resources :cards, only: %i[index show] do
     member do

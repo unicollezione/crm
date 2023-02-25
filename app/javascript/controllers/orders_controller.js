@@ -1,14 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="orders"
 export default class extends Controller {
-  connect() {
-    console.log("Hello, orders Stimulus!", this.element)
+  initialize() {
   }
 
-  // order refresh select fields
-  refresh(event) {
-    console.log("refreshing order")
-    console.log(event.params)
+  connect() {
   }
 }
