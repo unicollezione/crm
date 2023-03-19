@@ -7,14 +7,16 @@ class OrdersController < ApplicationController
   before_action :fabrics, :workrooms, :customers, :products, only: %i[new]
 
   def index
+    @orders = Order.last(12)
   end
 
   def new
+    @idx = Order.last.idx.next
     @order = Order.new
   end
 
-  def create
-    redirect_to new_order_path
+  def show
+    @order = Order.find(params[:id])
   end
 
   def update; end

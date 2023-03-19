@@ -1,25 +1,10 @@
-<%# <%= javascript_import_module_tag("utils") %1> %>
-
 <div class='orders pt-3'>
-  <div class='card mb-3 '>
-    <div class='card-header bg-white'>
+  <div class='mb-3 '>
+    <div class='bg-white'>
       <h2 class='text-dark'>Новый заказ</h2>
     </div>
-    <div class='card-body' data-controller='orders'>
-
-      <%= render partial: 'workrooms', locals: { workrooms: @workrooms } %>
-
-      <%= turbo_frame_tag :product do %>
-        <%= render partial: 'product' %>
-      <% end %>
-
-      <%= turbo_frame_tag 'fabric1' do %>
-        <%= render 'fabric' %>
-      <% end %>
-
-      <%= turbo_frame_tag 'customers' do %>
-        <%= render partial: 'customers', locals: { customers: @customers } %>
-      <% end %>
+    <div data-controller='orders'>
+      <%= render partial: 'form', locals: { order: @order } %>
     </div>
   </div>
 </div>

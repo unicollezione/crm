@@ -1,54 +1,50 @@
-<%= turbo_frame_tag 'fabric1' do %>
-  <div class="card form m-2 outline-primary">
-    <div class="card-header">
-      <div class='col d-flex justify-content-between'>
-        <label> Add new fabrics </label>
-        <%= link_to 'X',
-          new_order_path,
-          data: { action: 'click->orders:attachSelect2' },
-          class: 'btn btn-outline-dark pull-right' %>
+<%= turbo_frame_tag 'fabric' do %>
+  <div class='col d-flex justify-content-between'>
+    <label> добавить ткань </label>
+    <%= link_to 'X',
+      new_order_path,
+      data: { action: 'click->orders:attachSelect2' },
+      class: 'btn btn-outline pull-right' %>
+  </div>
+</div>
+<%= form_with model: @fabric, data: {turbo_frame: 'fabric' } do |form| %>
+<div class="form-group">
+    <div class='form-row'>
+      <div class='col'>
+        <%= form.label :title %>
+        <%= form.text_field :title, class: 'form-control' %>
       </div>
     </div>
-    <%= form_with model: @fabric, data: {turbo_frame: 'fabric1' } do |form| %>
-    <div class="card-body form-group">
-        <div class='form-row'>
-          <div class='col'>
-            <%= form.label :title %>
-            <%= form.text_field :title, class: 'form-control' %>
-          </div>
-        </div>
-        <div class='form-row'>
-          <div class='col'>
-            <%= form.label :name %>
-            <%= form.text_field :name, class: 'form-control' %>
-          </div>
-        </div>
-        <div class='form-row'>
-          <div class='col'>
-            <%= form.label :description %>
-            <%= form.text_area :description, class: 'form-control' %>
-          </div>
-        </div>
-        <div class='form-row'>
-          <div class='col'>
-            <%= form.label :material %>
-            <%= form.text_area :material, class: 'form-control' %>
-          </div>
-        </div>
-        <div class='form-row'>
-          <div class='col'>
-            <%= form.label :illustration %>
-            <%= form.file_field :illustration, class: 'form-control' %>
-          </div>
-        </div>
+    <div class='form-row'>
+      <div class='col'>
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
       </div>
-
-      <div class="card-footer">
-        <div class='col'>
-          <%= form.submit class: 'btn btn-primary form-control' %>
-        </div>
+    </div>
+    <div class='form-row'>
+      <div class='col'>
+        <%= form.label :description %>
+        <%= form.text_area :description, class: 'form-control' %>
       </div>
-      <% end %>
+    </div>
+    <div class='form-row'>
+      <div class='col'>
+        <%= form.label :material %>
+        <%= form.text_area :material, class: 'form-control' %>
+      </div>
+    </div>
+    <div class='form-row'>
+      <div class='col'>
+        <%= form.label :illustration %>
+        <%= form.file_field :illustration, class: 'form-control' %>
+      </div>
     </div>
   </div>
+
+  <div class="mt-2 mb-2">
+    <div class='col'>
+      <%= form.submit class: 'btn btn-outline-primary form-control' %>
+    </div>
+  </div>
+  <% end %>
 <% end %>

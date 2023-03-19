@@ -4,7 +4,12 @@ const choicesConfig = {
   searchEnabled: true,
   allowHTML: false
 }
-const elements = ['product_id', 'fabric_id', 'workroom_id', 'customer_id']
+const elements = [
+  'product_id',
+  'fabric_id',
+  'workroom_id',
+  'customer_id'
+]
 
 const events = ['DOMContentLoaded', 'turbo:frame-load']
 

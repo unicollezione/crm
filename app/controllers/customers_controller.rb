@@ -5,11 +5,9 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
-    if @customer.save
-      redirect_to customers_path
-    else
-      render :new
-    end
+    @customers = Customer.all
+
+    render partial: 'orders/customers', locals: { customers: @customers, customer: @customer } if @customer.save
   end
 
   def index

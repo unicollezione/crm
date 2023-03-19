@@ -1,0 +1,62 @@
+<div>
+  <h2>Order</h2>
+  <%# %w(idx customer_id purchased_at product_id fabric_id comment aasm_state workroom_id trello_url prepared_at prepayment payment notes trello_card_id) %>
+  <p>
+    <strong>Idx:</strong>
+    <%= @order.idx %>
+  </p>
+  <p>
+    <strong>Customer:</strong>
+    <%= @order.customer.name %>
+  </p>
+  <p>
+    <strong>Product:</strong>
+    <%= @order.product.name %>
+  </p>
+  <p>
+    <strong>Fabric:</strong>
+    <%= @order.fabric.title %>
+    <%= @order.fabric.description %>
+    <%= @order.fabric.material %>
+  </p>
+  <p>
+    <strong>Comment:</strong>
+    <%= @order.comment %>
+  </p>
+  <p>
+    <strong>Aasm state:</strong>
+    <%= @order.aasm_state %>
+  </p>
+  <p>
+    <strong>Workroom:</strong>
+    <%= @order.workroom.name %>
+  </p>
+  <p>
+    <strong>Trello url:</strong>
+    <%= @order.trello_url %>
+  </p>
+  <p>
+    <strong>Prepared at:</strong>
+    <%= @order.prepared_at %>
+  </p>
+  <p>
+    <strong>Purchased at:</strong>
+    <%= @order.purchased_at %>
+  </p>
+  <p>
+    <strong>Prepayment:</strong>
+    <%= @order.prepayment %>
+  </p>
+  <p>
+    <strong>Payment:</strong>
+    <%= @order.payment %>
+  </p>
+  <p>
+    <strong>Notes:</strong>
+    <%= @order.notes %>
+  </p>
+  <p>
+    <strong>Trello card:</strong>
+    <%= @order.trello_card %>
+  </p>
+</div>

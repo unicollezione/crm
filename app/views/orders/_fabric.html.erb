@@ -1,12 +1,16 @@
-<%= turbo_frame_tag 'fabric1' do %>
-  <div class="form mb-2">
-    <div class='m-2 d-flex flex-row justify-content-between'>
+<%= turbo_frame_tag 'fabric' do %>
+  <div class="form-group my-2">
+    <div class='d-flex flex-row justify-content-between mb-2'>
       <span class="text-gray-700">Fabric</span>
-      <%= link_to 'Add', new_fabric_path, data: { turbo_frame: 'fabric1'}, class: 'btn btn-sm btn-primary btn-outline' %>
+      <%= link_to 'Add', new_fabric_path, data: { turbo_frame: 'fabric'}, class: 'btn btn-sm btn-outline-primary' %>
     </div>
-    <%= select_tag :fabric_id,
-      options_from_collection_for_select(
-        @fabrics, :id, :title, { prompt: 'Select a fabric' }
-      ) %>
+    <div class="form-group">
+      <%= select_tag :fabric_id,
+        options_from_collection_for_select(
+          @fabrics, :id, :title, { prompt: 'Select a fabric' }
+        ),
+        class: 'form-control'
+      %>
+    </div>
   </div>
 <% end %>

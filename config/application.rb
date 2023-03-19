@@ -38,5 +38,6 @@ module Crm
     config.autoload_paths += Dir[Rails.root.join('app', 'services')]
     config.react.server_renderer_extensions = ["jsx", "js", "tsx", "ts"]
     config.action_mailer.default_url_options = { host: 'unicrm.herokuapp.com' }
+    config.i18n.default_locale = :ru
   end
 end

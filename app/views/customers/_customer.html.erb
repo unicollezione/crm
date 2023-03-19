@@ -1,7 +1,11 @@
 <%= turbo_frame_tag 'customers' do %>
   <%= form_for @customer, data: { turbo_frame: 'customers' } do |f| %>
+    <div class='d-flex justify-content-between'>
+      <label>добавить покупателя</label>
+      <%= link_to 'X', customers_path, class: 'btn btn-outlinedanger pull-right', data: { turbo_frame: 'customers' } %>
+    </div>
     <div class='form form-group'>
-      <div class='form-row'>
+      <div class='form-row mb-2'>
         <div class='col'>
           <%= f.label :name %>
           <%= f.text_field :nickname, class: 'form-control' %>
@@ -9,7 +13,7 @@
       </div>
       <div class='form-row'>
         <div class='col'>
-          <%= f.submit class: 'btn btn-primary form-control'%>
+          <%= f.submit class: 'btn btn-outline-primary form-control'%>
         </div>
       </div>
     </div>

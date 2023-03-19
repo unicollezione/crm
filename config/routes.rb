@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :orders do
+    resources :create_new_order, only: %i[create]
+  end
   namespace :api do
     resources :items
   end
@@ -13,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :items
   resources :customers, only: %w[index new create]
-  resources :orders, only: %w[index new create]
+  resources :orders, only: %w[index show new]
   resources :fabrics, only: %w[index new create]
 
   resources :cards, only: %i[index show] do

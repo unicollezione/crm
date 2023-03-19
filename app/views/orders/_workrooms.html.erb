@@ -1,10 +1,12 @@
 <%= turbo_frame_tag 'tailor' do %>
   <div class="form mb-2">
-    Tailor
+    производство
     <%= select_tag :workroom_id,
       options_from_collection_for_select(
-        @workrooms, :id, :name, { prompt: 'Select a tailor' }
-      ) %>
+        workrooms, :id, :name, { prompt: 'Select a tailor' },
+      ),
+      class: 'form-control'
+    %>
   </div>
 <% end %>
 
