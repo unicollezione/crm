@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users, controllers: { sessions: 'trestle/auth/sessions' }
+
   namespace :orders do
     resources :create_new_order, only: %i[create]
   end

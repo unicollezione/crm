@@ -13,6 +13,5 @@
 #  updated_at                :datetime         not null
 #
 class User < ApplicationRecord
-  include Trestle::Auth::ModelMethods
-  include Trestle::Auth::ModelMethods::Rememberable
+  devise :database_authenticatable
 end
