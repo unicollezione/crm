@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-# Trello::Board.find("5354b9475cdad1642a9c5426")
+# Trello::Board.find("5a9c5426")
 #
 #=> #<Trello::Board:0x00007fdf888a16b8
 # @__attributes=
-#  {"id"=>"5354b9475cdad1642a9c5426",
+#  {"id"=>"5354b9475cd",
 #   "starred"=>nil,
 #   "pinned"=>false,
-#   "url"=>"https://trello.com/b/PV2OtZdD/new-project",
-#   "short_url"=>"https://trello.com/b/PV2OtZdD",
+#   "url"=>"https://trello.com/b/asdf/new-project",
+#   "short_url"=>"https://trello.com/b/asdfasdf",
 #   "prefs"=>
 #    {"permissionLevel"=>"private",
 #     "hideVotes"=>false,
@@ -39,7 +39,7 @@
 #   "enterprise_id"=>nil,
 #   "name"=>"New Project",
 #   "description"=>"",
-#   "organization_id"=>"60c9511858ed4887fdb5827b",
+#   "organization_id"=>"60c9511858ed4887fdb58310",
 #   "visibility_level"=>"private",
 #   "voting_permission_level"=>"members",
 #   "comment_permission_level"=>"members",
@@ -59,15 +59,15 @@
 # @client=
 #  #<Trello::Client:0x00007fdf83a3ba78
 #   @auth_policy=
-#    #<Trello::Authorization::BasicAuthPolicy:0x00007fdf87fea218 @developer_public_key="f84381c572fa423f5cfc5b0a053d12d8", @member_token="01cb54a86bad592d68df1e023dbf6923938be607c8e72a9e6f5ae8b3a09e49b8">,
+#    #<Trello::Authorization::BasicAuthPolicy:0x00007fdf87fea218 @developer_public_key="", @member_token="">,
 #   @configuration=
 #    #<Trello::Configuration:0x00007fdf83a3ba28
-#     @developer_public_key="f84381c572fa423f5cfc5b0a053d12d8",
-#     @member_token="01cb54a86bad592d68df1e023dbf6923938be607c8e72a9e6f5ae8b3a09e49b8",
-#     @oauth_token="1b2574b0cf0782c7c596c637197fa628149aee9b4b2009029f32043d650325f9",
+#     @developer_public_key="",
+#     @member_token="",
+#     @oauth_token="",
 #     @oauth_token_secret=nil>>>
 
-Trestle.resource(:orders) do
+Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
   menu do
     group :orders do
       item :orders, icon: 'fa fa-shopping-cart', priority: :first
@@ -87,6 +87,7 @@ Trestle.resource(:orders) do
         .order(created_at: :desc)
     end
   end
+
   active_storage_fields do
     [:illustration]
   end
@@ -99,6 +100,7 @@ Trestle.resource(:orders) do
     scope :all, default: true
     scope :warning, -> { Order.where(ready_at: 7.days.ago..7.days.from_now) }
     scope :unpaid, -> { Order.unpaid }
+
     Workroom.all.map do |workroom|
       scope workroom.name.to_sym, -> { Order.where(workroom_id: workroom.id) }
     end
@@ -135,8 +137,13 @@ Trestle.resource(:orders) do
       end
 
       row do
-        col(sm: 6) { select :customer_id, Customer.all, { label: 'покупатель' } }
-        col(sm: 6) { select :product_id, Product.all, { label: 'продукт' } }
+        col(sm: 6) do
+          select :customer_id, Customer.all, { label: 'покупатель' }
+        end
+
+        col(sm: 6) do
+          select :product_id, Product.all, { label: 'продукт' }
+        end
       end
 
       row do
@@ -180,10 +187,12 @@ Trestle.resource(:orders) do
 
       row do
         col(sm: 6) do
-          render 'fabric', order: order
+          render 'fabric', order: order # rubocop:disable Style/HashSyntax
         end
 
-        col(sm: 6) { select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' } }
+        col(sm: 6) do
+          select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' }
+        end
       end
 
       active_storage_field :illustration
@@ -193,7 +202,8 @@ Trestle.resource(:orders) do
         col(sm: 3) { date_field :ready_at, label: 'готовность к' }
       end
 
-      render 'image', order: order
+      render 'image', order: order # rubocop:disable Style/HashSyntax
+
       row do
         col(sm: 4) { datetime_field :updated_at }
         col(sm: 4) { datetime_field :created_at }
@@ -209,7 +219,7 @@ Trestle.resource(:orders) do
                label: 'list'
       end
       col(sm: 2) do
-        link_to order.trello_url, order.trello_url, target: '_blank', class: 'external-link'
+        link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
       end
     end
 
@@ -230,17 +240,6 @@ Trestle.resource(:orders) do
       end
     end
   end
-
-  # By default, all parameters passed to the update and create actions will be
-  # permitted. If you do not have full trust in your users, you should explicitly
-  # define the list of permitted parameters.
-  #
-  # For further information, see the Rails documentation on Strong Parameters:
-  #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
-  #
-  # params do |params|
-  #   params.require(:order).permit(:name, ...)
-  # end
 end
 
 def lists_for(order)
