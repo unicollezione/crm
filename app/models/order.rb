@@ -35,8 +35,8 @@ class Order < ApplicationRecord
 
   has_one :trello_list, through: :workroom
 
-  has_many :measures, through: :order_measures
   has_many :order_measures, dependent: :destroy
+  has_many :measures, through: :order_measures
   has_many :product_measures, through: :product
 
   has_one_attached :chat_qr_code
