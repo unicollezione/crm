@@ -49,6 +49,7 @@ class Order < ApplicationRecord
   after_create :create_order_with_trello_list
 
   validates :customer_id, :idx, :product_id, :fabric_id, :workroom_id, presence: true
+  validates :idx, uniquentess: true
 
   scope :unpaid, -> { Order.where(payed: false) }
 
