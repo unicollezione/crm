@@ -42,8 +42,8 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |matcher|
+    matcher.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end
@@ -70,5 +70,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-   config.include FactoryBot::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end

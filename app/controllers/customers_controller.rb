@@ -1,22 +1,31 @@
+# frozen_string_literal: true
+
+# class CustomersController
+#
+# CRUD for customers
 class CustomersController < ApplicationController
+  before_action :customers, only: %i[index create]
   def new
     @customer = Customer.new
   end
 
   def create
     @customer = Customer.new(customer_params)
-    @customers = Customer.all
 
-    render partial: 'orders/customers', locals: { customers: @customers, customer: @customer } if @customer.save
+    return unless @customer.save
+
+    render partial: 'orders/customers', locals: { customers: @customers, customer: @customer }
   end
 
-  def index
-    @customers = Customer.all
-  end
+  def index; end
 
   private
 
   def customer_params
     params.require(:customer).permit(:nickname)
+  end
+
+  def customers
+    @customers ||= Customer.all
   end
 end
