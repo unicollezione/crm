@@ -107,26 +107,26 @@ Trestle.resource(:orders) do
       scope state.to_sym, -> { Order.where(aasm_state: state) }
     end
   end
+
   # Customize the table columns shown on the index view.
   #
   table do
     column :idx
     column :клиент, ->(order) { order.customer.nickname }
-    column :дата_продажи, ->(order) { order.purchased_at }
+    column :trello_url, ->(order) { link_to 'trello', order.trello_url }
+    column :дата_продажи, ->(order) { order.purchased_at&.to_formatted_s(:short) }
     column :продукт, ->(order) { order.product.name }
     column :ткань, ->(order) { order.fabric.title }
     column :наличие, ->(order) { order.aasm_state }
-    column :коммент, ->(order) { order.comment }
     column :производство, ->(order) { order.workroom.name }
-    column :created_at, align: :center
-    column :trello_url, link: true
+    column :коммент, ->(order) { order.comment }
     actions
   end
 
   # Customize the form fields shown on the new/edit views.
   #
   form do |order| # rubocop:disable Metrics/BlockLength
-    tab :order do
+    tab :order do # rubocop:disable Metrics/BlockLength
       row do
         col(sm: 3) { text_field :idx }
         col(sm: 3) { text_field :prepayment, label: 'предоплата' }
