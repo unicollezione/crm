@@ -8,7 +8,7 @@ ruby '3.2.0'
 gem 'aasm', '~> 5.2'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'chunky_png'
-gem 'devise', '~> 4.2'
+gem 'devise'
 gem 'factory_bot'
 gem 'faraday'
 gem 'faraday_middleware'
