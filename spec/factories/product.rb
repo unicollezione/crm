@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :product do
-    idx { Faker::IDNumber.valid }
+    idx { 1 }
     name { Faker::Name.name }
   end
 end

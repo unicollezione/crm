@@ -25,27 +25,29 @@
 # Order
 # Order represent customers order
 class Order < ApplicationRecord
+  include OrdersHelper
   include Qrcodable
 
   belongs_to :customer
-  belongs_to :product
-  has_many :product_measures, through: :product
   belongs_to :fabric
+  belongs_to :product
   belongs_to :workroom
+
   has_one :trello_list, through: :workroom
-  has_many :order_measures, dependent: :destroy
+
   has_many :measures, through: :order_measures
+  has_many :order_measures, dependent: :destroy
+  has_many :product_measures, through: :product
 
-  include AASM
-
+  has_one_attached :chat_qr_code
   has_one_attached :illustration
   has_one_attached :qr_code
   has_one_attached :trello_pdf
   has_one_attached :trello_qr_code
-  has_one_attached :chat_qr_code
 
   accepts_nested_attributes_for :order_measures, :customer, :fabric
-  after_create :setup_order
+
+  after_create :attach_qr_code
   after_create :create_order_with_trello_list
 
   validates :customer_id, :idx, :product_id, :fabric_id, :workroom_id, presence: true
@@ -53,23 +55,7 @@ class Order < ApplicationRecord
 
   scope :unpaid, -> { Order.where(payed: false) }
 
-  aasm do
-    state :купить, initial: true
-    state :на_производстве
-    state :в_офисе
-
-    event :buy do
-      transitions to: :in_office, from: :to_buy
-    end
-
-    event :bring_to_dev do
-      transitions to: :in_deveopment, from: :in_office
-    end
-  end
-
-  def name
-    idx
-  end
+  delegate :name, to: :idx
 
   def illustration_url
     product.illustration.attached? &&
@@ -87,37 +73,6 @@ class Order < ApplicationRecord
   end
 
   private
-
-  def setup_order
-    ActiveRecord::Base.connection.transaction do
-      attach_qr_code
-    end
-  end
-
-  def attach_product_measures
-    product &&
-      product.product_measurements.pluck(:measure_id).each do |measure_id|
-        order_measures.build(
-          value: 0,
-          measure_id:
-        )
-      end
-  end
-
-  def update_measures
-    measures = Measure.all
-
-    notes &&
-      notes.upcase.gsub(/\n/, ';').gsub(/\s+/, '').split(';').each do |arg|
-        note = arg.split(/:|-/)
-        measure = measures.detect { |m| m.tag.eql? note[0] }
-        measure &&
-          order_measures.find_or_initialize(
-            value: note[1].to_s,
-            measure_id: measure.id
-          )
-      end
-  end
 
   def create_order_with_trello_list
     workroom.trello_list &&

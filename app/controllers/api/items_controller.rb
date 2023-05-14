@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class ItemsController < Api::V1::BaseController
+  class ItemsController < Api::BaseController
     def index
       @items = Product.all
       render json: @items

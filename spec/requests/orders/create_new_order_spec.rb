@@ -1,7 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Orders::CreateNewOrders', type: :request do
-  describe 'POST /create' do
+RSpec.describe 'Orders::CreateNewOrders', type: :request do # rubocop:disable Metrics/BlockLength
+  let(:user) { create(:user) }
+
+  before do
+    sign_in user
+  end
+
+  describe 'POST /create' do # rubocop:disable Metrics/BlockLength
     let(:customer) { create(:customer) }
     let(:fabric) { create(:fabric) }
     let(:workroom) { create(:workroom) }

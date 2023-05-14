@@ -4,6 +4,8 @@
 # This controller is responsible for handling the
 # CRUD operations for the order entity.
 class OrdersController < ApplicationController
+  include OrdersHelper
+
   before_action :fabrics, :workrooms, :customers, :products, only: %i[new]
 
   def index
@@ -11,7 +13,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @idx = Order.last.idx.next
+    @idx = next_order_idx
     @order = Order.new
   end
 
