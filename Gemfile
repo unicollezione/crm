@@ -71,3 +71,8 @@ group :development do
   gem 'spring', '~> 4.1.1'
   gem 'spring-watcher-listen'
 end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+end
