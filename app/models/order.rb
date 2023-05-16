@@ -38,6 +38,7 @@ class Order < ApplicationRecord
   has_many :order_measures, dependent: :destroy
   has_many :measures, through: :order_measures
   has_many :product_measures, through: :product
+  has_many :order_events, dependent: :destroy
 
   has_one_attached :chat_qr_code
   has_one_attached :illustration

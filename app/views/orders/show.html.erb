@@ -1,6 +1,8 @@
 <div>
-  <h2>Order</h2>
   <%# %w(idx customer_id purchased_at product_id fabric_id comment aasm_state workroom_id trello_url prepared_at prepayment payment notes trello_card_id) %>
+
+  <%= render partial: 'orders/events', locals: { order: @order } %>
+
   <p>
     <strong>Idx:</strong>
     <%= @order.idx %>
@@ -56,7 +58,6 @@
     <%= @order.notes %>
   </p>
   <p>
-    <strong>Trello card:</strong>
-    <%= @order.trello_card %>
+    <%= @order.trello_card_id %>
   </p>
 </div>
