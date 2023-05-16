@@ -106,7 +106,7 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
     end
 
     Order.pluck(:aasm_state).map do |state|
-      scope state.to_sym, -> { Order.where(aasm_state: state) }
+      scope state&.to_sym, -> { Order.where(aasm_state: state) }
     end
   end
 
@@ -208,6 +208,10 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
         col(sm: 4) { datetime_field :updated_at }
         col(sm: 4) { datetime_field :created_at }
         col(sm: 4) { datetime_field :prepared_at }
+      end
+
+      row do
+        col(sm: 4) { text_field :trello_card_id }
       end
     end
 

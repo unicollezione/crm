@@ -35,7 +35,7 @@
   </p>
   <p>
     <strong>Trello url:</strong>
-    <%= @order.trello_url %>
+    <%= link_to @order.trello_url, @order.trello_url, target: '_blank' %>
   </p>
   <p>
     <strong>Prepared at:</strong>

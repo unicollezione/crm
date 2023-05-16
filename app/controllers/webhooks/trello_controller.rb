@@ -369,10 +369,24 @@ module Webhooks
     end
 
     def index
+      @order = Order.find_by(trello_card_id: params[:path])
+
+      @order && @order.order_events.create!(event_source: :notification, body: created_payload)
+
       render json: { status: 'ok' }
     end
 
     private
+
+    def created_payload
+      {
+        action_type: :created,
+        card_name: @order.idx,
+        creator: :notification,
+        list_before: :none,
+        list_after: :created
+      }
+    end
 
     def trello_webhook_payload
       { action_type:, card_name:, creator:, list_before:, list_after:, payload: params[:trello][:action] }
