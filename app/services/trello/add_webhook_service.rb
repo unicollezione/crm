@@ -18,7 +18,19 @@ module Trello
 
       Trello::Webhook.create(model_id: card.id,
                              description: "Order ##{order.idx}",
-                             callback_url: ENV.fetch('WEBHOOK_TRELLO_PATH'))
+                             callback_url:)
+    rescue Trello::Error
+      nil
+    end
+
+    private
+
+    def callback_url
+      URI::HTTP.build(
+        host: ENV.fetch('HOST'),
+        path: ENV.fetch('WEBHOOK_TRELLO_PATH'),
+        query: { id: order.trello_card_id }.to_query
+      ).to_s
     end
   end
 end
