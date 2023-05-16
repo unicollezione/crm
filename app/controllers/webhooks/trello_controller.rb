@@ -389,36 +389,40 @@ module Webhooks
     end
 
     def trello_webhook_payload
-      { action_type:, card_name:, creator:, list_before:, list_after:, payload: params[:trello][:action] }
+      { action_type:, card_name:, creator:, list_before:, list_after:, payload: webhook_action }
+    end
+
+    def webhook_action
+      params.dig(:trello, :action)
     end
 
     def trello_card_id
-      params[:trello][:action][:data][:card][:id]
+      params.dig(:trello, :action, :data, :card, :id)
     end
 
     # 'updateCard'
     def action_type
-      params[:trello][:action][:type]
+      params.dig(:trello, :action, :type)
     end
 
     # '#140'
     def card_name
-      params[:trello][:action][:data][:card][:name]
+      params.dig(:trello, :action, :data, :card, :name)
     end
 
     # 'alxekb'
     def creator
-      params[:trello][:action][:memberCreator][:username]
+      params.dig(:trello, :action, :memberCreator, :username)
     end
 
     # 'очередь'
     def list_after
-      params[:trello][:action][:data][:listAfter][:name]
+      params.dig(:trello, :action, :data, :listAfter, :name)
     end
 
     # 'В Работе'
     def list_before
-      params[:trello][:action][:data][:listBefore][:name]
+      params.dig(:trello, :action, :data, :listBefore, :name)
     end
   end
 end
