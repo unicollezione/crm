@@ -5,7 +5,10 @@ module Trello
   class AddWebhookService
     def initialize(order)
       @order = order
-      @card = Trello::Card.find(order.trello_card_id)
+      @card = Trello::Board.find(order.workroom.trello_list.board)
+                           .cards
+                           .find(order.trello_card_id)
+                           .first
     end
 
     attr_reader :order, :card
