@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   devise_for :users, controllers: { sessions: 'trestle/auth/sessions' }
 
   namespace :orders do
@@ -28,6 +28,12 @@ Rails.application.routes.draw do
       get 'image', to: 'cards#image'
     end
   end
+
+  namespace :webhooks do
+    resources :trello, only: %i[index create]
+  end
+
+  resources :tracking, only: %i[show]
 
   root to: 'items#index'
 end

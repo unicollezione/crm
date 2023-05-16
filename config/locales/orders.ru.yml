@@ -2,3 +2,5 @@
 ru:
   orders:
     add_new: новый заказ
+    events: Обновления заказа %{idx} (%{count})
+    from: от

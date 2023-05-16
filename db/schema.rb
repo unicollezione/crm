@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_25_195952) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_165116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -165,6 +165,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_195952) do
     t.string "range"
   end
 
+  create_table "order_events", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.string "event_source"
+    t.jsonb "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_source"], name: "index_order_events_on_event_source"
+    t.index ["order_id"], name: "index_order_events_on_order_id"
+  end
+
   create_table "order_measures", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "measure_id", null: false
@@ -197,6 +207,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_195952) do
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["fabric_id"], name: "index_orders_on_fabric_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["trello_card_id"], name: "index_orders_on_trello_card_id"
     t.index ["workroom_id"], name: "index_orders_on_workroom_id"
   end
 
@@ -1435,6 +1446,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_195952) do
   add_foreign_key "customer_measures", "customers"
   add_foreign_key "customer_measures", "measures"
   add_foreign_key "instructions", "products"
+  add_foreign_key "order_events", "orders"
   add_foreign_key "order_measures", "measures"
   add_foreign_key "order_measures", "orders"
   add_foreign_key "orders", "customers"

@@ -51,6 +51,7 @@ module Trello
 
     def call
       send_order_to_trello
+      add_webhook_to_card
     end
 
     def generate_jpg
@@ -141,10 +142,13 @@ module Trello
       card.update_fields(cover_image_id: attachment_id)
     end
 
-    # TODO: should we save here or just to assign attribute
     def add_trello_card_id_to_order!
       order.update!(trello_card_id: card.id,
                     trello_url: card.short_url)
+    end
+
+    def add_webhook_to_card
+      Trello::AddWebhookService.new(order).call
     end
   end
 end
