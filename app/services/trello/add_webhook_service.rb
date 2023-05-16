@@ -18,9 +18,7 @@ module Trello
 
       Trello::Webhook.create(model_id: card.id,
                              description: "Order ##{order.idx}",
-                             callback_url:)
-    rescue Trello::Error
-      nil
+                             callback_url: callback_url)
     end
 
     private
