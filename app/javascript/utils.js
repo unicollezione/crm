@@ -1,4 +1,4 @@
-import Choices from 'choices.js/src/scripts/choices.ts'
+import Choices from 'choices.js'
 
 const choicesConfig = {
   searchEnabled: true,
