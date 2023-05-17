@@ -215,6 +215,29 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
       end
     end
 
+    tab :tracking do
+      if order.trello_card_id.present?
+        row do
+          require 'uri'
+          url = URI::HTTP.build(host: ENV.fetch('HOST'), path: ['/tracking', order.trello_card_id].join('/'))
+          link_to(url.to_s, url.to_s, target: '_blank')
+        end
+      end
+
+      if order.order_events.size.positive?
+        label "events (#{order.order_events.count})"
+
+        row do
+          order.order_events.each do |event|
+            col(sm: 3) { event.event_source }
+            col(sm: 3) { event.body['creator'] }
+            col(sm: 3) { event.body['list_after'] }
+            col(sm: 3) { event.created_at }
+          end
+        end
+      end
+    end
+
     tab :trello do
       col(sm: 6) do
         select :trello_card_id,
