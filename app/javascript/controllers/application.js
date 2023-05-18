@@ -1,9 +1,12 @@
 import { Application } from "@hotwired/stimulus"
-// import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers"
 import OrdersController from "./orders_controller"
+import Clipboard from 'stimulus-clipboard'
+import YookassaController from "./yookassa_controller"
 
 const application = Application.start()
-console.log('application start js controllers')
+application.register('clipboard', Clipboard)
+application.register('yookassa', YookassaController)
+console.log("Hello from Stimulus!", application)
 
 application.debug = true
 window.Stimulus = application

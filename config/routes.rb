@@ -29,6 +29,10 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  namespace :payments do
+    resources :yoo_kassa, only: %i[index create]
+  end
+
   post '/webhooks/trello/*path', to: 'webhooks/trello#create', via: :all
   get '/webhooks/trello/*path', to: 'webhooks/trello#index', via: :all
 

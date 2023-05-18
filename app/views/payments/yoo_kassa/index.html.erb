@@ -1,0 +1,16 @@
+<div>
+  <%= turbo_frame_tag 'yookassa' do %>
+
+    <div data-controller="yookassa">
+      <%= form_with model: @order, url: payments_yoo_kassa_index_path, data: { controller: 'payments/yookassa' } do |f| %>
+        <div class='input-group mb-3 mr-2' data-controller='yookassa'>
+
+          <%= f.number_field :amount, label: false, placeholder: 'Сумма платежа', class: 'form-control', data: { controller: 'yookassa', action: "change->yookassa#change" } %>
+          <div class='input-group-append'>
+            <%= f.submit 'ссылка', class: 'btn disabled' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

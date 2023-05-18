@@ -1,0 +1,30 @@
+<div>
+  <p>
+    yookassa
+  </p>
+
+  <%= form.inspect %>
+  <%-
+    payment = {
+      amount: {
+        value: 111,
+        currency: 'RUB'
+      },
+      capture: true,
+      description: 'description',
+      expires_at: Time.now + 1.hour,
+      confirmation: {
+        type: 'redirect',
+        return_url: 'return_url'
+      }
+    }
+
+    payment_intent = Yookassa.payments.create(payment: payment)
+    confirmation_url = payment_intent.confirmation.confirmation_url
+  %>
+  <%=
+    turbo_frame_tag 'yookassa' do
+      link_to @confirmation_url, @confirmation_url
+    end
+  %>
+</div>
