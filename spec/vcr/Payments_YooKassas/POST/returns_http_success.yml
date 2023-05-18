@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.yookassa.ru/v3/payments
+    body:
+      encoding: UTF-8
+      string: '{"amount":{"value":4000,"currency":"RUB"},"capture":true,"description":"test","receipt":{"customer":{"full_name":"Иванов
+        Иван Иванович","email":"email@test.com","phone":"+79000000000"},"items":[{"description":"Брюки","quantity":"2.00","amount":{"value":1000,"currency":"RUB"},"vat_code":1,"payment_mode":"full_prepayment","payment_subject":"commodity","country_of_origin_code":"RU","customs_declaration_number":"test"},{"description":"Куртка","quantity":"1.00","amount":{"value":2000,"currency":"RUB"},"vat_code":1,"payment_mode":"full_prepayment","payment_subject":"commodity","country_of_origin_code":"RU","customs_declaration_number":"test"}]},"expires_at":"2023-05-18T21:18:34.106+02:00","confirmation":{"type":"redirect","return_url":"http://localhost:3000"}}'
+    headers:
+      Authorization:
+      - Basic NjY0MzE1OnRlc3RfQ3AwMmxsZjN2UjdoWFZjdUtqRHdCZ0VDU1h2eDRXVk9pWjcySldmaWtVNA==
+      Accept:
+      - application/json
+      Idempotence-Key:
+      - cb3996b2d29b374d28bc
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=UTF-8
+      Host:
+      - api.yookassa.ru
+      User-Agent:
+      - http.rb/5.0.4
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 18 May 2023 18:18:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '547'
+      Connection:
+      - close
+      Signature:
+      - v1 2bf87fba 1 MGQCMDQxt6GqNDJvJayRGdHu8/UyaRx2pVkMJxGZF8RmV7EENPWhbKySsS0f8JgtJu+K2gIwF4Fq3a2Mm3kMuMgUywZaf0pSc77R/2rSQqXijPpJqugjFT+libC11uzwT2eg50YJ
+      Strict-Transport-Security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id" : "2bf87fba-000f-5000-8000-16ae505c7a43",
+          "status" : "pending",
+          "amount" : {
+            "value" : "4000.00",
+            "currency" : "RUB"
+          },
+          "description" : "test",
+          "recipient" : {
+            "account_id" : "664315",
+            "gateway_id" : "1663299"
+          },
+          "created_at" : "2023-05-18T18:18:34.499Z",
+          "confirmation" : {
+            "type" : "redirect",
+            "confirmation_url" : "https://yoomoney.ru/checkout/payments/v2/contract?orderId=2bf87fba-000f-5000-8000-16ae505c7a43"
+          },
+          "test" : true,
+          "paid" : false,
+          "refundable" : false,
+          "metadata" : { }
+        }
+  recorded_at: Thu, 18 May 2023 18:18:34 GMT
+recorded_with: VCR 6.1.0

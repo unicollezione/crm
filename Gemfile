@@ -41,6 +41,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 6.0.0.rc.5'
 gem 'wicked_pdf', '~> 2.1'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
+gem 'yookassa'
 
 gem 'aws-sdk-s3', require: false
 gem 'image_processing', '>= 1.2'
