@@ -16,43 +16,29 @@ module Payments
     def payment # rubocop:disable Metrics/MethodLength
       {
         amount: {
-          value: 4000,
+          value:,
           currency: 'RUB'
         },
         capture: true,
-        description:,
+        description: "Заказ № #{order}",
         receipt: {
           customer: {
-            full_name: 'Иванов Иван Иванович',
-            email: 'email@test.com',
-            phone: '+79000000000'
+            full_name:,
+            email:,
+            phone:
           },
           items: [
             {
-              description: 'Брюки',
-              quantity: '2.00',
-              amount: {
-                value: 1000,
-                currency: 'RUB'
-              },
-              vat_code: 1,
-              payment_mode: 'full_prepayment',
-              payment_subject: 'commodity',
-              country_of_origin_code: 'RU',
-              customs_declaration_number: 'test'
-            },
-            {
-              description: 'Куртка',
+              description: ,
               quantity: '1.00',
               amount: {
-                value: 2000,
+                value:,
                 currency: 'RUB'
               },
               vat_code: 1,
               payment_mode: 'full_prepayment',
               payment_subject: 'commodity',
-              country_of_origin_code: 'RU',
-              customs_declaration_number: 'test'
+              country_of_origin_code: 'RU'
             }
           ]
         },
@@ -64,8 +50,32 @@ module Payments
       }
     end
 
+    def full_name
+      params[:full_name]
+    end
+
+    def product
+      params[:product]
+    end
+
+    def fabric
+      params[:fabric]
+    end
+
+    def order
+      params[:order]
+    end
+
+    def email
+      params[:email]
+    end
+
+    def phone
+      params[:phone]
+    end
+
     def description
-      params[:description]
+      [product, fabric].join(' ')
     end
 
     def value

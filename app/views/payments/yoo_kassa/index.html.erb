@@ -3,11 +3,45 @@
 
     <div data-controller="yookassa">
       <%= form_with model: @order, url: payments_yoo_kassa_index_path, data: { controller: 'payments/yookassa' } do |f| %>
-        <div class='input-group mb-3 mr-2' data-controller='yookassa'>
+        <div class="form-group">
+          <div class="my-2" data-controller='yookassa'>
+            <%=
+              f.phone_field :phone,
+                label: false,
+                placeholder: 'Номер телефона',
+                class: 'form-control',
+                data: { controller: 'yookassa', action: "change->yookassa#phone" }
+              %>
+          </div>
 
-          <%= f.number_field :amount, label: false, placeholder: 'Сумма платежа', class: 'form-control', data: { controller: 'yookassa', action: "change->yookassa#change" } %>
+          <div class="my-2" data-controller='yookassa'>
+            <%=
+              f.text_field :email,
+                label: false,
+                placeholder: 'Email',
+                class: 'form-control',
+                data: { controller: 'yookassa', action: "change->yookassa#email" }
+              %>
+          </div>
+        </div>
+
+        <div class='input-group mb-3 mr-2' data-controller='yookassa'>
+          <%= f.hidden_field :full_name %>
+          <%= f.hidden_field :product %>
+          <%= f.hidden_field :fabric %>
+          <%= f.hidden_field :order %>
+
+          <%=
+            f.number_field :amount,
+              label: false,
+              placeholder: 'Сумма платежа',
+              class: 'form-control',
+              data: { controller: 'yookassa', action: "change->yookassa#validate" }
+          %>
+
+
           <div class='input-group-append'>
-            <%= f.submit 'ссылка', class: 'btn disabled' %>
+            <%= f.submit 'ссылка', class: 'btn', disabled: true %>
           </div>
         </div>
       <% end %>

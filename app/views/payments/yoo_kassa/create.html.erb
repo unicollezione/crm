@@ -1,10 +1,26 @@
 <div>
   <%= turbo_frame_tag 'yookassa' do %>
-    <div data-controller="clipboard" data-clipboard-success-content="готово!" class="input-group mb-3 pr-2">
-      <input type="text" value="<%= @confirmation_url %>" data-clipboard-target="source" class='form-control' type='text' >
+    <div
+      data-controller="clipboard"
+      data-clipboard-success-content="готово!"
+      class="input-group mb-3 pr-2"
+    >
+      <input
+          type="text"
+          value="<%= @confirmation_url %>"
+          data-clipboard-target="source"
+          class='form-control'
+          type='text'
+      >
       <div class="input-group-append">
-        <i class="fa-solid fa-copy" data-action='clipboard#copy' data-clipboard-target="i"></i>
-        <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class='btn btn-outline-secondary'>скопировать</button>
+        <button
+          type="button"
+          data-action="clipboard#copy"
+          data-clipboard-target="button"
+          class='btn btn-outline-secondary'
+        >
+          скопировать
+        </button>
       </div>
     </div>
   <% end %>
