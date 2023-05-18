@@ -83,7 +83,7 @@ module Payments
     end
 
     def return_url
-      'http://localhost:3000'
+      'https://unicollezione.com'
     end
 
     def expires_at
