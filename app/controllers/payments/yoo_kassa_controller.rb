@@ -75,7 +75,7 @@ module Payments
     end
 
     def description
-      ['Изготовление на заказ:' product, fabric].join(' ')
+      ['Изготовление на заказ:', product, fabric].join(' ')
     end
 
     def value
