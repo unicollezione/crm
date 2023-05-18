@@ -29,7 +29,7 @@ module Payments
           },
           items: [
             {
-              description: ,
+              description:,
               quantity: '1.00',
               amount: {
                 value:,
@@ -75,7 +75,7 @@ module Payments
     end
 
     def description
-      [product, fabric].join(' ')
+      ['Изготовление на заказ:' product, fabric].join(' ')
     end
 
     def value
