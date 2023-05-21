@@ -37,7 +37,7 @@ module Payments
               },
               vat_code: 1,
               payment_mode: 'full_prepayment',
-              payment_subject: 'commodity',
+              payment_subject: 'service',
               country_of_origin_code: 'RU'
             }
           ]
