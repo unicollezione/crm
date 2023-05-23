@@ -1,0 +1,7 @@
+<div class='card-body'>
+  <%- @order.product.product_measurements.each do |measurement| %>
+    <div>
+      <%= measurement.measure.name %> ориентировочный диапазон <%= measurement.range %>
+    </div>
+  <% end %>
+</div>

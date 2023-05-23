@@ -3,44 +3,64 @@
 <div class="container">
   <div class='card m-4'>
     <div class='card-header'>
-      <p>
       <strong>Idx:</strong>
-      Заказ
-      <%= @order.idx %>
+      <p>
+        Заказ
+        <%= @order.idx %>
       </p>
     </div>
 
     <div class='card-body'>
-      <strong>заказчик:</strong>
-      <%= @order.customer.name %>
-      </p>
+
       <p>
-      <strong>изделие:</strong>
-      <%= @order.product.name %>
+        <strong>заказчик:</strong>
+        <%= @order.customer.name %>
       </p>
+
+      <div>
+        <p>
+        <strong>изделие:</strong>
+        <%= @order.product.name %>
+        </p>
+        <%= image_tag(@order.product.illustration, class: 'img-fluid') %>
+      </div>
+
+      <div>
+
+        <strong>ткань:</strong>
+        <p>
+          <%= @order.fabric.title %>
+          <%= @order.fabric.description %>
+          <%= @order.fabric.material %>
+        </p>
+        <%= image_tag(@order.fabric.illustration, class: 'img-fluid') %>
+      </div>
+
       <p>
-      <strong>ткань:</strong>
-      <%= @order.fabric.title %>
-      <%= @order.fabric.description %>
-      <%= @order.fabric.material %>
+        <strong>комментарий:</strong>
+        <%= @order.comment %>
       </p>
+
       <p>
-      <strong>комментарий:</strong>
-      <%= @order.comment %>
+        <strong>заказ от:</strong>
+        <%= @order.created_at %>
       </p>
+
       <p>
-      <strong>заказ от:</strong>
-      <%= @order.created_at %>
-      </p>
-      <p>
-      <strong>заметки:</strong>
-      <%= @order.notes %>
+        <strong>заметки:</strong>
+        <%= @order.notes %>
       </p>
     </div>
 
+    <%= render partial: 'measurements', locals: { order: @order } %>
+
     <div class='card-footer bg-info text-white'>
-      <%=
-        render 'orders/events', order: @order
-      %>
+      <%= render 'orders/events', order: @order %>
+      <%- @order.customer.orders.each do |order| %>
+        <div>
+
+          <%= order.trello_card_id && link_to(order.product.name, tracking_path(order.trello_card_id)) %> </div>
+      <% end %>
     </div>
+  </div>
 </div>

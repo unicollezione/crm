@@ -363,7 +363,7 @@ module Webhooks
     def create
       Order.find_by(trello_card_id:)
            .order_events
-           .create!(event_source: :notification, body: trello_webhook_payload)
+           .create!(event_source: 'trello_notification', body: trello_webhook_payload)
 
       render json: { status: :ok }
     end
@@ -371,7 +371,7 @@ module Webhooks
     def index
       @order = Order.find_by(trello_card_id: params[:path])
 
-      @order && @order.order_events.create!(event_source: :notification, body: created_payload)
+      @order && @order.order_events.create!(event_source: :notification, body: created_payload) # rubocop:disable Style/SafeNavigation
 
       render json: { status: 'ok' }
     end

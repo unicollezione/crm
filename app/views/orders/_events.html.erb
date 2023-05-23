@@ -8,25 +8,9 @@
   </div>
 
   <% @order.order_events.each do |event| %>
-    <div>
-      <strong>
-        <%= event.event_source %>: <%= event.created_at.strftime("%d/%m/%Y %H:%M:%S") %>
-      </strong>
-      <p>
-      <%= I18n.t('orders.from') %>
-      <%= event.body['creator'] %>
-      </p>
-
-      <%= event.body['action_type'] %>
-      <%= event.body['card_name'] %>
-
-      <div>
-        <span>
-          <%= event.body['list_before'] %>
-          ->
-          <%= event.body['list_after'] %>
-        </span>
-      </div>
-    </div>
+    <%=
+      render(partial: 'orders/events/trello', locals: {event:}) if event.event_source.eql?('notification')
+      render(partial: 'orders/events/payment_intent', locals: {event:}) if event.event_source.eql?('payment_intent')
+    %>
   <% end %>
 </div>

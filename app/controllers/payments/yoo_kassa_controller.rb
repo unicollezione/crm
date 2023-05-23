@@ -3,15 +3,32 @@
 module Payments
   # class Payments::YooKassaController
   class YooKassaController < ApplicationController
+    after_action :attach_event_to_order, only: %i[create]
+
+    PAYMENT_INTENT = 'payment_intent_yookassa'
+
+    # creates a payment intent and hooks it to the order
     def create
       payment_intent = Yookassa.payments.create(payment:)
 
       @confirmation_url = payment_intent.confirmation.confirmation_url
     end
 
+    # Yookassa checks this method to see if the payment url is valid
     def index; end
 
     private
+
+    def attach_event_to_order
+      order = Order.find_by(idx: params[:order])
+
+      return unless order
+
+      order.order_events.create(
+        event_source: PAYMENT_INTENT,
+        event_data: { payment_intent: }
+      )
+    end
 
     def payment # rubocop:disable Metrics/MethodLength
       {
@@ -90,7 +107,7 @@ module Payments
       if params[:expires_at].present?
         Time.parse(params[:expires_at])
       else
-        Time.now + 1.hour
+        Time.now + 2.hour
       end
     end
   end
