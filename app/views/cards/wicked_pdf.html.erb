@@ -40,9 +40,9 @@ th, td {
     <tr style='width: 100%; max-height: 640px;'>
       <td>
         <div>
-          <%= wicked_pdf_image_tag(rails_blob_url(@card.product.illustration),
+          <%= wicked_pdf_image_tag(url_for(@card.product.illustration),
                                    size: '640x480',
-                                   class: 'img img-fluid')  if @card.product.illustration.present? %>
+                                   class: 'img img-fluid')  if @card.product.illustration.attached? %>
           <div>
             <strong>
               <%= @card.comment.gsub(/\n/, '<br/>').html_safe %>
@@ -64,9 +64,9 @@ th, td {
 
       <td>
         <div>
-          <%= wicked_pdf_image_tag(rails_blob_url(@card.fabric.illustration),
+          <%= wicked_pdf_image_tag(url_for(@card.fabric.illustration),
                                    size: '480x640',
-                                   class: 'img img-fluid') if @card.fabric.illustration.present? %>
+                                   class: 'img img-fluid') if @card.fabric.illustration.attached? %>
           <div>
             <h2>
               <strong>мерки</strong>
