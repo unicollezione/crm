@@ -4,11 +4,18 @@
 <div class="container">
   <div class='card m-4'>
     <div class='card-header'>
-      <strong>Idx:</strong>
-      <p>
-        Заказ
-        <%= @order.idx %>
-      </p>
+      <div class='d-flex flex-row justify-content-between'>
+        <p>
+          Заказ
+          <%= @order.idx %>
+        </p>
+        <%=
+          if user_signed_in?
+            link_to 'trello ↗', @order.trello_url, target: '_blank', class: 'btn btn-primary'
+            link_to 'edit ↗', edit_orders_admin_path(@order), class: 'btn btn-primary', target: '_blank'
+          end
+        %>
+      </div>
     </div>
 
     <div class='card-body'>
@@ -67,7 +74,12 @@
       <%= render 'orders/events', order: @order %>
       <%- @order.customer.orders.each do |order| %>
         <div>
-          <%= order.trello_card_id && link_to(order.product.name, tracking_path(order.trello_card_id)) %>
+          <%=
+            order.trello_card_id &&
+              link_to(
+                [order.product.name, order.fabric.title].join(' - '),
+                tracking_path(order.trello_card_id))
+          %>
         </div>
       <% end %>
     </div>
