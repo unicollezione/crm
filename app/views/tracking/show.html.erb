@@ -12,7 +12,6 @@
         <%=
           if user_signed_in?
             link_to 'trello ↗', @order.trello_url, target: '_blank', class: 'btn btn-primary'
-            link_to 'edit ↗', edit_orders_admin_path(@order), class: 'btn btn-primary', target: '_blank'
           end
         %>
       </div>
