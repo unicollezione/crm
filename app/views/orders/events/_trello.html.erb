@@ -3,12 +3,9 @@
     <%= event.event_source %>: <%= event.created_at.strftime("%d/%m/%Y %H:%M:%S") %>
   </strong>
   <p>
-  <%= I18n.t('orders.from') %>
-  <%= event.body['creator'] %>
+    <%= I18n.t('orders.from') %>
+    <%= event.body['creator'] %>
   </p>
-
-  <%= event.body['action_type'] %>
-  <%= event.body['card_name'] %>
 
   <div>
     <span>
