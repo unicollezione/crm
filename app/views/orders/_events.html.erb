@@ -9,7 +9,7 @@
 
   <% @order.order_events.each do |event| %>
     <%=
-      render(partial: 'orders/events/trello', locals: {event:}) if event.event_source.eql?('notification')
+      render(partial: 'orders/events/trello', locals: { event: }) if event.event_source.eql?('notification')
       render(partial: 'orders/events/payment_intent', locals: {event:}) if event.event_source.eql?('payment_intent')
     %>
   <% end %>

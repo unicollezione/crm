@@ -23,7 +23,11 @@
         <strong>изделие:</strong>
         <%= @order.product.name %>
         </p>
-        <%= image_tag(@order.product.illustration, class: 'img-fluid') %>
+        <%=
+          if @order.product.illustration.attached?
+            image_tag(@order.product.illustration, class: 'img-fluid')
+          end
+        %>
       </div>
 
       <div>
@@ -34,7 +38,11 @@
           <%= @order.fabric.description %>
           <%= @order.fabric.material %>
         </p>
-        <%= image_tag(@order.fabric.illustration, class: 'img-fluid') %>
+        <%=
+          if @order.fabric.illustration.attached?
+            image_tag(@order.fabric.illustration, class: 'img-fluid')
+          end
+        %>
       </div>
 
       <p>
@@ -59,8 +67,8 @@
       <%= render 'orders/events', order: @order %>
       <%- @order.customer.orders.each do |order| %>
         <div>
-
-          <%= order.trello_card_id && link_to(order.product.name, tracking_path(order.trello_card_id)) %> </div>
+          <%= order.trello_card_id && link_to(order.product.name, tracking_path(order.trello_card_id)) %>
+        </div>
       <% end %>
     </div>
   </div>
