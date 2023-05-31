@@ -10,7 +10,8 @@
   <%- if @order.order_events.size.positive? %>
     <p>События</p>
     <%- @order.order_events.each do |event| %>
-      <%= render(partial: 'orders/events/trello', locals: { event: event }) if event.event_source.eql?('notification') %>
+      <%= render(partial: 'orders/events/notification', locals: { event: event }) if event.event_source.eql?('notification') %>
+      <%= render(partial: 'orders/events/trello', locals: { event: event }) if event.event_source.eql?('trello_notification') %>
       <%= render(partial: 'orders/events/payment_intent', locals: { event: event }) if event.event_source.eql?('payment_intent') %>
     <% end %>
   <% end %>

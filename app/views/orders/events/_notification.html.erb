@@ -1,0 +1,14 @@
+<div>
+  <strong>
+    <%= event.body['action_type'] %>
+  </strong>
+  <%= event.created_at.strftime("%d/%m/%Y %H:%M:%S") %>
+
+  <div>
+    <span>
+      <%= event.body['list_before'] %>
+      ->
+      <%= event.body['list_after'] %>
+    </span>
+  </div>
+</div>
