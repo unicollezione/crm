@@ -72,7 +72,8 @@
     <div class='card-footer bg-info text-white'>
       <%= render 'orders/events', order: @order %>
       <%- @order.customer.orders.each do |order| %>
-        <div>
+        <div class='mt-4'>
+          <%= order.idx %>
           <%=
             order.trello_card_id &&
               link_to(
