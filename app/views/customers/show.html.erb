@@ -1,0 +1,57 @@
+<%= turbo_frame_tag 'customers' do %>
+  <div class='card'>
+    <div class='card-header d-flex flex-row justify-content-between'>
+      <h4 class='card-title'>
+        <%= @customer.nickname %>
+      </h4>
+      <%= link_to 'Edit', CustomersAdmin.path(:show, id: @customer.id), class: 'btn btn-primary' %>
+    </div>
+
+    <div class='card-body'>
+      <div class='mt-4'>
+        <label>
+          Контакты
+          <%= @customer.contacts.size %>
+          <%= turbo_frame_tag 'contacts' do %>
+
+            <%= link_to '+', new_contact_path(customer_id: @customer), class: 'btn btn-outline-info' %>
+
+            <%- @customer.contacts.each do |contact| -%>
+              <div class='row'>
+                <span>
+                  <%= contact.name %>
+                  <%= link_to contact.value, contact.value, target: '_blank' %>
+                </span>
+              </div>
+            <% end %>
+          <% end %>
+        </label>
+
+      </div>
+
+      <div class='mt-4'>
+        <label>
+          Адреса
+          <%= @customer.addresses.size %>
+        </label>
+
+        <%- @customer.addresses.each do |address| -%>
+          <div class='col-12'>
+            <div class='row'>
+              <div class='col-6'>
+                <%= address.address_type.name %>
+              </div>
+              <div class='col-6'>
+                <%= address.value %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='card-footer d-flex flex-row'>
+      <%= link_to 'закрыть', customers_path, class: 'btn btn-outline-secondary fload-right' %>
+    </div>
+  </div>
+<% end %>

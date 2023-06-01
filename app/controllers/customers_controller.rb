@@ -12,12 +12,20 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
 
-    return unless @customer.save
-
-    render partial: 'orders/customers', locals: { customers: @customers, customer: @customer }
+    redirect_to customer_path(@customer) if @customer.save
   end
 
-  def index; end
+  def index
+    if params[:search].present?
+      @customers = Customer.where('nickname LIKE ?', "%#{params[:search]}%")
+    else
+      @customers = Customer.last(10)
+    end
+  end
+
+  def show
+    @customer = Customer.find(params[:id])
+  end
 
   private
 

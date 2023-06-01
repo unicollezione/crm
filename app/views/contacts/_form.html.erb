@@ -1,0 +1,17 @@
+<div class='border rounded p-2'>
+  <%= form_for @contact, customer: @customer do |f| %>
+    <div class="field">
+      <%= f.label :value %><br />
+      <%= f.text_field :value, class: 'form-control' %>
+    </div>
+    <div class="form-check-inline">
+      <%= f.collection_radio_buttons :contact_type_id, ContactType.all, :id, :name %>
+    </div>
+    <%= f.hidden_field :customer_id, value: @customer.id %>
+    <div class="actions">
+      <%= f.submit "сохранить", class: 'btn btn-primary', data: { disable_with: "Сохраняю..." } %>
+      <%= link_to 'закрыть', customer_path(@customer), class: 'btn btn-outline-secondary' %>
+    </div>
+
+  <% end %>
+</div>

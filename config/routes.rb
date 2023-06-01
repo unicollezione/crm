@@ -17,7 +17,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   resources :items
-  resources :customers, only: %w[index new create]
+  resources :customers, only: %w[index show new create]
+  resources :contacts, only: %w[index show new create]
   resources :orders, only: %w[index show new]
   resources :fabrics, only: %w[index new create]
 

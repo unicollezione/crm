@@ -1,9 +1,13 @@
 <%= turbo_frame_tag 'customers' do %>
-  <div class='form mb-2'>
-    <div class='mb-2 d-flex flex-row justify-content-between'>
-      <span class='text-gray-700'>Customer</span>
-      <%= link_to 'Add', new_customer_path, data: { turbo_frame: 'customers' }, class: 'btn btn-outline-primary btn-sm' %>
+  <div class='form-group outline mb-2'>
+    <div class='mb-2'>
+      <span class='text-gray-700'>Покупатель</span>
     </div>
-    <%= render partial: 'customers/select', locals: { customers: @customers } %>
+    <div class='d-flex flex-row justify-content-between'>
+      <div class='flex-grow-1 mr-2'>
+        <%= render partial: 'customers/select', locals: { customers: @customers } %>
+      </div>
+      <%= link_to '+', new_customer_path, data: { turbo_frame: 'customers' }, class: 'btn btn-outline-primary btn-sm' %>
+    </div>
   </div>
 <% end %>

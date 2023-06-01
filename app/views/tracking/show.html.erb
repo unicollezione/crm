@@ -21,7 +21,7 @@
 
       <p>
         <strong>заказчик:</strong>
-        <%= @order.customer.name %>
+        <%= link_to @order.customer.name, customer_path(@order.customer) %>
       </p>
 
       <div>
@@ -70,7 +70,9 @@
     <%= render partial: 'measurements', locals: { order: @order } %>
 
     <div class='card-footer bg-info text-white'>
+
       <%= render 'orders/events', order: @order %>
+
       <%- @order.customer.orders.each do |order| %>
         <div class='mt-4'>
           <%= order.idx %>

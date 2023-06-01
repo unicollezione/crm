@@ -21,11 +21,15 @@
       class: 'form-control' %>
   </div>
 
-  <%= render partial: 'workrooms', locals: { form: form, workrooms: @workrooms } %>
+  <div class='form-group mt-4'>
+    <%= render partial: 'workrooms', locals: { form: form, workrooms: @workrooms } %>
+  </div>
 
-  <%= turbo_frame_tag :product do %>
-    <%= render partial: 'product', locals: { form: form } %>
-  <% end %>
+  <div class='form-group mt-4'>
+    <%= turbo_frame_tag :product do %>
+      <%= render partial: 'product', locals: { form: form } %>
+    <% end %>
+  </div>
 
   <%= turbo_frame_tag 'fabric' do %>
     <%= render partial: 'fabric', locals: { form: form } %>
