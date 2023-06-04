@@ -72,6 +72,7 @@ module Trello
 
     def card
       @card ||= Trello::Card.create(name: "##{order.idx}",
+                                    desc: order.description,
                                     list_id: order.workroom.trello_list.list)
     end
 
