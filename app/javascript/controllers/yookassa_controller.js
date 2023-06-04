@@ -3,9 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   validate(event) {
     if (
-      event.target.form.elements.amount.valueAsNumber > 0 &&
-      event.target.form.elements.email.value.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/) ||
-      event.target.form.elements.phone.value.match(/\d{11}/)
+      event.target.form.elements.amount.valueAsNumber > 0
     ) {
       this.allowFormSubmit(event)
       this.assignHiddenFields(event)

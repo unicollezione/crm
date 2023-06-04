@@ -39,11 +39,6 @@ module Payments
         capture: true,
         description: "Заказ № #{order}",
         receipt: {
-          customer: {
-            full_name:,
-            email:,
-            phone:
-          },
           items: [
             {
               description:,
