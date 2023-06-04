@@ -12,6 +12,7 @@ FactoryBot.define do
     trello_url { nil }
     notes { '' }
     workroom
+    trello_card_id { '' }
 
     trait :with_trello_list do
       after :build do |order|
