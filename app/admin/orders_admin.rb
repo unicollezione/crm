@@ -158,7 +158,7 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
 
       row do
         col do
-          text_field :comment
+          text_area :comment
         end
       end
 
@@ -188,10 +188,6 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
       row do
         col(sm: 6) do
           render 'fabric', order: order # rubocop:disable Style/HashSyntax
-        end
-
-        col(sm: 6) do
-          select :aasm_state, ['---', 'купить', 'в_офисе', 'на_производстве'], { label: 'наличие' }
         end
       end
 
@@ -227,10 +223,14 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
       if order.order_events.size.positive?
         label "events (#{order.order_events.count})"
 
-        row do
-          order.order_events.each do |event|
-            col(sm: 3) { event.event_source }
-            col(sm: 3) { event.body['creator'] }
+        order.order_events.each do |event|
+          row do
+            label event.body['action_type']
+          end
+
+          row do
+            col(sm: 2) { event.body['creator'] }
+            col(sm: 2) { event.event_source }
             col(sm: 3) { event.body['list_after'] }
             col(sm: 3) { event.created_at }
           end
@@ -239,14 +239,28 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
     end
 
     tab :trello do
-      col(sm: 6) do
-        select :trello_card_id,
-               lists_for(order),
-               selected: order.trello_card&.list&.name,
-               label: 'list'
+      row do
+        col(sm: 6) do
+          text_field :aasm_state, label: 'статус', readonly: true
+        end
+
+        col(sm: 2) do
+          link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
+        end
       end
-      col(sm: 2) do
-        link_to 'trello', order.trello_url, target: '_blank', class: 'external-link'
+
+      row do
+        col(sm: 6) do
+          if order.trello_card_id.present?
+
+            trello_card(order).attributes.each do |key, value|
+              row do
+                col(sm: 3) { label key }
+                col(sm: 9) { value.to_s }
+              end
+            end
+          end
+        end
       end
     end
 
@@ -269,9 +283,11 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
   end
 end
 
-def lists_for(order)
-  order.trello_card &&
-    order.trello_card.board.lists.map { |list| [list.name, list.id] }
+def trello_card(order)
+  Trello::Board
+    .find(order.workroom.trello_list.board)
+    .cards
+    .find { |card| card.id == order.trello_card_id }
 rescue Trello::Error
-  []
+  {}
 end
