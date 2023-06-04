@@ -58,6 +58,17 @@ class Order < ApplicationRecord
 
   delegate :name, to: :idx
 
+  def description
+    <<~TXT
+      #{comment}\n
+      #{customer.nickname}\n
+      #{customer.contacts.map(&:value).join("\n")}
+      #{trello_url}\n
+      \n
+      #{notes}\n
+    TXT
+  end
+
   def illustration_url
     product.illustration.attached? &&
       Rails.application.routes.url_helpers.rails_blob_url(product.illustration)
