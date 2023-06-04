@@ -7,7 +7,13 @@
       <div class='d-flex flex-row justify-content-between'>
         <p>
           Заказ
-          <%= @order.idx %>
+          <%=
+            if user_signed_in?
+              link_to @order.idx, OrdersAdmin.path(:show, id: @order), target: '_blank'
+            else
+              @order.idx
+            end
+          %>
         </p>
         <%=
           if user_signed_in?
@@ -21,7 +27,13 @@
 
       <p>
         <strong>заказчик:</strong>
-        <%= link_to @order.customer.name, customer_path(@order.customer) %>
+        <%=
+          if user_signed_in?
+            link_to @order.customer.name, customer_path(@order.customer)
+          else
+            @order.customer.name
+          end
+        %>
       </p>
 
       <div>
@@ -73,7 +85,7 @@
 
       <%= render 'orders/events', order: @order %>
 
-      <%- @order.customer.orders.each do |order| %>
+      <%- Order.order(created_at: :desc).where(customer_id: @order.customer_id).each do |order| %>
         <div class='mt-4'>
           <%= order.idx %>
           <%=
