@@ -52,6 +52,7 @@ gem 'react-rails', '~> 2.6', '>= 2.6.1'
 
 group :development, :test do
   gem 'database_cleaner'
+  gem 'debug'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'json_matchers'
