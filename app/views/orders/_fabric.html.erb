@@ -9,7 +9,9 @@
           options_from_collection_for_select(
             @fabrics, :id, :title, { prompt: 'Select a fabric' }
           ),
-          class: 'form-control'
+          class: 'form-control',
+          'data-controller': 'orders',
+          'data-orders-target': 'fabric'
         %>
       </div>
       <%= link_to '+', new_fabric_path, data: { turbo_frame: 'fabric'}, class: 'btn btn-sm btn-outline-primary' %>

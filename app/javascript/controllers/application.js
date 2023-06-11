@@ -4,18 +4,20 @@ import Clipboard from 'stimulus-clipboard'
 import YookassaController from "./yookassa_controller"
 
 const application = Application.start()
+
 application.register('clipboard', Clipboard)
 application.register('yookassa', YookassaController)
-console.log("Hello from Stimulus!", application)
 
-application.debug = true
+if (process.env.NODE_ENV === 'development') {
+  application.debug = true
+}
+
 window.Stimulus = application
 
 application.register("orders", OrdersController)
 
-application.handleError = (error, message, detail) => {
+application.handleError = (_error, message, detail) => {
   console.warn(message, detail)
-  ErrorTrackingSystem.captureException(error)
 }
 
 export { application }
