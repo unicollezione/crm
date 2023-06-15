@@ -251,7 +251,7 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
 
       row do
         col(sm: 6) do
-          if order.trello_card_id.present?
+          if order.trello_card_id.present? && trello_card(order)
 
             trello_card(order).attributes.each do |key, value|
               row do
@@ -284,10 +284,9 @@ Trestle.resource(:orders) do # rubocop:disable Metrics/BlockLength
 end
 
 def trello_card(order)
-  Trello::Board
-    .find(order.workroom.trello_list.board)
-    .cards
-    .find { |card| card.id == order.trello_card_id }
+  @trello_card ||= Trello::Board.find(order.workroom.trello_list.board)
+                                .cards
+                                .find { |card| card.id == order.trello_card_id }
 rescue Trello::Error
-  {}
+  Trello::Card.new
 end
